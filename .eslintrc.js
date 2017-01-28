@@ -10,6 +10,7 @@ module.exports = {
   env: {
     node: true,
     es6: true,
+    jest: true,
   },
   globals: {
     fetch: true,
@@ -150,5 +151,6 @@ module.exports = {
     'class-methods-use-this': 0,
     'react/forbid-prop-types': 1, // replace with 1 for very strict type checks
     'no-plusplus': ['error', { 'allowForLoopAfterthoughts': true }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js"]}]
   }
 };

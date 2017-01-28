@@ -14,6 +14,9 @@
 .*/Libraries/react-native/React.js
 .*/Libraries/react-native/ReactNative.js
 
+; Ignored because it fails the flow check
+.*/node_modules/react-navigation/.*
+
 [include]
 
 [libs]

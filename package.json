@@ -11,6 +11,11 @@
 		"flow": "flow",
 		"test": "jest"
 	},
+  "pre-commit": [
+    "lint",
+    "flow",
+    "test"
+  ],
 	"dependencies": {
 		"react": "~15.4.0-rc.4",
 		"react-native": "0.40.0",
@@ -31,6 +36,7 @@
 		"eslint-plugin-sort-class-members": "^1.1.1",
 		"flow-bin": "^0.36.0",
 		"jest": "18.1.0",
+		"pre-commit": "^1.2.2",
 		"react-test-renderer": "~15.4.0-rc.4"
 	},
 	"jest": {
