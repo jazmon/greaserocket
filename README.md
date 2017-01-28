@@ -3,8 +3,8 @@ A React Native boilerplate.
 
 ## Planned Features
 * flowtyped
-* exNavigation
-* latest ES features (ES2017, Stage-2)
+* react-navigation
+* latest ES features (ES2017)
 * modern React syntax (no createClass)
 * Redux, Redux Loop
 * Code Push
