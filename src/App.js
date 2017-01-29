@@ -1,11 +1,15 @@
 // @flow
+import React from 'react';
 import {
   AppRegistry,
   Platform,
 } from 'react-native';
 
+import { Provider } from 'react-redux';
 // $FlowIssue
 import { TabNavigator } from 'react-navigation';
+
+import configureStore from './store/configureStore';
 
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
@@ -42,7 +46,14 @@ const App = TabNavigator({
   },
 });
 
+const store = configureStore();
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
 
-AppRegistry.registerComponent('Greaserocket', () => App);
 
-export default App;
+AppRegistry.registerComponent('Greaserocket', () => Root);
+
+export default Root;

@@ -4,9 +4,15 @@ import {
   View,
   Text,
   ListView,
+  TouchableHighlight,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import { connect } from 'react-redux';
+
+import { setFoo } from '../redux/modules/feed';
 
 import Story from '../components/Story';
 
@@ -36,8 +42,9 @@ const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 const ds = new ListView.DataSource({ rowHasChanged });
 
 type Props = {
-  navigation: Object,
-  router: Object,
+  // navigation: Object,
+  // router: Object,
+  dispatch: Function,
 };
 
 type State = {
@@ -82,33 +89,39 @@ class Feed extends React.Component {
   );
 
   render() {
-    const { text } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{text}</Text>
         <ListView
           dataSource={this.dataSource}
           renderRow={this.renderRow}
           renderSeparator={this.renderSeparator}
         />
+        <TouchableHighlight onPress={() => this.props.dispatch(setFoo('baz'))}>
+          <Text>Click me!</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+
+const styles: Style = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Platform.OS === 'ios' && 24,
     flexDirection: 'column',
     backgroundColor: '#fff',
-  },
-  text: {
-    color: '#000',
-    fontSize: 16,
   },
   separator: {
     height: 8,
   },
 });
 
-export default Feed;
+
+const mapState = (state: StateType) => ({
+  foo: state.foo,
+});
+
+const mapActions = (dispatch) => ({ dispatch });
+
+export default connect(mapState, mapActions)(Feed);

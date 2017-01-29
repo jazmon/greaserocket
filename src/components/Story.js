@@ -24,7 +24,7 @@ type Props = {
 
 const Story = ({ text, style, author, ...props }: Props): React.Element<*> => (
   <View style={[styles.container, style]}>
-    <View>
+    <View style={styles.imageContainer}>
       <Image
         style={styles.image}
         source={{ uri: author ? author.profilePictureUrl : null }}
@@ -32,6 +32,7 @@ const Story = ({ text, style, author, ...props }: Props): React.Element<*> => (
       />
     </View>
     <View style={styles.textArea}>
+      <Text>{author.name}</Text>
       <Text style={styles.text}>{text}</Text>
     </View>
   </View>
@@ -44,8 +45,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    borderColor: '#f00',
-    borderWidth: 1,
+    // borderColor: '#f00',
+    // borderWidth: 1,
+    height: 120,
   },
   text: {
     color: '#000',
@@ -53,15 +55,21 @@ const styles = StyleSheet.create({
   },
   textArea: {
     flex: 1,
-    borderColor: '#00f',
-    borderWidth: 1,
+    padding: 16,
+    // borderColor: '#00f',
+    // borderWidth: 1,
     flexDirection: 'column',
   },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 120,
+  },
   image: {
-    width: 200,
-    borderColor: '#0f0',
-    borderWidth: 1,
-    height: 200,
+    width: 100,
+    // borderColor: '#0f0',
+    // borderWidth: 1,
+    height: 100,
   },
 });
 
