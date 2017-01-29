@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 
-import { setFoo } from '../redux/modules/feed';
+import { FOOBAR, FETCH_DATA } from '../redux/modules/feed';
 
 import Story from '../components/Story';
 
@@ -44,6 +44,8 @@ const ds = new ListView.DataSource({ rowHasChanged });
 type Props = {
   // navigation: Object,
   // router: Object,
+  fetchData: Function,
+  foobar: Function,
   dispatch: Function,
 };
 
@@ -51,7 +53,7 @@ type State = {
   text: string,
 };
 
-class Feed extends React.Component {
+export class Feed extends React.Component {
   static navigationOptions = {
     tabBar: {
       label: 'Feed',
@@ -80,6 +82,11 @@ class Feed extends React.Component {
 
   state: State;
 
+  componentDidMount() {
+    // this.props.dispatch(FETCH_DATA.START());
+    this.props.fetchData();
+  }
+
   renderRow = (story: Object) => (
     <Story {...story} key={story.id} />
   );
@@ -96,14 +103,13 @@ class Feed extends React.Component {
           renderRow={this.renderRow}
           renderSeparator={this.renderSeparator}
         />
-        <TouchableHighlight onPress={() => this.props.dispatch(setFoo('baz'))}>
+        <TouchableHighlight >
           <Text>Click me!</Text>
         </TouchableHighlight>
       </View>
     );
   }
 }
-
 
 const styles: Style = StyleSheet.create({
   container: {
@@ -117,11 +123,16 @@ const styles: Style = StyleSheet.create({
   },
 });
 
-
 const mapState = (state: StateType) => ({
   foo: state.foo,
+  error: state.error,
+  data: state.data,
+  isFetching: state.isFetching,
 });
 
-const mapActions = (dispatch) => ({ dispatch });
+const mapActions = (dispatch) => ({
+  fetchData: () => dispatch(FETCH_DATA()),
+  foobar: () => dispatch(FOOBAR()),
+});
 
 export default connect(mapState, mapActions)(Feed);

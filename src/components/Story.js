@@ -27,7 +27,7 @@ const Story = ({ text, style, author, ...props }: Props): React.Element<*> => (
     <View style={styles.imageContainer}>
       <Image
         style={styles.image}
-        source={{ uri: author ? author.profilePictureUrl : null }}
+        source={{ uri: author.profilePictureUrl }}
         resizemode="contain"
       />
     </View>

@@ -5,20 +5,9 @@ exports[`test renders correctly 1`] = `
       "backgroundColor": "#fff",
       "flex": 1,
       "flexDirection": "column",
+      "marginTop": 24,
     }
   }>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "color": "#000",
-        "fontSize": 16,
-      }
-    }>
-    Feed
-  </Text>
   <ScrollView
     dataSource={
       ListViewDataSource {
@@ -46,15 +35,21 @@ exports[`test renders correctly 1`] = `
         Array [
           Object {
             "backgroundColor": "#fff",
-            "borderColor": "#f00",
-            "borderWidth": 1,
             "flex": 1,
             "flexDirection": "row",
+            "height": 120,
           },
           undefined,
         ]
       }>
-      <View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "width": 120,
+          }
+        }>
         <Image
           resizemode="contain"
           source={
@@ -64,22 +59,25 @@ exports[`test renders correctly 1`] = `
           }
           style={
             Object {
-              "borderColor": "#0f0",
-              "borderWidth": 1,
-              "height": 200,
-              "width": 200,
+              "height": 100,
+              "width": 100,
             }
           } />
       </View>
       <View
         style={
           Object {
-            "borderColor": "#00f",
-            "borderWidth": 1,
             "flex": 1,
             "flexDirection": "column",
+            "padding": 16,
           }
         }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail">
+          Jack Johnson
+        </Text>
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -105,15 +103,21 @@ exports[`test renders correctly 1`] = `
         Array [
           Object {
             "backgroundColor": "#fff",
-            "borderColor": "#f00",
-            "borderWidth": 1,
             "flex": 1,
             "flexDirection": "row",
+            "height": 120,
           },
           undefined,
         ]
       }>
-      <View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "width": 120,
+          }
+        }>
         <Image
           resizemode="contain"
           source={
@@ -123,22 +127,25 @@ exports[`test renders correctly 1`] = `
           }
           style={
             Object {
-              "borderColor": "#0f0",
-              "borderWidth": 1,
-              "height": 200,
-              "width": 200,
+              "height": 100,
+              "width": 100,
             }
           } />
       </View>
       <View
         style={
           Object {
-            "borderColor": "#00f",
-            "borderWidth": 1,
             "flex": 1,
             "flexDirection": "column",
+            "padding": 16,
           }
         }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail">
+          John Jackson
+        </Text>
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -160,5 +167,34 @@ exports[`test renders correctly 1`] = `
         }
       } />
   </ScrollView>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hitSlop={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+        },
+        undefined,
+      ]
+    }
+    testID={undefined}>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail">
+      Click me!
+    </Text>
+  </View>
 </View>
 `;

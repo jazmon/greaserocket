@@ -8,7 +8,10 @@ import Story from './Story';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <Story />
+    <Story
+      text="foo"
+      author={{ name: 'foo', profilePictureUrl: null }}
+    />
   );
   expect(tree).toMatchSnapshot();
 });
