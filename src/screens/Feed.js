@@ -36,6 +36,7 @@ const ds = new ListView.DataSource({ rowHasChanged });
 
 type Props = {
   navigation: Object,
+  router: Object,
 };
 
 type State = {

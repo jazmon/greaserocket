@@ -5,12 +5,11 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 type Props = {
-  navigator: Object,
-  route: Object,
-  relay: Object,
-  loading: boolean,
+  navigation: Object,
+  router: Object,
 };
 
 type State = {
@@ -31,10 +30,17 @@ class Map extends React.Component {
   state: State;
 
   render() {
-    const { text } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{text}</Text>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
       </View>
     );
   }
@@ -43,12 +49,12 @@ class Map extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexGrow: 1,
     flexDirection: 'column',
     backgroundColor: '#fff',
   },
-  text: {
-    color: '#000',
-    fontSize: 16,
+  map: {
+   ...StyleSheet.absoluteFillObject,
   },
 });
 
