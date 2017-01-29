@@ -118,7 +118,10 @@ module.exports = {
         capIsNewExceptions: [
           'Color',
           'TouchableNativeFeedback.SelectableBackground',
-          'TouchableNativeFeedback.Ripple'
+          'TouchableNativeFeedback.Ripple',
+          'TabNavigator',
+          'DrawerNavigator',
+          'StackNavigator',
         ]
       },
     ],

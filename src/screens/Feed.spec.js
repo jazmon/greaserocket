@@ -3,11 +3,12 @@ import React from 'react';
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
-import App from './App';
+import Feed from './Feed';
 
 
 it('renders correctly', () => {
-  // const tree = renderer.create(
-  //   <App />
-  // );
+  const tree = renderer.create(
+    <Feed />
+  );
+  expect(tree).toMatchSnapshot();
 });

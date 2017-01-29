@@ -27,7 +27,7 @@ const Story = ({ text, style, author, ...props }: Props): React.Element<*> => (
     <View>
       <Image
         style={styles.image}
-        source={{ uri: author.profilePictureUrl }}
+        source={{ uri: author ? author.profilePictureUrl : null }}
         resizemode="contain"
       />
     </View>
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    borderColor: '#f00', borderWidth: 1,
+    borderColor: '#f00',
+    borderWidth: 1,
   },
   text: {
     color: '#000',
@@ -52,12 +53,14 @@ const styles = StyleSheet.create({
   },
   textArea: {
     flex: 1,
-    borderColor: '#00f', borderWidth: 1,
+    borderColor: '#00f',
+    borderWidth: 1,
     flexDirection: 'column',
   },
   image: {
     width: 200,
-    borderColor: '#0f0', borderWidth: 1,
+    borderColor: '#0f0',
+    borderWidth: 1,
     height: 200,
   },
 });

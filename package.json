@@ -9,7 +9,10 @@
 		"lint": "eslint -c .eslintrc.js src",
 		"lint:fix": "eslint -c .eslintrc.js src --fix",
 		"flow": "flow",
-		"test": "jest"
+		"test": "jest --notify",
+    "coverage": "jest --coverage",
+    "snapshot:update": "jest --updateSnapshot",
+    "test:watch": "jest --watch"
 	},
 	"pre-commit": [
 		"lint",
@@ -43,6 +46,9 @@
 		"react-test-renderer": "~15.4.0-rc.4"
 	},
 	"jest": {
-		"preset": "react-native"
+		"preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-native)"
+    ]
 	}
 }

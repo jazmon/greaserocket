@@ -2,7 +2,6 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
 } from 'react-native';
 import MapView from 'react-native-maps';
@@ -12,22 +11,9 @@ type Props = {
   router: Object,
 };
 
-type State = {
-  text: string,
-};
-
+// eslint-disable-next-line react/prefer-stateless-function
 class Map extends React.Component {
   props: Props;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      text: 'Map',
-    };
-  }
-
-  state: State;
 
   render() {
     return (
@@ -54,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   map: {
-   ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject,
   },
 });
 

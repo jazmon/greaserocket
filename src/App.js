@@ -2,11 +2,13 @@
 import {
   AppRegistry,
 } from 'react-native';
+
+// $FlowIssue
 import { TabNavigator } from 'react-navigation';
 
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
-import Map from './screens/Map';
+import MapScreen from './screens/Map';
 
 const App = TabNavigator({
   Profile: {
@@ -16,7 +18,7 @@ const App = TabNavigator({
     screen: Feed,
   },
   Map: {
-    screen: Map,
+    screen: MapScreen,
   },
 }, {
   tabBarOptions: {

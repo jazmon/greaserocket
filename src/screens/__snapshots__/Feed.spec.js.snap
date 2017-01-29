@@ -1,0 +1,164 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#000",
+        "fontSize": 16,
+      }
+    }>
+    Feed
+  </Text>
+  <ScrollView
+    dataSource={
+      ListViewDataSource {
+        "items": 2,
+      }
+    }
+    initialListSize={10}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={1000}
+    onKeyboardDidHide={undefined}
+    onKeyboardDidShow={undefined}
+    onKeyboardWillHide={undefined}
+    onKeyboardWillShow={undefined}
+    onLayout={[Function]}
+    onScroll={[Function]}
+    pageSize={1}
+    removeClippedSubviews={true}
+    renderRow={[Function]}
+    renderSeparator={[Function]}
+    scrollEventThrottle={50}
+    scrollRenderAheadDistance={1000}
+    stickyHeaderIndices={Array []}>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#fff",
+            "borderColor": "#f00",
+            "borderWidth": 1,
+            "flex": 1,
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
+      }>
+      <View>
+        <Image
+          resizemode="contain"
+          source={
+            Object {
+              "uri": "http://loremflickr.com/320/240/dog?asdf=0",
+            }
+          }
+          style={
+            Object {
+              "borderColor": "#0f0",
+              "borderWidth": 1,
+              "height": 200,
+              "width": 200,
+            }
+          } />
+      </View>
+      <View
+        style={
+          Object {
+            "borderColor": "#00f",
+            "borderWidth": 1,
+            "flex": 1,
+            "flexDirection": "column",
+          }
+        }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#000",
+              "fontSize": 16,
+            }
+          }>
+          Hello, World!
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 8,
+        }
+      } />
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#fff",
+            "borderColor": "#f00",
+            "borderWidth": 1,
+            "flex": 1,
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
+      }>
+      <View>
+        <Image
+          resizemode="contain"
+          source={
+            Object {
+              "uri": "http://loremflickr.com/320/240/dog?foo=1",
+            }
+          }
+          style={
+            Object {
+              "borderColor": "#0f0",
+              "borderWidth": 1,
+              "height": 200,
+              "width": 200,
+            }
+          } />
+      </View>
+      <View
+        style={
+          Object {
+            "borderColor": "#00f",
+            "borderWidth": 1,
+            "flex": 1,
+            "flexDirection": "column",
+          }
+        }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#000",
+              "fontSize": 16,
+            }
+          }>
+          I like trains
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 8,
+        }
+      } />
+  </ScrollView>
+</View>
+`;

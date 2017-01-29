@@ -1,0 +1,55 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "borderColor": "#f00",
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }>
+  <View>
+    <Image
+      resizemode="contain"
+      source={
+        Object {
+          "uri": null,
+        }
+      }
+      style={
+        Object {
+          "borderColor": "#0f0",
+          "borderWidth": 1,
+          "height": 200,
+          "width": 200,
+        }
+      } />
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#00f",
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "column",
+      }
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#000",
+          "fontSize": 16,
+        }
+      }>
+      
+    </Text>
+  </View>
+</View>
+`;
