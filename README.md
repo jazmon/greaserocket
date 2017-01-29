@@ -12,3 +12,4 @@ A React Native boilerplate.
 * Testing with Jest and enzyme
 * Airbnb JS (with a few tweaks)
 * i18n support!
+* Deep linking support

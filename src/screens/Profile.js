@@ -3,8 +3,10 @@ import React from 'react';
 import {
   View,
   Text,
+  Platform,
   StyleSheet,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 type Props = {
   navigation: Object,
@@ -16,8 +18,17 @@ type State = {
 
 class Profile extends React.Component {
   static navigationOptions = {
-    title: 'Profile',
-  };
+    tabBar: {
+      label: 'Profile',
+      icon: ({ tintColor }) => (
+        <Icon
+          name="ios-person"
+          size={30}
+          color={tintColor}
+        />
+     ),
+    },
+  }
 
   props: Props;
 

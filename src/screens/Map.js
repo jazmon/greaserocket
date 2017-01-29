@@ -5,14 +5,27 @@ import {
   StyleSheet,
 } from 'react-native';
 import MapView from 'react-native-maps';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 type Props = {
   navigation: Object,
   router: Object,
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Map extends React.Component {
+  static navigationOptions = {
+    tabBar: {
+      label: 'Map',
+      icon: ({ tintColor }) => (
+        <Icon
+          name="ios-map"
+          size={30}
+          color={tintColor}
+        />
+     ),
+    },
+  }
+
   props: Props;
 
   render() {

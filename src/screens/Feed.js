@@ -6,6 +6,7 @@ import {
   ListView,
   StyleSheet,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Story from '../components/Story';
 
@@ -44,10 +45,18 @@ type State = {
 };
 
 class Feed extends React.Component {
-
   static navigationOptions = {
-    title: 'Feed',
-  };
+    tabBar: {
+      label: 'Feed',
+      icon: ({ tintColor }) => (
+        <Icon
+          name="ios-paper"
+          size={30}
+          color={tintColor}
+        />
+     ),
+    },
+  }
 
   props: Props;
   dataSource: Object;
