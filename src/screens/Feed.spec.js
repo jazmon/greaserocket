@@ -3,12 +3,12 @@ import React from 'react';
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
-import { Feed } from './Feed';
+import { FeedComponent as Feed } from './Feed';
 
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <Feed fetchData={jest.fn} />
+    <Feed fetchData={jest.fn} data={[]} />
   );
   expect(tree).toMatchSnapshot();
 });

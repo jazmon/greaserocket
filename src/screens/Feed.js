@@ -7,53 +7,46 @@ import {
   TouchableHighlight,
   StyleSheet,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 
-import { FOOBAR, FETCH_DATA } from '../redux/modules/feed';
+import { foobar, fetchData } from '../redux/modules/feed';
 
 import Story from '../components/Story';
-
-const data = [
-  {
-    id: 'story-0',
-    text: 'Hello, World!',
-    author: {
-      id: 'author-0',
-      profilePictureUrl: 'http://loremflickr.com/320/240/dog?asdf=0',
-      name: 'Jack Johnson',
-    },
-  },
-  {
-    id: 'story-1',
-    text: 'I like trains',
-    author: {
-      id: 'author-1',
-      profilePictureUrl: 'http://loremflickr.com/320/240/dog?foo=1',
-      name: 'John Jackson',
-    },
-  },
-];
 
 const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 
 const ds = new ListView.DataSource({ rowHasChanged });
+type Author = {
+  id: string,
+  name: string,
+  profilePictureUrl: string,
+};
 
+type FeedItem = {
+  author: Author,
+  id: string,
+  text: string,
+}
 type Props = {
   // navigation: Object,
   // router: Object,
   fetchData: Function,
   foobar: Function,
   dispatch: Function,
+  error: boolean,
+  isFetching: boolean,
+  data: Array<FeedItem>,
 };
 
 type State = {
   text: string,
 };
 
-export class Feed extends React.Component {
+class Feed extends React.Component {
   static navigationOptions = {
     tabBar: {
       label: 'Feed',
@@ -73,18 +66,19 @@ export class Feed extends React.Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
-      text: 'Feed',
-    };
-
-    this.dataSource = ds.cloneWithRows(data);
+    this.dataSource = ds.cloneWithRows(props.data);
   }
 
   state: State;
 
   componentDidMount() {
-    // this.props.dispatch(FETCH_DATA.START());
     this.props.fetchData();
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.data) {
+      this.dataSource = ds.cloneWithRows(nextProps.data);
+    }
   }
 
   renderRow = (story: Object) => (
@@ -95,6 +89,10 @@ export class Feed extends React.Component {
     <View style={styles.separator} key={`${sID}-${rID}`} />
   );
 
+  renderLoading = () => (
+    this.props.isFetching ? <ActivityIndicator animating size="large" /> : null
+  );
+
   render() {
     return (
       <View style={styles.container}>
@@ -102,10 +100,12 @@ export class Feed extends React.Component {
           dataSource={this.dataSource}
           renderRow={this.renderRow}
           renderSeparator={this.renderSeparator}
+          renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
         />
         <TouchableHighlight >
           <Text>Click me!</Text>
         </TouchableHighlight>
+        {this.renderLoading()}
       </View>
     );
   }
@@ -123,16 +123,17 @@ const styles: Style = StyleSheet.create({
   },
 });
 
-const mapState = (state: StateType) => ({
-  foo: state.foo,
-  error: state.error,
-  data: state.data,
-  isFetching: state.isFetching,
+const mapState = ({ feed }) => ({
+  foo: feed.foo,
+  error: feed.error,
+  data: feed.data,
+  isFetching: feed.isFetching,
 });
 
 const mapActions = (dispatch) => ({
-  fetchData: () => dispatch(FETCH_DATA()),
-  foobar: () => dispatch(FOOBAR()),
+  fetchData: () => dispatch(fetchData.start()),
+  foobar: () => dispatch(foobar()),
 });
 
+export const FeedComponent = Feed;
 export default connect(mapState, mapActions)(Feed);
