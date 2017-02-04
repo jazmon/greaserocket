@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 
 import { loop, Effects } from 'redux-loop';
 import { uniqueAction, uniqueActionGroup } from '../../utils/actions';
+import config from '../../constants/config';
 
 export const foobar = uniqueAction('greaserocket/feed/FOOBAR');
 export const fetchData = uniqueActionGroup('FETCH_DATA', ['start', 'success', 'error']);
@@ -20,9 +21,11 @@ const initialState: State = {
   error: null,
 };
 
+const url = config.BACKEND.URL;
+
 const dofetchData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/');
+    const response = await fetch(url);
     const data = await response.json();
     return { type: fetchData.success.toString(), payload: data };
   } catch (err) {

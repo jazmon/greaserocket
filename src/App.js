@@ -10,12 +10,18 @@ import { Provider } from 'react-redux';
 import { TabNavigator } from 'react-navigation';
 
 import configureStore from './store/configureStore';
+import config from './constants/config';
 
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
 import MapScreen from './screens/Map';
+import Login from './screens/Login';
 
 const App = TabNavigator({
+  Login: {
+    screen: Login,
+    path: 'login',
+  },
   Profile: {
     screen: Profile,
     path: 'profile/:name',
@@ -42,7 +48,9 @@ const App = TabNavigator({
   },
   containerOptions: {
     // on Android, the URI prefix typically contains a host in addition to scheme
-    URIPrefix: Platform.OS === 'android' ? 'greaserocket://greaserocket/' : 'greaserocket://',
+    URIPrefix: Platform.OS === 'android'
+      ? `${config.NAVIGATION.URI_PREFIX}://config.NAVIGATION.URI_PREFIX/`
+      : `${config.NAVIGATION.URI_PREFIX}://`,
   },
 });
 
