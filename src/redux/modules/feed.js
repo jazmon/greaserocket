@@ -1,3 +1,4 @@
+// @flow
 import { handleActions } from 'redux-actions';
 
 import { loop, Effects } from 'redux-loop';

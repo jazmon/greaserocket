@@ -7,7 +7,7 @@
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"lint": "eslint -c .eslintrc.js src",
-		"lint:fix": "eslint -c .eslintrc.js src --fix",
+		"lint:fix": "npm run lint -- --fix",
 		"flow": "flow",
 		"test": "jest --notify",
 		"coverage": "jest --coverage",
@@ -30,7 +30,9 @@
 		"react-redux": "^5.0.2",
 		"redux": "^3.6.0",
 		"redux-actions": "^1.2.1",
-		"redux-loop": "^2.2.2"
+		"redux-loop": "^2.2.2",
+		"redux-persist": "^4.1.1",
+		"reselect": "^2.5.4"
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",

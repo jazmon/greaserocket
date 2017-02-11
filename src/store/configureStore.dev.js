@@ -4,6 +4,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import devTools from 'remote-redux-devtools';
 import createLogger from 'redux-logger';
 import { install as installLoop } from 'redux-loop';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import { AsyncStorage } from 'react-native';
 
 import rootReducer from '../redux/modules/index';
 
@@ -16,11 +18,15 @@ const enhancer = compose(
   applyMiddleware(
     loggerMiddleware,
   ),
+  autoRehydrate(),
   devTools(),
 );
 
 const configureStore = (initialState?: Object) => {
   const store = createStore(rootReducer, initialState, enhancer);
+
+  // begin periodically persisting the store
+  persistStore(store, { storage: AsyncStorage });
 
   if (module.hot) {
     // eslint-disable-next-line max-len
@@ -33,6 +39,7 @@ const configureStore = (initialState?: Object) => {
 
   return store;
 };
+
 
 // export default configureStore;
 module.exports = configureStore;
