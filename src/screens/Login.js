@@ -10,16 +10,25 @@ import { login as doLogin } from '../redux/modules/user';
 
 // const lock = new Auth0Lock({ clientId: config.AUTH.CLIENT_ID, domain: config.AUTH.DOMAIN });
 
-type Props = {navigator: Object, route: Object, relay: Object, loading: boolean, login: () => void};
+type Props = {
+  navigator: Object,
+  route: Object,
+  relay: Object,
+  loading: boolean,
+  login(): void,
+  error: ?Error,
+  profile: ?Auth0Profile,
+  token: ?Auth0Token,
+};
 
-type State = {error: ?Error, profile: ?Auth0Profile, token: ?Auth0Token};
+// type State = {error: ?Error, profile: ?Auth0Profile, token: ?Auth0Token};
 
-const initialState: State = { error: null, profile: null, token: null };
+// const initialState: State = { error: null, profile: null, token: null };
 
 class Login extends React.Component {
   props: Props;
 
-  state: State = initialState;
+  // state: State = initialState;
 
   componentDidMount() {
     this.props.login();
@@ -41,27 +50,28 @@ class Login extends React.Component {
 
   state: State;
 
-  attemptLogin = (): void => {
-    this.setState({ error: null, profile: null, token: null });
-  };
-
-  isLoggedIn = (): boolean => {
-    const { profile, token } = this.state;
-    return !!profile && !!token;
-  };
+  // attemptLogin = (): void => {
+  //   this.setState({ error: null, profile: null, token: null });
+  // };
+  //
+  // isLoggedIn = (): boolean => {
+  //   const { profile, token } = this.state;
+  //   return !!profile && !!token;
+  // };
 
   render() {
-    if (this.isLoggedIn()) {
+    const { profile, token, error } = this.props;
+    if (profile && token) {
       return (
         <View style={styles.container}>
-          <Text>Welcome {this.state.profile.name}</Text>
-          <Text>Your email is: {this.state.profile.email}</Text>
+          <Text>Welcome {profile.name}</Text>
+          <Text>Your email is: {profile.email}</Text>
         </View>
       );
-    } else if (this.state.error) {
+    } else if (error) {
       return (
         <View style={styles.container}>
-          <Text>{this.state.error}</Text>
+          <Text>{error}</Text>
         </View>
       );
     }
@@ -78,16 +88,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
   },
-  text: { color: '#000', fontSize: 16 },
+  // text: { color: '#000', fontSize: 16 },,
 });
 
-const mapState = ({ login }) => ({
-  ...login,
-});
+const mapState = ({ login }) => ({ ...login });
 
-const mapActions = (dispatch) => ({
-  login: () => dispatch(doLogin.start()),
-});
+const mapActions = dispatch => ({ login: () => dispatch(doLogin.start()) });
 
 export const LoginComponent = Login;
 export default connect(mapState, mapActions)(Login);

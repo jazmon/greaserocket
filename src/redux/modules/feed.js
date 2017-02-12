@@ -28,9 +28,9 @@ const dofetchData = async () => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return { type: fetchData.success.toString(), payload: data };
+    return fetchData.success(data);
   } catch (err) {
-    return { type: fetchData.error.toString(), payload: err };
+    return fetchData.error(err);
   }
 };
 
