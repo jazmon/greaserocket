@@ -8,28 +8,22 @@ function trimBaseUrl(url) {
 const BASE_URL = trimBaseUrl(config.BACKEND.URL);
 
 export const CALL_API = 'greaserocket/api/CALL_API';
-const TOKEN_IDENTIFIER = 'GREASEROCKET/TOKEN';
 
-async function callApi(endpoint: string, authenticated: boolean): Promise<*> {
-  console.log('callApi');
-  const token: ?Auth0Token = await AsyncStorage.getItem(TOKEN_IDENTIFIER);
+async function callApi(endpoint: string, authenticated: boolean, token: ?Auth0Token): Promise<*> {
   let fetchConfig = {};
 
   if (authenticated) {
     if (token) {
-      fetchConfig = { ...fetchConfig, headers: { Authorization: `${token.type} ${token.idToken}` } };
+      fetchConfig = { ...fetchConfig, headers: { Authorization: `${token.tokenType} ${token.idToken}` } };
     } else {
       throw new Error('No token saved!');
     }
   }
   const url = `${BASE_URL}/${endpoint}`;
-  console.log('url', url)
 
   try {
     const response = await fetch(url, fetchConfig);
-    console.log('response', response);
     const json = await response.json();
-    console.log('json', json);
     return json;
   } catch (e) {
     return Promise.reject(e);
@@ -43,11 +37,17 @@ export default (store: Object) => (next: Function) => (action: Object): Promise<
     return next(action);
   }
 
+  const token: ?Auth0Token = store.getState().user.token;
+
   const { endpoint, types, authenticated } = callAPI;
   const [, successType, errorType] = types;
-  console.log('api middleware');
-  return callApi(endpoint, authenticated).then(
-    response => next({ response, authenticated, type: successType.toString() }),
-    error => next({ error: error.message || 'Error during api call', type: errorType.toString() }),
+  return callApi(endpoint, authenticated, token).then(
+    response => next({ payload: response, meta: authenticated, type: successType.toString() }),
+    error =>
+      next({
+        payload: error,
+        meta: error.message || 'Error during api call',
+        type: errorType.toString(),
+      }),
   );
 };
