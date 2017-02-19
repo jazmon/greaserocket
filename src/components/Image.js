@@ -1,25 +1,15 @@
 // @flow
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image as RNImage,
-} from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, Image as RNImage } from "react-native";
 
-const defaultProps = {
-};
+const defaultProps = {};
 
-type Props = {
-};
+type Props = {};
 
-const Image = ({ ...props }: Props): React.Element<*> => (
-  <RNImage {...props} />
-);
+const Image = ({ ...props }: Props): React.Element<*> => <RNImage {...props} />;
 
 Image.defaultProps = defaultProps;
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default Image;

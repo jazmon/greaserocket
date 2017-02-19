@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 
-import { foobar, fetchData } from '../redux/modules/feed';
+import { fetchFeed } from '../redux/modules/feed';
 
 import Story from '../components/Story';
 
@@ -35,10 +35,9 @@ type Props = {
   // navigation: Object,
   // router: Object,
   fetchData: Function,
-  foobar: Function,
   dispatch: Function,
   error: boolean,
-  isFetching: boolean,
+  loading: boolean,
   data: Array<FeedItem>,
 };
 
@@ -90,7 +89,7 @@ class Feed extends React.Component {
   );
 
   renderLoading = () => (
-    this.props.isFetching ? <ActivityIndicator animating size="large" /> : null
+    this.props.loading ? <ActivityIndicator animating size="large" /> : null
   );
 
   render() {
@@ -102,7 +101,7 @@ class Feed extends React.Component {
           renderSeparator={this.renderSeparator}
           renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
         />
-        <TouchableHighlight >
+        <TouchableHighlight>
           <Text>Click me!</Text>
         </TouchableHighlight>
         {this.renderLoading()}
@@ -114,7 +113,7 @@ class Feed extends React.Component {
 const styles: Style = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' && 24,
+    marginTop: Platform.OS === 'ios' ? 24 : 0,
     flexDirection: 'column',
     backgroundColor: '#fff',
   },
@@ -127,12 +126,11 @@ const mapState = ({ feed }) => ({
   foo: feed.foo,
   error: feed.error,
   data: feed.data,
-  isFetching: feed.isFetching,
+  loading: feed.isFetching,
 });
 
 const mapActions = (dispatch) => ({
-  fetchData: () => dispatch(fetchData.start()),
-  foobar: () => dispatch(foobar()),
+  fetchData: () => dispatch(fetchFeed()),
 });
 
 export const FeedComponent = Feed;

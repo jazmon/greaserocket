@@ -8,6 +8,7 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
 
 import rootReducer from '../redux/modules/index';
+import apiMiddleware from '../redux/middleware/api';
 
 const loggerMiddleware = createLogger();
 
@@ -16,6 +17,7 @@ const enhancer = compose(
 
   // Middleware you want to use in development:
   applyMiddleware(
+    apiMiddleware,
     loggerMiddleware,
   ),
   autoRehydrate(),

@@ -4,11 +4,13 @@ const Promise = require('bluebird');
 
 const data = require('./data');
 
+const PORT = process.env.PORT || 9000;
+
 global.Promise = Promise;
 
 const app = express();
 
-app.get('/', async (req, res) => {
+app.get('/feed', async (req, res) => {
   setTimeout(() => {
     res
       .status(200)
@@ -17,6 +19,6 @@ app.get('/', async (req, res) => {
   }, 200);
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+app.listen(PORT, () => {
+  console.log(`Greased launchpad listening on port ${PORT}!`);
 });

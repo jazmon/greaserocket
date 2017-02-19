@@ -21,6 +21,8 @@ type Props = {
   token: ?Auth0Token,
 };
 
+type State = {};
+
 // type State = {error: ?Error, profile: ?Auth0Profile, token: ?Auth0Token};
 
 // const initialState: State = { error: null, profile: null, token: null };
@@ -31,7 +33,7 @@ class Login extends React.Component {
   // state: State = initialState;
 
   componentDidMount() {
-    this.props.login();
+    // this.props.login();
     // const auth0 = lock.authenticationAPI();
     //
     // lock.show({}, (err, profile, token) => {
@@ -88,10 +90,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
   },
-  // text: { color: '#000', fontSize: 16 },,
 });
 
-const mapState = ({ login }) => ({ ...login });
+const mapState = ({ user }) => ({ ...user });
 
 const mapActions = dispatch => ({ login: () => dispatch(doLogin.start()) });
 
