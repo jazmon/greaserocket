@@ -1,0 +1,16 @@
+{
+  "locations": [
+    {
+      "lat": 61.504678,
+      "lng": 23.774825,
+      "title": "Park party!",
+      "description": "asfasdfadf"
+    },
+    {
+      "lat": 61.55,
+      "lng": 23.44,
+      "title": "Foo bar!",
+      "description": "htrhrth"
+    }
+  ]
+}

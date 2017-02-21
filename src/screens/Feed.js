@@ -2,9 +2,7 @@
 import React from 'react';
 import {
   View,
-  Text,
   ListView,
-  TouchableHighlight,
   RefreshControl,
   StyleSheet,
   Platform,
@@ -28,8 +26,8 @@ type Props = {
   // navigation: Object,
   // router: Object,
   fetchData: Function,
-  dispatch: Function,
-  error: boolean,
+  // dispatch: Function,
+  // error: boolean,
   loading: boolean,
   data: Array<FeedItem>,
 };
@@ -51,7 +49,6 @@ class Feed extends React.Component {
     super(props);
 
     this.dataSource = ds.cloneWithRows(props.data);
-    console.log('constructor', props);
   }
 
   state: State;
@@ -61,7 +58,6 @@ class Feed extends React.Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    console.log('componentWillReceiveProps', nextProps);
     if (nextProps.data) {
       this.dataSource = ds.cloneWithRows(nextProps.data);
     }
@@ -121,6 +117,19 @@ const mapState = ({ feed }) => ({
   data: feed.data,
   loading: feed.isFetching,
 });
+
+// function mapState({ feed }) {
+//   return {
+//     error: feed.error,
+//     data: feed.data,
+//     loading: feed.isFetching,
+//   }
+// }
+
+// function mapActions(dispatch) {
+//   return { fetchData: () => dispatch(fetchFeed()) }
+// }
+
 
 const mapActions = dispatch => ({ fetchData: () => dispatch(fetchFeed()) });
 

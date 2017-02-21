@@ -5,15 +5,16 @@ import { loop, Effects } from 'redux-loop';
 import { uniqueAction, uniqueActionGroup } from '../../utils/actions';
 import { CALL_API } from '../middleware/api';
 
-export const fetchData = uniqueActionGroup('FETCH_FEED', ['start', 'success', 'error']);
+export const fetchData = uniqueActionGroup('FETCH_LOCATIONS', ['start', 'success', 'error']);
 
-type State = {isFetching: boolean, data: Array<Object>, error: ?Error};
+type Location = {lat: number, lng: number, title: string};
+type State = {isFetching: boolean, locations: Array<Location>, error: ?Error};
 
-const initialState: State = { isFetching: false, data: [], error: null };
+const initialState: State = { isFetching: false, locations: [], error: null };
 
-export function fetchFeed() {
+export function fetchLocations() {
   return {
-    [CALL_API]: { endpoint: 'feed', types: [fetchData.start, fetchData.success, fetchData.error] },
+    [CALL_API]: { endpoint: 'locations', types: [fetchData.start, fetchData.success, fetchData.error] },
   };
 }
 
@@ -24,7 +25,7 @@ const reducer = handleActions(
     [fetchData.success]: (state: StateType, action: ActionType) => ({
       ...state,
       isFetching: false,
-      data: action.payload,
+      locations: action.payload.locations,
       error: null,
     }),
     [fetchData.error]: (state: StateType, action: ActionType) => ({
