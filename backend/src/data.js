@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const data = [
   {
     id: 'story-0',
@@ -19,4 +21,23 @@ const data = [
   },
 ];
 
-module.exports = data;
+
+function getRandomString(length = 7) {
+  return Math.random().toString(36).substring(length);
+}
+
+function generateFeedData(count = 10) {
+  return _.range(count)
+    .map(e => ({
+      id: `story-${e}`,
+      text: getRandomString(24),
+      author: {
+        id: `author-${e}`,
+        profilePictureUrl: `http://loremflickr.com/320/240/dog?${getRandomString(4)}=${e}`,
+        name: getRandomString(12),
+      },
+    }));
+}
+const foobar = generateFeedData(10);
+
+module.exports = foobar;

@@ -1,19 +1,13 @@
 // @flow
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-// import Auth0Lock from 'react-native-lock';
 import { connect } from 'react-redux';
 
-// import config from '../constants/config';
-
 import { login as doLogin } from '../redux/modules/user';
-
-// const lock = new Auth0Lock({ clientId: config.AUTH.CLIENT_ID, domain: config.AUTH.DOMAIN });
 
 type Props = {
   navigator: Object,
   route: Object,
-  relay: Object,
   loading: boolean,
   login(): void,
   error: ?Error,
@@ -30,36 +24,13 @@ type State = {};
 class Login extends React.Component {
   props: Props;
 
-  // state: State = initialState;
-
-  componentDidMount() {
-    // this.props.login();
-    // const auth0 = lock.authenticationAPI();
-    //
-    // lock.show({}, (err, profile, token) => {
-    //   if (err) {
-    //     console.log(err);
-    //     this.setState({ error: err });
-    //     return;
-    //   }
-    //   console.log('profile', profile);
-    //   console.log('token', token);
-    //   this.setState({ profile, token });
-    //   // Authentication worked!
-    //   console.log('Logged in with Auth0!');
-    // });
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props.loading && !nextProps.loading) {
+      this.props.navigator.navigate('App');
+    }
   }
 
   state: State;
-
-  // attemptLogin = (): void => {
-  //   this.setState({ error: null, profile: null, token: null });
-  // };
-  //
-  // isLoggedIn = (): boolean => {
-  //   const { profile, token } = this.state;
-  //   return !!profile && !!token;
-  // };
 
   render() {
     const { profile, token, error } = this.props;
@@ -92,7 +63,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapState = ({ user }) => ({ ...user });
+const mapState = ({ user }) => ({ ...user, loading: user.inProgress });
 
 const mapActions = dispatch => ({ login: () => dispatch(doLogin.start()) });
 

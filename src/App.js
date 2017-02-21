@@ -7,7 +7,7 @@ import {
 
 import { Provider } from 'react-redux';
 // $FlowIssue
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import configureStore from './store/configureStore';
 import config from './constants/config';
@@ -18,10 +18,6 @@ import MapScreen from './screens/Map';
 import Login from './screens/Login';
 
 const App = TabNavigator({
-  Login: {
-    screen: Login,
-    path: 'login',
-  },
   Profile: {
     screen: Profile,
     path: 'profile/:name',
@@ -37,8 +33,7 @@ const App = TabNavigator({
 }, {
   animationEnabled: true,
   swipeEnabled: true,
-  lazyLoad: true,
-
+  lazyLoad: false,
   screenProps: {
     foo: 'bar',
   },
@@ -46,18 +41,26 @@ const App = TabNavigator({
   tabBarOptions: {
     activeTintColor: '#e91e63',
   },
-  containerOptions: {
-    // on Android, the URI prefix typically contains a host in addition to scheme
-    URIPrefix: Platform.OS === 'android'
-      ? `${config.NAVIGATION.URI_PREFIX}://config.NAVIGATION.URI_PREFIX/`
-      : `${config.NAVIGATION.URI_PREFIX}://`,
-  },
+  // containerOptions: {
+  //   // on Android, the URI prefix typically contains a host in addition to scheme
+  //   URIPrefix: Platform.OS === 'android'
+  //     ? `${config.NAVIGATION.URI_PREFIX}://config.NAVIGATION.URI_PREFIX/`
+  //     : `${config.NAVIGATION.URI_PREFIX}://`,
+  // },
+});
+
+
+const Base = StackNavigator({
+  App: { screen: App },
+  Login: { screen: Login }
+}, {
+  headerMode: 'none',
 });
 
 const store = configureStore();
 const Root = () => (
   <Provider store={store}>
-    <App />
+    <Base />
   </Provider>
 );
 

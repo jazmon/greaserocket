@@ -30,7 +30,7 @@ const reducer = handleActions(
     [fetchData.error]: (state: StateType, action: ActionType) => ({
       ...state,
       isFetching: false,
-      error: action.error,
+      error: action.payload,
     }),
   },
   initialState,
