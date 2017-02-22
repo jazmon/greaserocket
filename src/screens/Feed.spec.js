@@ -8,7 +8,7 @@ import { FeedComponent as Feed } from './Feed';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <Feed fetchData={jest.fn} data={[]} />
+    <Feed fetchData={jest.fn} data={[]} loading={false} />
   );
   expect(tree).toMatchSnapshot();
 });

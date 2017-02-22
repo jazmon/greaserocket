@@ -1,64 +1,58 @@
 exports[`test renders correctly 1`] = `
 <View
   style={
-    Object {
-      "backgroundColor": "#fff",
-      "flex": 1,
-      "flexDirection": "column",
-      "marginTop": 24,
-    }
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+      },
+      undefined,
+    ]
   }>
-  <ScrollView
-    dataSource={
-      ListViewDataSource {
-        "items": 0,
-      }
-    }
-    initialListSize={10}
-    onContentSizeChange={[Function]}
-    onEndReachedThreshold={1000}
-    onKeyboardDidHide={undefined}
-    onKeyboardDidShow={undefined}
-    onKeyboardWillHide={undefined}
-    onKeyboardWillShow={undefined}
-    onLayout={[Function]}
-    onScroll={[Function]}
-    pageSize={1}
-    removeClippedSubviews={true}
-    renderRow={[Function]}
-    renderSectionHeader={[Function]}
-    renderSeparator={[Function]}
-    scrollEventThrottle={50}
-    scrollRenderAheadDistance={1000}
-    stickyHeaderIndices={Array []} />
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
-    accessible={true}
-    hitSlop={undefined}
-    onLayout={undefined}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "transparent",
-        },
-        undefined,
-      ]
-    }
-    testID={undefined}>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail">
-      Click me!
-    </Text>
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "flexDirection": "column",
+        "marginTop": 24,
+      }
+    }>
+    <ScrollView
+      dataSource={
+        ListViewDataSource {
+          "items": 0,
+        }
+      }
+      enableEmptySections={true}
+      initialListSize={10}
+      onContentSizeChange={[Function]}
+      onEndReachedThreshold={1000}
+      onKeyboardDidHide={undefined}
+      onKeyboardDidShow={undefined}
+      onKeyboardWillHide={undefined}
+      onKeyboardWillShow={undefined}
+      onLayout={[Function]}
+      onScroll={[Function]}
+      pageSize={6}
+      refreshControl={
+        <RefreshControl
+          onRefresh={[Function]}
+          refreshing={false} />
+      }
+      removeClippedSubviews={true}
+      renderRow={[Function]}
+      renderSectionHeader={[Function]}
+      renderSeparator={[Function]}
+      scrollEventThrottle={50}
+      scrollRenderAheadDistance={1000}
+      stickyHeaderIndices={
+        Array [
+          0,
+        ]
+      }>
+      <View />
+    </ScrollView>
   </View>
 </View>
 `;

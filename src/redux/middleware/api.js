@@ -8,7 +8,7 @@ const BASE_URL = trimBaseUrl(config.BACKEND.URL);
 
 export const CALL_API = 'greaserocket/api/CALL_API';
 
-class ResponseError extends Response {
+class ResponseError extends Error {
   response: Response;
 }
 

@@ -4,13 +4,13 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 
-import Map from './Map';
+import { MapScreenComponent } from './Map';
 
 jest.mock('react-native-maps');
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <Map />
+    <MapScreenComponent fetchLocations={() => {}} />
   );
   expect(tree).toMatchSnapshot();
 });

@@ -1,11 +1,27 @@
 // @flow
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
+import { isEqual } from 'lodash';
 
 import { fetchLocations } from '../redux/modules/map';
+
+const { width, height } = Dimensions.get('window');
+
+const ASPECT_RATIO = width / height;
+const LATITUDE = 61.497421;
+const LONGITUDE = 23.757292;
+const LATITUDE_DELTA = 0.0322;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
+const REGION = {
+  latitude: LATITUDE,
+  longitude: LONGITUDE,
+  latitudeDelta: LATITUDE_DELTA,
+  longitudeDelta: LONGITUDE_DELTA,
+};
 
 type Props = {
   navigation: Object,
@@ -20,10 +36,12 @@ function toMarker(location: Location): Marker {
     latlng: { latitude: location.lat, longitude: location.lng },
     title: location.title,
     description: '',
+    id: location.id,
   };
 }
 
 class MapScreen extends React.Component {
+  map: Object;
   static navigationOptions = {
     tabBar: {
       label: 'Map',
@@ -31,8 +49,50 @@ class MapScreen extends React.Component {
     },
   };
 
+  static defaultProps = {
+    locations: [],
+  };
+
   componentDidMount() {
     this.props.fetchLocations();
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (!isEqual(nextProps.locations, this.props.locations)) {
+      const edgePadding: EdgePadding = {
+        top: 40,
+        right: 40,
+        bottom: 40,
+        left: 40,
+      };
+      const coords: Array<LatLng> = this.props.events
+        .filter(location => !!location.lat && !!location.lng)
+        .map(location => ({
+          latitude: (location: any).lat,
+          longitude: (location: any).lng,
+        }))
+        .filter(latlng => {
+          const center: LatLng = {
+            latitude: 61.497418,
+            longitude: 23.757059,
+          };
+          const MAX_DELTA_LONGITUDE = 0.2;
+          const MAX_DELTA_LATITUDE = 0.2;
+          const diff = {
+            latitude: center.latitude - latlng.latitude,
+            longitude: center.longitude - latlng.longitude,
+          };
+          const outside = Math.abs(diff.longitude) > MAX_DELTA_LONGITUDE ||
+            Math.abs(diff.latitude) > MAX_DELTA_LATITUDE;
+          return !outside;
+        });
+      if (!!this.map && coords && coords.length > 1) {
+        this.map.fitToCoordinates(coords, {
+          edgePadding,
+          animated: true,
+        });
+      }
+    }
   }
 
   props: Props;
@@ -42,23 +102,26 @@ class MapScreen extends React.Component {
     return (
       <View style={styles.container}>
         <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: 65.78825,
-            longitude: 23.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+          ref={map => {
+            this.map = map;
           }}
+          style={styles.map}
+          initialRegion={REGION}
+          loadingEnabled={false}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
         >
-          {!loading && locations
-            .map(toMarker)
-            .map(marker => (
-              <MapView.Marker
-                coordinate={marker.latlng}
-                title={marker.title}
-                description={marker.description}
-              />
-            ))}
+          {!loading &&
+            locations
+              .map(toMarker)
+              .map(marker => (
+                <MapView.Marker
+                  key={marker.id}
+                  coordinate={marker.latlng}
+                  title={marker.title}
+                  description={marker.description}
+                />
+              ))}
         </MapView>
       </View>
     );

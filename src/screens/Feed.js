@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { fetchFeed } from '../redux/modules/feed';
 
 import Story from '../components/Story';
+import Base from '../components/Base';
 
 const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 
@@ -84,20 +85,22 @@ class Feed extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ListView
-          dataSource={this.dataSource}
-          pageSize={6}
-          renderRow={this.renderRow}
-          renderSeparator={this.renderSeparator}
-          enableEmptySections
-          renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
-          refreshControl={
-            <RefreshControl refreshing={this.props.loading} onRefresh={this.onRefresh} />
-          }
-        />
-        {this.props.loading && this.renderLoading()}
-      </View>
+      <Base>
+        <View style={styles.container}>
+          <ListView
+            dataSource={this.dataSource}
+            pageSize={6}
+            renderRow={this.renderRow}
+            renderSeparator={this.renderSeparator}
+            enableEmptySections
+            renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
+            refreshControl={
+              <RefreshControl refreshing={this.props.loading} onRefresh={this.onRefresh} />
+            }
+          />
+          {this.props.loading && this.renderLoading()}
+        </View>
+      </Base>
     );
   }
 }
@@ -117,19 +120,6 @@ const mapState = ({ feed }) => ({
   data: feed.data,
   loading: feed.isFetching,
 });
-
-// function mapState({ feed }) {
-//   return {
-//     error: feed.error,
-//     data: feed.data,
-//     loading: feed.isFetching,
-//   }
-// }
-
-// function mapActions(dispatch) {
-//   return { fetchData: () => dispatch(fetchFeed()) }
-// }
-
 
 const mapActions = dispatch => ({ fetchData: () => dispatch(fetchFeed()) });
 
