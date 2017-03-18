@@ -38,6 +38,8 @@ module.exports = {
   rules: {
     'react-native/no-unused-styles': 2,
     'react-native/split-platform-components': 2,
+    'react-native/no-inline-styles': 1,
+    'react-native/no-color-literals': 2,
     'jsx-quotes': ['error', 'prefer-double'],
     'jsx-a11y/href-no-hash': 2,
     'jsx-a11y/label-has-for': 2,
@@ -109,7 +111,7 @@ module.exports = {
     'babel/object-curly-spacing': 0,
     'object-shorthand': 1,
     'babel/arrow-parens': 0,
-    'babel/no-await-in-loop': 1,
+    'no-await-in-loop': 1,
     'arrow-parens': 0,
     'new-cap': [
       'warn',
@@ -137,7 +139,8 @@ module.exports = {
       'error',
       'single'
     ],
-    semi: [
+    'semi': 0,
+    'babel/semi': [
       'error',
       'always'
     ],
@@ -154,7 +157,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'react/forbid-prop-types': 1, // replace with 1 for very strict type checks
     'no-plusplus': ['error', { 'allowForLoopAfterthoughts': true }],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js"]}],
-    "react/no-unused-prop-types": "warn",
+    'import/no-extraneous-dependencies': ['error', {'devDependencies': ['**/*.test.js', '**/*.spec.js']}],
+    'react/no-unused-prop-types': 'warn',
   }
 };
