@@ -5,7 +5,7 @@ import theme from '../constants/theme';
 
 type Props = {
   style?: Style,
-  children?: ?Children,
+  children?: ?any,
 };
 
 const Base = ({ children, style }: Props): ElementType => (

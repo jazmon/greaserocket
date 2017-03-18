@@ -1,3 +1,2 @@
 /* eslint-disable no-undef */
 declare type ElementType = React$Element<any>;
-declare type Children = any;

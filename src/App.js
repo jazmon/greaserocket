@@ -3,7 +3,6 @@ import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
 
 import { Provider } from 'react-redux';
-// $FlowIssue
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import configureStore from './store/configureStore';

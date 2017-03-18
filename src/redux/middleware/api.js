@@ -12,12 +12,13 @@ class ResponseError extends Error {
   response: Response;
 }
 
+
 function checkStatus(response: Response) {
-  console.log('checkstatus');
+  console.log('response.foo', response.foo);
   if (response.status >= 200 && response.status < 300) {
-    console.log('status ok');
     return response;
   }
+
   const error = new ResponseError(response.statusText);
   error.response = response;
   throw error;
