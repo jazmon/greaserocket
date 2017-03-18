@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 
 import { fetchLocations } from '../redux/modules/map';
+import theme from '../constants/theme';
 
 const { width, height } = Dimensions.get('window');
 
@@ -23,6 +24,14 @@ const REGION = {
   longitudeDelta: LONGITUDE_DELTA,
 };
 
+type Location = {
+  id: string,
+  latitude: number,
+  longitude: number,
+  title: string,
+  description: string,
+};
+
 type Props = {
   navigation: Object,
   fetchLocations: Function,
@@ -31,11 +40,11 @@ type Props = {
   locations: Array<Location>,
 };
 
-function toMarker(location: Location): Marker {
+function toMarker(location: Location): MapMarker {
   return {
-    latlng: { latitude: location.lat, longitude: location.lng },
+    latlng: { latitude: location.latitude, longitude: location.longitude },
     title: location.title,
-    description: '',
+    description: location.description,
     id: location.id,
   };
 }
@@ -65,12 +74,8 @@ class MapScreen extends React.Component {
         bottom: 40,
         left: 40,
       };
-      const coords: Array<LatLng> = this.props.events
-        .filter(location => !!location.lat && !!location.lng)
-        .map(location => ({
-          latitude: (location: any).lat,
-          longitude: (location: any).lng,
-        }))
+      const coords: Array<LatLng> = this.props.locations
+        .filter(location => !!location.latitude && !!location.longitude)
         .filter(latlng => {
           const center: LatLng = {
             latitude: 61.497418,
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    backgroundColor: theme.WHITE,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -145,7 +150,7 @@ const mapState = ({ map }) => ({
   loading: map.isFetching,
 });
 
-const mapActions = dispatch => ({ fetchLocations: () => dispatch(fetchLocations()) });
+const mapDispatchtoProps = dispatch => ({ fetchLocations: () => dispatch(fetchLocations()) });
 
 export const MapScreenComponent = MapScreen;
-export default connect(mapState, mapActions)(MapScreen);
+export default connect(mapState, mapDispatchtoProps)(MapScreen);

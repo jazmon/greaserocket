@@ -2,15 +2,15 @@
   "locations": [
     {
       "id": "location-0",
-      "lat": 61.504678,
-      "lng": 23.774825,
+      "latitude": 61.504678,
+      "longitude": 23.774825,
       "title": "Park party!",
       "description": "asfasdfadf"
     },
     {
       "id": "location-1",
-      "lat": 61.55,
-      "lng": 23.44,
+      "latitude": 61.55,
+      "longitude": 23.44,
       "title": "Foo bar!",
       "description": "htrhrth"
     }

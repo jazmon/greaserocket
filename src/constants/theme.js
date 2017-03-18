@@ -1,7 +1,7 @@
 // @flow
 import color from 'color';
 
-export default {
+const theme = {
   DARK_PRIMARY_COLOR: '#388E3C',
   DEFAULT_PRIMARY_COLOR: '#4CAF50',
   LIGHT_PRIMARY_COLOR: '#C8E6C9',
@@ -11,5 +11,11 @@ export default {
   SECONDAY_TEXT_COLOR: 'rgba(0, 0, 0, 0.54)',
   DIVIDER_COLOR: 'rgba(0, 0, 0, 0.12)',
   DISABLED_TEXT_COLOR: 'rgba(0, 0, 0, 0.38)',
-  LIGHT_STATUS_BAR: color(this.DARK_PRIMARY_COLOR).dark(),
+  WHITE: '#FFF',
+  BLACK: '#000',
+};
+
+export default {
+  ...theme,
+  LIGHT_STATUS_BAR: color(theme.DARK_PRIMARY_COLOR).dark(),
 };

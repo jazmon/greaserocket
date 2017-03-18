@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 declare type Auth0ExtraInfo = {
   locale?: string,
   family_name?: string,

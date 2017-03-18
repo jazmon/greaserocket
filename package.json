@@ -27,7 +27,7 @@
 		"react-native-lock": "^0.4.0",
 		"react-native-maps": "https://github.com/airbnb/react-native-maps.git#0.13.0",
 		"react-native-vector-icons": "^4.0.0",
-		"react-navigation": "^1.0.0-beta.1",
+		"react-navigation": "^1.0.0-beta.7",
 		"react-redux": "^5.0.2",
 		"redux": "^3.6.0",
 		"redux-actions": "^1.2.1",
