@@ -53,25 +53,29 @@ async function callApi(endpoint: string, authenticated: boolean, token: ?Auth0To
   }
 }
 
-export default (store: Object) => (next: Function) => (action: Object): Promise<*> => {
-  const callAPI = action[CALL_API];
+export default (store: Object) =>
+  (next: Function) =>
+    (action: Object): Promise<*> => {
+      const callAPI = action[CALL_API];
 
-  if (typeof callAPI === 'undefined') {
-    return next(action);
-  }
+      if (typeof callAPI === 'undefined') {
+        return next(action);
+      }
 
-  const token: ?Auth0Token = store.getState().user.token;
+      const token: ?Auth0Token = store.getState().user.token;
 
-  const { endpoint, types, authenticated } = callAPI;
-  const [, successType, errorType] = types;
-  return callApi(endpoint, authenticated, token)
-    .then(
-      response => next({ payload: response, meta: authenticated, type: successType.toString() }),
-      // error => next({
-      //   payload: error,
-      //   meta: error.message || 'Error during api call',
-      //   type: errorType.toString(),
-      // }),
-      error => next(errorType(error))
-    ).catch(err => next(errorType(err)));
-};
+      const { endpoint, types, authenticated } = callAPI;
+      const [, successType, errorType] = types;
+      return callApi(endpoint, authenticated, token)
+        .then(
+          response =>
+            next({ payload: response, meta: authenticated, type: successType.toString() }),
+          // error => next({
+          //   payload: error,
+          //   meta: error.message || 'Error during api call',
+          //   type: errorType.toString(),
+          // }),
+          error => next(errorType(error)),
+        )
+        .catch(err => next(errorType(err)));
+    };

@@ -62,6 +62,7 @@ module.exports = {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 1,
     'react/self-closing-comp': 2,
+    'react/require-default-props': 0,
     // 'sort-class-members/sort-class-members': [2, {
     //   'order': [
     //     '[static-properties]',

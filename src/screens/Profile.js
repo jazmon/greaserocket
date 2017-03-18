@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 
 import { login as doLogin } from '../redux/modules/user';
 
-type Props = {navigation: Object, login(): void, profile: ?Auth0Profile};
+type Props = { navigation: Object, login(): void, profile: ?Auth0Profile };
 
-type State = {text: string};
+type State = { text: string };
 
 class Profile extends React.Component {
   static navigationOptions = {
@@ -33,11 +33,10 @@ class Profile extends React.Component {
     const { profile, loading } = this.props;
     return (
       <View style={styles.container}>
-        {loading && (
+        {loading &&
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
             <ActivityIndicator size="large" />
-          </View>
-        )}
+          </View>}
         {profile &&
           <View>
             <Text style={styles.text}>{profile.name}</Text>

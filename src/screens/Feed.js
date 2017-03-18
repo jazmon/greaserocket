@@ -20,9 +20,9 @@ import Base from '../components/Base';
 const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 
 const ds = new ListView.DataSource({ rowHasChanged });
-type Author = {id: string, name: string, profilePictureUrl: string};
+type Author = { id: string, name: string, profilePictureUrl: string };
 
-type FeedItem = {author: Author, id: string, text: string};
+type FeedItem = { author: Author, id: string, text: string };
 type Props = {
   // navigation: Object,
   // router: Object,
@@ -33,7 +33,7 @@ type Props = {
   data: Array<FeedItem>,
 };
 
-type State = {text: string};
+type State = { text: string };
 
 class Feed extends React.Component {
   static navigationOptions = {

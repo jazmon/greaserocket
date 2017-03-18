@@ -7,14 +7,17 @@ import { CALL_API } from '../middleware/api';
 
 export const fetchData = uniqueActionGroup('FETCH_LOCATIONS', ['start', 'success', 'error']);
 
-type Location = {lat: number, lng: number, title: string};
-type State = {isFetching: boolean, locations: Array<Location>, error: ?Error};
+type Location = { lat: number, lng: number, title: string };
+type State = { isFetching: boolean, locations: Array<Location>, error: ?Error };
 
 const initialState: State = { isFetching: false, locations: [], error: null };
 
 export function fetchLocations() {
   return {
-    [CALL_API]: { endpoint: 'locations', types: [fetchData.start, fetchData.success, fetchData.error] },
+    [CALL_API]: {
+      endpoint: 'locations',
+      types: [fetchData.start, fetchData.success, fetchData.error],
+    },
   };
 }
 

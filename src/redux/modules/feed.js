@@ -7,7 +7,7 @@ import { CALL_API } from '../middleware/api';
 
 export const fetchData = uniqueActionGroup('FETCH_FEED', ['start', 'success', 'error']);
 
-type State = {isFetching: boolean, data: Array<Object>, error: ?Error};
+type State = { isFetching: boolean, data: Array<Object>, error: ?Error };
 
 const initialState: State = { isFetching: false, data: [], error: null };
 

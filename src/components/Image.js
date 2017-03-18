@@ -1,6 +1,6 @@
 // @flow
-import React from "react";
-import { View, Text, StyleSheet, Image as RNImage } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet, Image as RNImage } from 'react-native';
 
 const defaultProps = {};
 

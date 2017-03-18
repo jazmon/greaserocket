@@ -7,13 +7,7 @@ import rootReducer from '../redux/modules/index';
 import apiMiddleware from '../redux/middleware/api';
 
 // Middleware you want to use in production:
-const enhancer = compose(
-  installLoop(),
-  applyMiddleware(
-    apiMiddleware,
-  ),
-  autoRehydrate(),
-);
+const enhancer = compose(installLoop(), applyMiddleware(apiMiddleware), autoRehydrate());
 
 const configureStore = (initialState?: Object) => {
   const store = createStore(rootReducer, initialState, enhancer);

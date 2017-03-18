@@ -41,13 +41,16 @@ function doLogin(token: ?Auth0Token) {
 
       auth0
         .refreshToken(token.refreshToken)
-        .then(response => console.log('response', response) || resolve(refreshSession.success({ response })))
+        .then(
+          response =>
+            console.log('response', response) || resolve(refreshSession.success({ response })),
+        )
         .catch(error => reject(refreshSession.error(error)));
     }
   });
 }
 
-type State = {profile: ?Auth0Profile, token: ?Auth0Token, loginDate: ?Date, error: ?Error};
+type State = { profile: ?Auth0Profile, token: ?Auth0Token, loginDate: ?Date, error: ?Error };
 
 const initialState: State = {
   profile: null,
@@ -79,7 +82,7 @@ const reducer = handleActions(
       token: {
         ...state.token,
         ...action.payload,
-      }
+      },
     }),
     [refreshSession.error]: (state: StateType, action: ActionType) => ({
       ...state,

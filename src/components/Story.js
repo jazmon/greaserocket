@@ -1,13 +1,9 @@
 // @flow
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  // Image,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import Image from './Image';
+import theme from '../constants/theme';
 
 const defaultProps = {
   text: '',
@@ -22,14 +18,10 @@ type Props = {
   style: any,
 };
 
-const Story = ({ text, style, author, ...props }: Props): React.Element<*> => (
+const Story = ({ text, style, author }: Props): React.Element<*> => (
   <View style={[styles.container, style]}>
     <View style={styles.imageContainer}>
-      <Image
-        style={styles.image}
-        source={{ uri: author.profilePictureUrl }}
-        resizemode="contain"
-      />
+      <Image style={styles.image} source={{ uri: author.profilePictureUrl }} resizemode="contain" />
     </View>
     <View style={styles.textArea}>
       <Text>{author.name}</Text>
@@ -44,13 +36,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: theme.WHITE,
     // borderColor: '#f00',
     // borderWidth: 1,
     height: 120,
   },
   text: {
-    color: '#000',
+    color: theme.BLACK,
     fontSize: 16,
   },
   textArea: {

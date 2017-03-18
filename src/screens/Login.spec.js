@@ -5,10 +5,7 @@ import renderer from 'react-test-renderer';
 
 import { LoginComponent as Login } from './Login';
 
-
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <Login />
-  );
+  const tree = renderer.create(<Login />);
   expect(tree).toMatchSnapshot();
 });
