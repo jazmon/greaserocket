@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import type { Story as StoryType } from '../../types';
 import type { ReduxState } from '../redux/modules';
 
-import { fetchStories } from '../redux/modules/feed';
+import { fetchStories, refetchStories } from '../redux/modules/feed';
 
 import Story from '../components/Story';
 import Base from '../components/Base';
@@ -31,6 +31,7 @@ type Props = {
   fetchStories: Function,
   error: boolean,
   loading: boolean,
+  refetching: boolean,
   stories: Array<StoryType>,
 };
 
@@ -65,7 +66,7 @@ class Feed extends React.Component {
   }
 
   onRefresh = () => {
-    this.props.fetchStories();
+    this.props.refetchStories();
   };
 
   renderRow = (story: StoryType) => <Story story={story} key={story.id} />;
@@ -81,6 +82,7 @@ class Feed extends React.Component {
   );
 
   render() {
+    const { loading, refetching } = this.props;
     return (
       <Base>
         <View style={styles.container}>
@@ -91,11 +93,9 @@ class Feed extends React.Component {
             renderSeparator={this.renderSeparator}
             enableEmptySections
             renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
-            refreshControl={
-              <RefreshControl refreshing={this.props.loading} onRefresh={this.onRefresh} />
-            }
+            refreshControl={<RefreshControl refreshing={refetching} onRefresh={this.onRefresh} />}
           />
-          {this.props.loading && this.renderLoading()}
+          {loading && this.renderLoading()}
         </View>
       </Base>
     );
@@ -110,9 +110,11 @@ const styles: Style = StyleSheet.create({
     backgroundColor: theme.WHITE,
   },
   loadingContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    ...StyleSheet.absoluteFillObject,
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.TRANSPARENT,
   },
   separator: { height: 8 },
 });
@@ -121,7 +123,10 @@ const mapState = ({ feed }: ReduxState) => ({
   ...feed,
 });
 
-const mapActions = dispatch => ({ fetchStories: () => dispatch(fetchStories()) });
+const mapActions = dispatch => ({
+  fetchStories: () => dispatch(fetchStories()),
+  refetchStories: () => dispatch(refetchStories()),
+});
 
 export const FeedComponent = Feed;
 export default connect(mapState, mapActions)(Feed);

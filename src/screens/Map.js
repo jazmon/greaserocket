@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
@@ -44,6 +44,12 @@ function toMarker(location: Location): MapMarker {
     id: location.id,
   };
 }
+
+const LoadingOverlay = (): ElementType => (
+  <View style={styles.loadingContainer}>
+    <ActivityIndicator size="large" />
+  </View>
+);
 
 class MapScreen extends React.Component {
   map: Object;
@@ -124,6 +130,7 @@ class MapScreen extends React.Component {
                 />
               ))}
         </MapView>
+        {loading && <LoadingOverlay />}
       </View>
     );
   }
@@ -135,6 +142,13 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: 'column',
     backgroundColor: theme.WHITE,
+  },
+  loadingContainer: {
+    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.TRANSPARENT,
   },
   map: {
     ...StyleSheet.absoluteFillObject,

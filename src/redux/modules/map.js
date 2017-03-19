@@ -24,7 +24,7 @@ export function fetchLocations() {
 }
 
 const handlers: Handler<State> = {
-  [FETCH_LOCATIONS_START](state: State, action: Action<*>) {
+  [FETCH_LOCATIONS_START](state: State) {
     return {
       ...state,
       loading: true,

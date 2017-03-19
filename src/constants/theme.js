@@ -13,6 +13,7 @@ const theme = {
   DISABLED_TEXT_COLOR: 'rgba(0, 0, 0, 0.38)',
   WHITE: '#FFF',
   BLACK: '#000',
+  TRANSPARENT: 'transparent',
 };
 
 export default {

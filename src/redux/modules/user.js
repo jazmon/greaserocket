@@ -94,7 +94,7 @@ const initialState: State = {
 };
 
 const handlers: Handler<State> = {
-  [LOGIN_START](state: State, action: Action<*>) {
+  [LOGIN_START](state: State) {
     return loop({ ...state, loading: true, error: null }, Effects.promise(doLogin, state.token));
   },
   [LOGIN_SUCCESS](state: State, action: Action<LoginData>) {
@@ -137,7 +137,7 @@ const handlers: Handler<State> = {
     if (
       action.payload.user &&
       action.payload.user.loginDate &&
-      moment(action.payload.user.loginDate).isBefore(moment().subtract(20, 'seconds'))
+      moment(action.payload.user.loginDate).isBefore(moment().subtract(1, 'weeks'))
     ) {
       return state;
     }

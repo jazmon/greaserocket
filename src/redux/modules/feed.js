@@ -5,13 +5,16 @@ import createReducer from '../../utils/createReducer';
 import type { Action, Handler, Story } from '../../../types';
 
 // Constants
-export const FETCH_FEED_START = 'GREASEROCKET/FEED/FETCH_FEED';
+export const FETCH_FEED_START = 'GREASEROCKET/FEED/FETCH_FEED_START';
 export const FETCH_FEED_SUCCESS = 'GREASEROCKET/FEED/FETCH_FEED_SUCCESS';
 export const FETCH_FEED_FAILURE = 'GREASEROCKET/FEED/FETCH_FEED_FAILURE';
+export const REFETCH_FEED_START = 'GREASEROCKET/FEED/REFETCH_FEED_START';
+export const REFETCH_FEED_SUCCESS = 'GREASEROCKET/FEED/REFETCH_FEED_SUCCESS';
+export const REFETCH_FEED_FAILURE = 'GREASEROCKET/FEED/REFETCH_FEED_FAILURE';
 
-export type State = { loading: boolean, stories: Array<Story>, error: ?Error };
+export type State = { loading: boolean, refetching: boolean, stories: Array<Story>, error: ?Error };
 
-const initialState: State = { loading: false, stories: [], error: null };
+const initialState: State = { loading: false, refetching: false, stories: [], error: null };
 
 export function fetchStories() {
   return {
@@ -24,8 +27,17 @@ export function fetchStories() {
   };
 }
 
+export const refetchStories = () => ({
+  type: CALL_API,
+  payload: {
+    endpoint: 'feed',
+    authenticated: false,
+    types: [REFETCH_FEED_START, REFETCH_FEED_SUCCESS, REFETCH_FEED_FAILURE],
+  },
+});
+
 const handlers: Handler<State> = {
-  [FETCH_FEED_START](state: State, action: Action<*>) {
+  [FETCH_FEED_START](state: State) {
     return {
       ...state,
       loading: true,
@@ -43,6 +55,27 @@ const handlers: Handler<State> = {
     return {
       ...state,
       loading: false,
+      error: action.payload,
+    };
+  },
+  [REFETCH_FEED_START](state: State) {
+    return {
+      ...state,
+      refetching: true,
+    };
+  },
+  [REFETCH_FEED_SUCCESS](state: State, action: Action<Array<Story>>) {
+    return {
+      ...state,
+      refetching: false,
+      error: null,
+      stories: action.payload || [],
+    };
+  },
+  [REFETCH_FEED_FAILURE](state: State, action: Action<Error>) {
+    return {
+      ...state,
+      refetching: false,
       error: action.payload,
     };
   },

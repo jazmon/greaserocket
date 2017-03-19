@@ -2,7 +2,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import Image from './Image';
+import Image from 'react-native-image-progress';
+// import Image from './Image';
 import theme from '../constants/theme';
 
 import type { Story as StoryType } from '../../types';
