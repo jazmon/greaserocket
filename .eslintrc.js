@@ -16,6 +16,7 @@ module.exports = {
     fetch: true,
     __DEV__: true,
     FormData: true,
+    alert: true,
   },
   extends: ['plugin:react/recommended', 'plugin:flowtype/recommended', 'airbnb'],
   parserOptions: {

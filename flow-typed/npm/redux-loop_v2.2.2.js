@@ -34,10 +34,10 @@
    declare function getEffect<M>(loop: any): ?M;
 
    declare function combineReducers<S, K, V, A>(
-     reducerMap: any,
-     rootState: Object,
-     accessor: (state: S, key: K) => S,
-     mutator: (state: S, key: K, value: V) => S,
+     reducerMap: Object,
+     rootState?: Object,
+     accessor?: (state: S, key: K) => S,
+     mutator?: (state: S, key: K, value: V) => S,
    ): (state: S, action: A) => loop<*, *>;
 
    declare interface Action {
@@ -56,12 +56,12 @@
    declare function isNone(object: Object): Boolean;
    declare function none(): Object;
 
-   declare function promise(factory: Function, ...args: any): Object;
+   declare function promise(factory: Function, ...args?: any): Object;
 
-   declare function call(factory: Function, ...args: any): Object;
+   declare function call(factory: Function, ...args?: any): Object;
    declare function batch(effects: Array<any>): Object;
    declare function constant(action: Action): Object; // { action, type: string };
-   declare function lift(effect: Object, factory: Function, ...args: any): Object;
+   declare function lift(effect: Object, factory: Function, ...args?: any): Object;
 
    declare function effectToPromise(effect: Object): Promise<*>;
 

@@ -1,23 +1,24 @@
 // @flow
 import React from 'react';
-import { View, Text, Platform, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
-import type { NavigationScreenProp, NavigationAction } from 'react-navigation/lib/TypeDefinition'
+// import type {
+//   NavigationScreenProp,
+//   NavigationAction
+// } from 'react-navigation/lib/TypeDefinition';
 
 import { login } from '../redux/modules/user';
 import theme from '../constants/theme';
 
 type Props = {
-  navigation: NavigationScreenProp<*, NavigationAction>,
-  // login(): void,
+  // navigation: NavigationScreenProp<*, NavigationAction>,
+  login(): void,
   loginDate: Date,
   profile: ?Auth0Profile,
   loading: boolean,
 };
-
-type State = { text: string };
 
 class Profile extends React.Component {
   static navigationOptions = {
@@ -29,33 +30,27 @@ class Profile extends React.Component {
 
   props: Props;
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = { text: 'Profile' };
+  componentDidMount() {
+    setTimeout(
+      () => {
+        // FIXME
+        if (
+          !this.props.profile ||
+          moment(this.props.loginDate).isBefore(moment().subtract(20, 'seconds'))
+        ) {
+          this.props.login();
+        }
+      },
+      400,
+    );
   }
 
-  state: State;
-
-  // componentDidMount() {
-  //   setTimeout(
-  //     () => {
-  //       // FIXME
-  //       if (!this.props.profile || moment(this.props.loginDate).isBefore(moment().subtract(20, 'seconds'))) {
-  //         this.props.login();
-  //       }
-  //     },
-  //     400,
-  //   );
-  // }
-
   render() {
-    const { text } = this.state;
     const { profile, loading } = this.props;
     return (
       <View style={styles.container}>
         {loading &&
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" />
           </View>}
         {profile &&
@@ -76,10 +71,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  loadingContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
   text: { color: theme.BLACK, fontSize: 16 },
 });
 
-const mapState = ({ user }) => ({ ...user, loading: user.inProgress });
+const mapState = ({ user }) => ({ ...user });
 
 const mapActions = dispatch => ({ login: () => dispatch(login()) });
 

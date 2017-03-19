@@ -5,7 +5,13 @@ type Action = {
   payload: Object,
 };
 
-function createReducer(initialState: ?Object, handlers: Object) {
+// type State = Object;
+
+type Handler<S> = () => S;
+
+type Handlers = Array<Handler>;
+
+function createReducer<S>(initialState: ?Object, handlers: Object): S {
   return function reducer(state: ?Object = initialState, action: Action) {
     return typeof handlers[action.type] === 'function'
       ? handlers[action.type](state, action)

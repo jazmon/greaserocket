@@ -9,6 +9,8 @@ import { isEqual } from 'lodash';
 import { fetchLocations } from '../redux/modules/map';
 import theme from '../constants/theme';
 
+import type { Location } from '../../types';
+
 const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -24,13 +26,6 @@ const REGION = {
   longitudeDelta: LONGITUDE_DELTA,
 };
 
-type Location = {
-  id: string,
-  latitude: number,
-  longitude: number,
-  title: string,
-  description: string,
-};
 
 type Props = {
   navigation: Object,
@@ -147,7 +142,6 @@ const styles = StyleSheet.create({
 
 const mapState = ({ map }) => ({
   ...map,
-  loading: map.isFetching,
 });
 
 const mapDispatchtoProps = dispatch => ({ fetchLocations: () => dispatch(fetchLocations()) });

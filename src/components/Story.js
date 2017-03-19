@@ -5,40 +5,34 @@ import { View, Text, StyleSheet } from 'react-native';
 import Image from './Image';
 import theme from '../constants/theme';
 
-const defaultProps = {
-  text: '',
-};
+import type { Story as StoryType } from '../../types';
 
 type Props = {
-  text: string,
-  author: {
-    profilePictureUrl: string,
-    name: string,
-  },
-  style: any,
+  story: StoryType,
+  style?: ?any,
 };
 
-const Story = ({ text, style, author }: Props): React.Element<*> => (
+const Story = ({ story, style }: Props): ElementType => (
   <View style={[styles.container, style]}>
     <View style={styles.imageContainer}>
-      <Image style={styles.image} source={{ uri: author.profilePictureUrl }} resizemode="contain" />
+      <Image
+        style={styles.image}
+        source={{ uri: story.author.profilePictureUrl }}
+        resizemode="contain"
+      />
     </View>
     <View style={styles.textArea}>
-      <Text>{author.name}</Text>
-      <Text style={styles.text}>{text}</Text>
+      <Text>{story.author.name}</Text>
+      <Text style={styles.text}>{story.text}</Text>
     </View>
   </View>
 );
-
-Story.defaultProps = defaultProps;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: theme.WHITE,
-    // borderColor: '#f00',
-    // borderWidth: 1,
     height: 120,
   },
   text: {
@@ -48,8 +42,6 @@ const styles = StyleSheet.create({
   textArea: {
     flex: 1,
     padding: 16,
-    // borderColor: '#00f',
-    // borderWidth: 1,
     flexDirection: 'column',
   },
   imageContainer: {
@@ -59,8 +51,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    // borderColor: '#0f0',
-    // borderWidth: 1,
     height: 100,
   },
 });

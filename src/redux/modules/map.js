@@ -1,43 +1,47 @@
 // @flow
-import { handleActions } from 'redux-actions';
-
-import { loop, Effects } from 'redux-loop';
-import { uniqueAction, uniqueActionGroup } from '../../utils/actions';
 import { CALL_API } from '../middleware/api';
+import createReducer from '../../utils/createReducer';
 
-export const fetchData = uniqueActionGroup('FETCH_LOCATIONS', ['start', 'success', 'error']);
+import type { Action, Handler, Location } from '../../../types';
 
-type Location = { lat: number, lng: number, title: string };
-type State = { isFetching: boolean, locations: Array<Location>, error: ?Error };
+export const FETCH_LOCATIONS_START = 'GREASEROCKET/MAP/FETCH_LOCATIONS_START';
+export const FETCH_LOCATIONS_SUCCESS = 'GREASEROCKET/MAP/FETCH_LOCATIONS_SUCCESS';
+export const FETCH_LOCATIONS_FAILURE = 'GREASEROCKET/MAP/FETCH_LOCATIONS_FAILURE';
 
-const initialState: State = { isFetching: false, locations: [], error: null };
+type State = { loading: boolean, locations: Array<Location>, error: ?Error };
+
+const initialState: State = { loading: false, locations: [], error: null };
 
 export function fetchLocations() {
   return {
     [CALL_API]: {
       endpoint: 'locations',
-      types: [fetchData.start, fetchData.success, fetchData.error],
+      types: [FETCH_LOCATIONS_START, FETCH_LOCATIONS_SUCCESS, FETCH_LOCATIONS_FAILURE],
     },
   };
 }
 
-const reducer = handleActions(
-  {
-    [fetchData.start]: (state: StateType) =>
-      loop({ ...state, isFetching: true, error: null }, Effects.none()),
-    [fetchData.success]: (state: StateType, action: ActionType) => ({
+const handlers: Handler<State> = {
+  [FETCH_LOCATIONS_START](state: State, action: Action<*>) {
+    return {
       ...state,
-      isFetching: false,
-      locations: action.payload.locations,
-      error: null,
-    }),
-    [fetchData.error]: (state: StateType, action: ActionType) => ({
-      ...state,
-      isFetching: false,
-      error: action.payload,
-    }),
+      loading: true,
+    };
   },
-  initialState,
-);
+  [FETCH_LOCATIONS_SUCCESS](state: State, action: Action<Array<Location>>) {
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      locations: action.payload || [],
+    };
+  },
+  [FETCH_LOCATIONS_FAILURE](state: State, action: Action<Error>) {
+    return {
+      ...state,
+      error: action.payload,
+    };
+  },
+};
 
-export default reducer;
+export default createReducer(initialState, handlers);

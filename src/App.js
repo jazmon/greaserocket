@@ -13,7 +13,7 @@ import config from './constants/config';
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
 import MapScreen from './screens/Map';
-import Login from './screens/Login';
+// import Login from './screens/Login';
 
 const App = TabNavigator(
   {
@@ -50,15 +50,15 @@ const App = TabNavigator(
   },
 );
 
-const Base = StackNavigator(
-  {
-    Login: { screen: Login },
-    App: { screen: App },
-  },
-  {
-    headerMode: 'none',
-  },
-);
+// const Base = StackNavigator(
+//   {
+//     Login: { screen: Login },
+//     App: { screen: App },
+//   },
+//   {
+//     headerMode: 'none',
+//   },
+// );
 
 const store: Store<*, *> = configureStore();
 const Root = () => (

@@ -2,28 +2,18 @@
 import { CALL_API } from '../middleware/api';
 import createReducer from '../../utils/createReducer';
 
-import type { Action, Handler } from '../../../types';
+import type { Action, Handler, Story } from '../../../types';
 
 // Constants
 export const FETCH_FEED_START = 'GREASEROCKET/FEED/FETCH_FEED';
 export const FETCH_FEED_SUCCESS = 'GREASEROCKET/FEED/FETCH_FEED_SUCCESS';
 export const FETCH_FEED_FAILURE = 'GREASEROCKET/FEED/FETCH_FEED_FAILURE';
 
-type Data = Array<{
-  id: string,
-  text: string,
-  author: {
-    id: string,
-    profilePictureUrl: string,
-    name: string,
-  },
-}>;
+type State = { loading: boolean, stories: Array<Story>, error: ?Error };
 
-type State = { isFetching: boolean, data: Data, error: ?Error };
+const initialState: State = { loading: false, stories: [], error: null };
 
-const initialState: State = { isFetching: false, data: [], error: null };
-
-export function fetchFeed() {
+export function fetchStories() {
   return {
     [CALL_API]: {
       endpoint: 'feed',
@@ -36,21 +26,21 @@ const handlers: Handler<State> = {
   [FETCH_FEED_START](state: State, action: Action<*>) {
     return {
       ...state,
-      isFetching: true,
+      loading: true,
     };
   },
-  [FETCH_FEED_SUCCESS](state: State, action: Action<Data>) {
+  [FETCH_FEED_SUCCESS](state: State, action: Action<Array<Story>>) {
     return {
       ...state,
-      isFetching: false,
+      loading: false,
       error: null,
-      data: action.payload || [],
+      stories: action.payload || [],
     };
   },
   [FETCH_FEED_FAILURE](state: State, action: Action<Error>) {
     return {
       ...state,
-      isFetching: false,
+      loading: false,
       error: action.payload,
     };
   },

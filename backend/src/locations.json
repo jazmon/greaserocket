@@ -1,18 +1,16 @@
-{
-  "locations": [
-    {
-      "id": "location-0",
-      "latitude": 61.504678,
-      "longitude": 23.774825,
-      "title": "Park party!",
-      "description": "asfasdfadf"
-    },
-    {
-      "id": "location-1",
-      "latitude": 61.55,
-      "longitude": 23.44,
-      "title": "Foo bar!",
-      "description": "htrhrth"
-    }
-  ]
-}
+[
+  {
+    "id": "location-0",
+    "latitude": 61.504678,
+    "longitude": 23.774825,
+    "title": "Park party!",
+    "description": "asfasdfadf"
+  },
+  {
+    "id": "location-1",
+    "latitude": 61.55,
+    "longitude": 23.44,
+    "title": "Foo bar!",
+    "description": "htrhrth"
+  }
+]

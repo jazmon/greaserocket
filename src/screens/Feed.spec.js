@@ -6,6 +6,6 @@ import renderer from 'react-test-renderer';
 import { FeedComponent as Feed } from './Feed';
 
 it('renders correctly', () => {
-  const tree = renderer.create(<Feed fetchData={jest.fn} data={[]} loading={false} />);
+  const tree = renderer.create(<Feed fetchStories={jest.fn} stories={[]} loading={false} />);
   expect(tree).toMatchSnapshot();
 });

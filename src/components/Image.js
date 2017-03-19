@@ -6,7 +6,7 @@ const defaultProps = {};
 
 type Props = {};
 
-const Image = ({ ...props }: Props): React.Element<*> => <RNImage {...props} />;
+const Image = ({ ...props }: Props): ElementType => <RNImage {...props} />;
 
 Image.defaultProps = defaultProps;
 

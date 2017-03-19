@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapState = ({ user }) => ({ ...user, loading: user.inProgress });
+const mapState = ({ user }) => ({ ...user });
 
 const mapActions = dispatch => ({ login: () => dispatch(login()) });
 

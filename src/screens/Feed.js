@@ -12,28 +12,26 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 
-import { fetchFeed } from '../redux/modules/feed';
+import type { Story as StoryType } from '../../types';
+
+import { fetchStories } from '../redux/modules/feed';
 
 import Story from '../components/Story';
 import Base from '../components/Base';
+import theme from '../constants/theme';
 
 const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 
 const ds = new ListView.DataSource({ rowHasChanged });
-type Author = { id: string, name: string, profilePictureUrl: string };
 
-type FeedItem = { author: Author, id: string, text: string };
 type Props = {
   // navigation: Object,
   // router: Object,
-  fetchData: Function,
-  // dispatch: Function,
-  // error: boolean,
+  fetchStories: Function,
+  error: boolean,
   loading: boolean,
-  data: Array<FeedItem>,
+  stories: Array<StoryType>,
 };
-
-type State = { text: string };
 
 class Feed extends React.Component {
   static navigationOptions = {
@@ -49,18 +47,16 @@ class Feed extends React.Component {
   constructor(props: Props) {
     super(props);
 
-    this.dataSource = ds.cloneWithRows(props.data);
+    this.dataSource = ds.cloneWithRows(props.stories);
   }
 
-  state: State;
-
   componentDidMount() {
-    this.props.fetchData();
+    this.props.fetchStories();
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.data) {
-      this.dataSource = ds.cloneWithRows(nextProps.data);
+    if (nextProps.stories) {
+      this.dataSource = ds.cloneWithRows(nextProps.stories);
     }
     if (nextProps.error) {
       alert(nextProps.error.message || 'Error!');
@@ -68,17 +64,17 @@ class Feed extends React.Component {
   }
 
   onRefresh = () => {
-    this.props.fetchData();
+    this.props.fetchStories();
   };
 
-  renderRow = (story: Object) => <Story {...story} key={story.id} />;
+  renderRow = (story: StoryType) => <Story story={story} key={story.id} />;
 
   renderSeparator = (sID: string, rID: string) => (
     <View style={styles.separator} key={`${sID}-${rID}`} />
   );
 
   renderLoading = () => (
-    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+    <View style={styles.loadingContainer}>
       <ActivityIndicator animating size="large" />
     </View>
   );
@@ -110,18 +106,21 @@ const styles: Style = StyleSheet.create({
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 24 : 0,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    backgroundColor: theme.WHITE,
+  },
+  loadingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   separator: { height: 8 },
 });
 
 const mapState = ({ feed }) => ({
-  error: feed.error,
-  data: feed.data,
-  loading: feed.isFetching,
+  ...feed,
 });
 
-const mapActions = dispatch => ({ fetchData: () => dispatch(fetchFeed()) });
+const mapActions = dispatch => ({ fetchStories: () => dispatch(fetchStories()) });
 
 export const FeedComponent = Feed;
 export default connect(mapState, mapActions)(Feed);

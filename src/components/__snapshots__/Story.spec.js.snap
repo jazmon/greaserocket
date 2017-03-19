@@ -3,7 +3,7 @@ exports[`test renders correctly 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#fff",
+        "backgroundColor": "#FFF",
         "flex": 1,
         "flexDirection": "row",
         "height": 120,

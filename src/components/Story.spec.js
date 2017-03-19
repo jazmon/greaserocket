@@ -5,9 +5,13 @@ import renderer from 'react-test-renderer';
 
 import Story from './Story';
 
+const story = {
+  id: 'foo',
+  text: 'foo',
+  author: { name: 'foo', profilePictureUrl: null },
+};
+
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <Story text="foo" author={{ name: 'foo', profilePictureUrl: null }} />,
-  );
+  const tree = renderer.create(<Story story={story} />);
   expect(tree).toMatchSnapshot();
 });

@@ -89,18 +89,18 @@ const initialState: State = {
   profile: null,
   token: null,
   loginDate: null,
-  inProgress: true,
+  loading: true,
   error: null,
 };
 
 const handlers: Handler<State> = {
   [LOGIN_START](state: State, action: Action<*>) {
-    return loop({ ...state, inProgress: true, error: null }, Effects.promise(doLogin, state.token));
+    return loop({ ...state, loading: true, error: null }, Effects.promise(doLogin, state.token));
   },
   [LOGIN_SUCCESS](state: State, action: Action<LoginData>) {
     return {
       ...state,
-      inProgress: false,
+      loading: false,
       error: null,
       profile: action.payload.profile,
       token: action.payload.token,
@@ -111,13 +111,13 @@ const handlers: Handler<State> = {
     return {
       ...state,
       error: action.payload,
-      inProgress: false,
+      loading: false,
     };
   },
   [REFRESH_SESSION_SUCCESS](state: State, action: Action<RefreshData>) {
     return {
       ...state,
-      inProgress: false,
+      loading: false,
       error: null,
       loginDate: new Date(),
       token: {
@@ -129,13 +129,14 @@ const handlers: Handler<State> = {
   [REFRESH_SESSION_FAILURE](state: State, action: Action<Error>) {
     return {
       ...state,
-      inProgress: false,
+      loading: false,
       error: action.payload,
     };
   },
   [REHYDRATE](state: State, action: Action<Object>) {
     if (
-      action.payload.user && action.payload.user.loginDate &&
+      action.payload.user &&
+      action.payload.user.loginDate &&
       moment(action.payload.user.loginDate).isBefore(moment().subtract(20, 'seconds'))
     ) {
       return state;
