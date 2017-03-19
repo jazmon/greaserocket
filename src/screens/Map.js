@@ -10,6 +10,7 @@ import { fetchLocations } from '../redux/modules/map';
 import theme from '../constants/theme';
 
 import type { Location } from '../../types';
+import type { ReduxState } from '../redux/modules';
 
 const { width, height } = Dimensions.get('window');
 
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapState = ({ map }) => ({
+const mapState = ({ map }: ReduxState) => ({
   ...map,
 });
 

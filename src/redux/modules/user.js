@@ -83,7 +83,7 @@ export function doLogin(token: ?Auth0Token) {
   });
 }
 
-type State = { profile: ?Auth0Profile, token: ?Auth0Token, loginDate: ?Date, error: ?Error };
+export type State = { profile: ?Auth0Profile, token: ?Auth0Token, loginDate: ?Date, error: ?Error };
 
 const initialState: State = {
   profile: null,

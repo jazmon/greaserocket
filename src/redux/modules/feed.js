@@ -9,14 +9,16 @@ export const FETCH_FEED_START = 'GREASEROCKET/FEED/FETCH_FEED';
 export const FETCH_FEED_SUCCESS = 'GREASEROCKET/FEED/FETCH_FEED_SUCCESS';
 export const FETCH_FEED_FAILURE = 'GREASEROCKET/FEED/FETCH_FEED_FAILURE';
 
-type State = { loading: boolean, stories: Array<Story>, error: ?Error };
+export type State = { loading: boolean, stories: Array<Story>, error: ?Error };
 
 const initialState: State = { loading: false, stories: [], error: null };
 
 export function fetchStories() {
   return {
-    [CALL_API]: {
+    type: CALL_API,
+    payload: {
       endpoint: 'feed',
+      authenticated: false,
       types: [FETCH_FEED_START, FETCH_FEED_SUCCESS, FETCH_FEED_FAILURE],
     },
   };

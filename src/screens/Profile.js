@@ -4,6 +4,9 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
+
+import type { ReduxState } from '../redux/modules';
+
 // import type {
 //   NavigationScreenProp,
 //   NavigationAction
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   text: { color: theme.BLACK, fontSize: 16 },
 });
 
-const mapState = ({ user }) => ({ ...user });
+const mapState = ({ user }: ReduxState) => ({ ...user });
 
 const mapActions = dispatch => ({ login: () => dispatch(login()) });
 

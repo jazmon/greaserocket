@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 
 import type { Story as StoryType } from '../../types';
+import type { ReduxState } from '../redux/modules';
 
 import { fetchStories } from '../redux/modules/feed';
 
@@ -116,7 +117,7 @@ const styles: Style = StyleSheet.create({
   separator: { height: 8 },
 });
 
-const mapState = ({ feed }) => ({
+const mapState = ({ feed }: ReduxState) => ({
   ...feed,
 });
 

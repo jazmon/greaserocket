@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { login } from '../redux/modules/user';
 import theme from '../constants/theme';
 
+import type { ReduxState } from '../redux/modules';
+
 type Props = {
   navigation: Object,
   route: Object,
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapState = ({ user }) => ({ ...user });
+const mapState = ({ user }: ReduxState) => ({ ...user });
 
 const mapActions = dispatch => ({ login: () => dispatch(login()) });
 

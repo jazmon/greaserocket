@@ -8,14 +8,16 @@ export const FETCH_LOCATIONS_START = 'GREASEROCKET/MAP/FETCH_LOCATIONS_START';
 export const FETCH_LOCATIONS_SUCCESS = 'GREASEROCKET/MAP/FETCH_LOCATIONS_SUCCESS';
 export const FETCH_LOCATIONS_FAILURE = 'GREASEROCKET/MAP/FETCH_LOCATIONS_FAILURE';
 
-type State = { loading: boolean, locations: Array<Location>, error: ?Error };
+export type State = { loading: boolean, locations: Array<Location>, error: ?Error };
 
 const initialState: State = { loading: false, locations: [], error: null };
 
 export function fetchLocations() {
   return {
-    [CALL_API]: {
+    type: CALL_API,
+    payload: {
       endpoint: 'locations',
+      authenticated: false,
       types: [FETCH_LOCATIONS_START, FETCH_LOCATIONS_SUCCESS, FETCH_LOCATIONS_FAILURE],
     },
   };
