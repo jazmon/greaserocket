@@ -3,10 +3,11 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import { login as doLogin } from '../redux/modules/user';
+import { login } from '../redux/modules/user';
+import theme from '../constants/theme';
 
 type Props = {
-  navigator: Object,
+  navigation: Object,
   route: Object,
   loading: boolean,
   login(): void,
@@ -24,9 +25,14 @@ type State = {};
 class Login extends React.Component {
   props: Props;
 
+  componentDidMount() {
+    this.props.login();
+  }
+
   componentWillReceiveProps(nextProps: Props) {
-    if (this.props.loading && !nextProps.loading) {
-      this.props.navigator.navigate('App');
+    if (!!nextProps.token && nextProps.profile) {
+      console.log('this.props.navigation', this.props.navigation);
+      this.props.navigation.navigate('App');
     }
   }
 
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    backgroundColor: theme.WHITE,
     marginTop: 24,
     justifyContent: 'center',
     padding: 16,
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
 
 const mapState = ({ user }) => ({ ...user, loading: user.inProgress });
 
-const mapActions = dispatch => ({ login: () => dispatch(doLogin.start()) });
+const mapActions = dispatch => ({ login: () => dispatch(login()) });
 
 export const LoginComponent = Login;
 export default connect(mapState, mapActions)(Login);

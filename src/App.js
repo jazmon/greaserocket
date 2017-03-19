@@ -5,6 +5,8 @@ import { AppRegistry, Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
+import type { Store } from 'redux';
+
 import configureStore from './store/configureStore';
 
 import config from './constants/config';
@@ -58,7 +60,7 @@ const Base = StackNavigator(
   },
 );
 
-const store = configureStore();
+const store: Store<*, *> = configureStore();
 const Root = () => (
   <Provider store={store}>
     <Base />

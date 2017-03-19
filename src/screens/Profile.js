@@ -4,9 +4,10 @@ import { View, Text, Platform, ActivityIndicator, StyleSheet } from 'react-nativ
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 
-import { login as doLogin } from '../redux/modules/user';
+import { login } from '../redux/modules/user';
+import theme from '../constants/theme';
 
-type Props = { navigation: Object, login(): void, profile: ?Auth0Profile };
+type Props = { navigation: Object, login(): void, profile: ?Auth0Profile, loading: boolean };
 
 type State = { text: string };
 
@@ -51,16 +52,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    backgroundColor: theme.WHITE,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: { color: '#000', fontSize: 16 },
+  text: { color: theme.BLACK, fontSize: 16 },
 });
 
 const mapState = ({ user }) => ({ ...user, loading: user.inProgress });
 
-const mapActions = dispatch => ({ login: () => dispatch(doLogin.start()) });
+const mapActions = dispatch => ({ login: () => dispatch(login()) });
 
 export const ProfileComponent = Profile;
 export default connect(mapState, mapActions)(Profile);

@@ -1,6 +1,7 @@
 {
   "plugins": [
-    "lodash"
+    "lodash",
+    "idx"
   ],
   "presets": [
     "react-native"

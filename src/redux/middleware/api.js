@@ -12,9 +12,32 @@ class ResponseError extends Error {
   response: Response;
 }
 
+declare class Response {
+  constructor(input?: string | URLSearchParams | FormData | Blob, init?: ResponseOptions): void,
+  clone(): Response,
+  static error(): Response,
+  static redirect(url: string, status: number): Response,
+
+  type: ResponseType,
+  url: string,
+  useFinalURL: boolean,
+  ok: boolean,
+  status: number,
+  statusText: string,
+  headers: Headers,
+
+  // Body methods and attributes
+  bodyUsed: boolean,
+  body: ?ReadableStream,
+
+  arrayBuffer(): Promise<ArrayBuffer>,
+  blob(): Promise<Blob>,
+  formData(): Promise<FormData>,
+  json(): Promise<any>,
+  text(): Promise<string>,
+}
 
 function checkStatus(response: Response) {
-  console.log('response.foo', response.foo);
   if (response.status >= 200 && response.status < 300) {
     return response;
   }

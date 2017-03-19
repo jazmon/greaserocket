@@ -8,116 +8,71 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'redux-loop' {
-  declare module.exports: any;
-}
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
+ /*
+ * S = State
+ * K = Key
+ * A = Action
+ * V = Value
+ * M = Model
+ * E = Effect
  */
-declare module 'redux-loop/lib/combineReducers' {
-  declare module.exports: any;
-}
 
-declare module 'redux-loop/lib/effects' {
-  declare module.exports: any;
-}
+ declare module 'redux-loop' {
+   // declare module.exports: any;
+   declare function loop<M, E>(
+     model: M,
+     effect: E,
+   ): [M, E];
 
-declare module 'redux-loop/lib/errors' {
-  declare module.exports: any;
-}
+   declare function isLoop(array: Array<any>): Boolean;
 
-declare module 'redux-loop/lib/index' {
-  declare module.exports: any;
-}
+   declare function getEffect<M>(loop: any): ?M;
 
-declare module 'redux-loop/lib/install' {
-  declare module.exports: any;
-}
+   declare function combineReducers<S, K, V, A>(
+     reducerMap: any,
+     rootState: Object,
+     accessor: (state: S, key: K) => S,
+     mutator: (state: S, key: K, value: V) => S,
+   ): (state: S, action: A) => loop<*, *>;
 
-declare module 'redux-loop/lib/loop' {
-  declare module.exports: any;
-}
+   declare interface Action {
+     type: string,
+   }
 
-declare module 'redux-loop/lib/utils' {
-  declare module.exports: any;
-}
+   declare function liftState<S>(
+     state: S
+   ): S | loop<*, *>;
 
-declare module 'redux-loop/modules/combineReducers' {
-  declare module.exports: any;
-}
+   declare function getModel(
+     loop: any
+   ): loop<*, *>;
 
-declare module 'redux-loop/modules/effects' {
-  declare module.exports: any;
-}
+   declare function isEffect(object: Object): Boolean;
+   declare function isNone(object: Object): Boolean;
+   declare function none(): Object;
 
-declare module 'redux-loop/modules/errors' {
-  declare module.exports: any;
-}
+   declare function promise(factory: Function, ...args: any): Object;
 
-declare module 'redux-loop/modules/index' {
-  declare module.exports: any;
-}
+   declare function call(factory: Function, ...args: any): Object;
+   declare function batch(effects: Array<any>): Object;
+   declare function constant(action: Action): Object; // { action, type: string };
+   declare function lift(effect: Object, factory: Function, ...args: any): Object;
 
-declare module 'redux-loop/modules/install' {
-  declare module.exports: any;
-}
+   declare function effectToPromise(effect: Object): Promise<*>;
 
-declare module 'redux-loop/modules/loop' {
-  declare module.exports: any;
-}
+   declare function install(): (next: Function) => (reducer: Function, initialState: Object, enhancer: Function) => Object;
 
-declare module 'redux-loop/modules/utils' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'redux-loop/lib/combineReducers.js' {
-  declare module.exports: $Exports<'redux-loop/lib/combineReducers'>;
-}
-declare module 'redux-loop/lib/effects.js' {
-  declare module.exports: $Exports<'redux-loop/lib/effects'>;
-}
-declare module 'redux-loop/lib/errors.js' {
-  declare module.exports: $Exports<'redux-loop/lib/errors'>;
-}
-declare module 'redux-loop/lib/index.js' {
-  declare module.exports: $Exports<'redux-loop/lib/index'>;
-}
-declare module 'redux-loop/lib/install.js' {
-  declare module.exports: $Exports<'redux-loop/lib/install'>;
-}
-declare module 'redux-loop/lib/loop.js' {
-  declare module.exports: $Exports<'redux-loop/lib/loop'>;
-}
-declare module 'redux-loop/lib/utils.js' {
-  declare module.exports: $Exports<'redux-loop/lib/utils'>;
-}
-declare module 'redux-loop/modules/combineReducers.js' {
-  declare module.exports: $Exports<'redux-loop/modules/combineReducers'>;
-}
-declare module 'redux-loop/modules/effects.js' {
-  declare module.exports: $Exports<'redux-loop/modules/effects'>;
-}
-declare module 'redux-loop/modules/errors.js' {
-  declare module.exports: $Exports<'redux-loop/modules/errors'>;
-}
-declare module 'redux-loop/modules/index.js' {
-  declare module.exports: $Exports<'redux-loop/modules/index'>;
-}
-declare module 'redux-loop/modules/install.js' {
-  declare module.exports: $Exports<'redux-loop/modules/install'>;
-}
-declare module 'redux-loop/modules/loop.js' {
-  declare module.exports: $Exports<'redux-loop/modules/loop'>;
-}
-declare module 'redux-loop/modules/utils.js' {
-  declare module.exports: $Exports<'redux-loop/modules/utils'>;
-}
+   declare class Effects {
+     static constant: constant,
+     static promise: promise,
+     static call: call,
+     static batch: batch,
+     static none: none,
+     static lift: lift,
+   }
+ }

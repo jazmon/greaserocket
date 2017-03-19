@@ -1,11 +1,12 @@
 // @flow
 import React from 'react';
+import type { Children } from 'react';
 import { View, StatusBar, StyleSheet } from 'react-native';
 import theme from '../constants/theme';
 
 type Props = {
   style?: Style,
-  children?: ?any,
+  children?: ?Children,
 };
 
 const Base = ({ children, style }: Props): ElementType => (
