@@ -3,9 +3,11 @@ import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
 
 import { Provider } from 'react-redux';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
 
 import type { Store } from 'redux';
+import type { ReduxState } from './redux/modules';
+import type { Action } from '../types';
 
 import configureStore from './store/configureStore';
 
@@ -13,7 +15,6 @@ import config from './constants/config';
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
 import MapScreen from './screens/Map';
-// import Login from './screens/Login';
 
 const App = TabNavigator(
   {
@@ -50,17 +51,7 @@ const App = TabNavigator(
   },
 );
 
-// const Base = StackNavigator(
-//   {
-//     Login: { screen: Login },
-//     App: { screen: App },
-//   },
-//   {
-//     headerMode: 'none',
-//   },
-// );
-
-const store: Store<*, *> = configureStore();
+const store: Store<ReduxState, Action<*>> = configureStore();
 const Root = () => (
   <Provider store={store}>
     <App />

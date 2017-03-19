@@ -22,7 +22,7 @@ app.get('/feed', async (req, res) => {
     () => {
       res.status(200).set('Content-Type', 'application/json').json(data);
     },
-    200
+    3000
   );
 });
 
@@ -31,7 +31,7 @@ app.get('/locations', async (req, res) => {
     () => {
       res.status(200).set('Content-Type', 'application/json').json(locations);
     },
-    500
+    3000
   );
 });
 

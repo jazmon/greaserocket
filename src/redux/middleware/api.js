@@ -95,7 +95,10 @@ const middleware: Middleware<ReduxState, Action<any>> = (
 
       const token: ?Auth0Token = store.getState().user.token;
       const { endpoint, types, authenticated } = action.payload;
-      const [, successType, errorType] = types;
+      const [startType, successType, errorType] = types;
+      store.dispatch({
+        type: startType,
+      });
       return callApi(endpoint, authenticated, token)
         .then(
           (response: JsonData) =>
