@@ -33,7 +33,7 @@ const App = TabNavigator(
   {
     animationEnabled: true,
     swipeEnabled: true,
-    lazyLoad: false,
+    lazyLoad: true,
     screenProps: {
       foo: 'bar',
     },
@@ -41,19 +41,19 @@ const App = TabNavigator(
     tabBarOptions: {
       activeTintColor: '#e91e63',
     },
-    // containerOptions: {
-    //   // on Android, the URI prefix typically contains a host in addition to scheme
-    //   URIPrefix: Platform.OS === 'android'
-    //     ? `${config.NAVIGATION.URI_PREFIX}://config.NAVIGATION.URI_PREFIX/`
-    //     : `${config.NAVIGATION.URI_PREFIX}://`,
-    // },
+    containerOptions: {
+      // on Android, the URI prefix typically contains a host in addition to scheme
+      URIPrefix: Platform.OS === 'android'
+        ? `${config.NAVIGATION.URI_PREFIX}://${config.NAVIGATION.URI_PREFIX}/`
+        : `${config.NAVIGATION.URI_PREFIX}://`,
+    },
   },
 );
 
 const Base = StackNavigator(
   {
-    App: { screen: App },
     Login: { screen: Login },
+    App: { screen: App },
   },
   {
     headerMode: 'none',
@@ -63,7 +63,7 @@ const Base = StackNavigator(
 const store: Store<*, *> = configureStore();
 const Root = () => (
   <Provider store={store}>
-    <Base />
+    <App />
   </Provider>
 );
 

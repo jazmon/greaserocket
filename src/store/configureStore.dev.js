@@ -24,7 +24,7 @@ const configureStore = (initialState?: Object) => {
   const store = createStore(rootReducer, initialState, enhancer);
 
   // begin periodically persisting the store
-  // persistStore(store, { storage: AsyncStorage, keyPrefix: 'GREASEROCKET/PERSIST_STORE' });
+  persistStore(store, { storage: AsyncStorage, keyPrefix: 'GREASEROCKET/PERSIST_STORE' });
 
   if (module.hot) {
     // eslint-disable-next-line max-len

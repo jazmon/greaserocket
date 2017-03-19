@@ -31,7 +31,6 @@ class Login extends React.Component {
 
   componentWillReceiveProps(nextProps: Props) {
     if (!!nextProps.token && nextProps.profile) {
-      console.log('this.props.navigation', this.props.navigation);
       this.props.navigation.navigate('App');
     }
   }

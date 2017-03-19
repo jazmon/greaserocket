@@ -1,13 +1,21 @@
 // @flow
 import React from 'react';
 import { View, Text, Platform, ActivityIndicator, StyleSheet } from 'react-native';
+import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
+import type { NavigationScreenProp, NavigationAction } from 'react-navigation/lib/TypeDefinition'
 
 import { login } from '../redux/modules/user';
 import theme from '../constants/theme';
 
-type Props = { navigation: Object, login(): void, profile: ?Auth0Profile, loading: boolean };
+type Props = {
+  navigation: NavigationScreenProp<*, NavigationAction>,
+  // login(): void,
+  loginDate: Date,
+  profile: ?Auth0Profile,
+  loading: boolean,
+};
 
 type State = { text: string };
 
@@ -28,6 +36,18 @@ class Profile extends React.Component {
   }
 
   state: State;
+
+  // componentDidMount() {
+  //   setTimeout(
+  //     () => {
+  //       // FIXME
+  //       if (!this.props.profile || moment(this.props.loginDate).isBefore(moment().subtract(20, 'seconds'))) {
+  //         this.props.login();
+  //       }
+  //     },
+  //     400,
+  //   );
+  // }
 
   render() {
     const { text } = this.state;
