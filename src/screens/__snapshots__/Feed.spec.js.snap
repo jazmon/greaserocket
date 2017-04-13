@@ -1,4 +1,6 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
   style={
     Array [
@@ -8,7 +10,8 @@ exports[`test renders correctly 1`] = `
       },
       undefined,
     ]
-  }>
+  }
+>
   <View
     style={
       Object {
@@ -17,7 +20,8 @@ exports[`test renders correctly 1`] = `
         "flexDirection": "column",
         "marginTop": 24,
       }
-    }>
+    }
+  >
     <RCTScrollView
       alwaysBounceHorizontal={undefined}
       alwaysBounceVertical={true}
@@ -48,7 +52,8 @@ exports[`test renders correctly 1`] = `
       refreshControl={
         <RefreshControlMock
           onRefresh={[Function]}
-          refreshing={undefined} />
+          refreshing={undefined}
+        />
       }
       renderRow={[Function]}
       renderScrollComponent={[Function]}
@@ -65,9 +70,10 @@ exports[`test renders correctly 1`] = `
           },
           undefined,
         ]
-      }>
+      }
+    >
       <RCTRefreshControl />
-      <View
+      <RCTScrollContentView
         collapsable={false}
         removeClippedSubviews={undefined}
         style={
@@ -75,7 +81,8 @@ exports[`test renders correctly 1`] = `
             undefined,
             undefined,
           ]
-        } />
+        }
+      />
     </RCTScrollView>
   </View>
 </View>

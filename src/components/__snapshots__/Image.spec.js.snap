@@ -1,8 +1,12 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
-  style={null}>
+  style={null}
+>
   <Image
     onLoadEnd={[Function]}
-    onLoadStart={[Function]} />
+    onLoadStart={[Function]}
+  />
 </View>
 `;
