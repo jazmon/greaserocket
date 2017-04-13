@@ -1,2 +1,2 @@
-// import 'core-js';
+import 'core-js/Symbol';
 import './src/App';

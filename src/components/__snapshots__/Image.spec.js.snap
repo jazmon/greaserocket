@@ -1,1 +1,8 @@
-exports[`test renders correctly 1`] = `<Image />`;
+exports[`test renders correctly 1`] = `
+<View
+  style={null}>
+  <Image
+    onLoadEnd={[Function]}
+    onLoadStart={[Function]} />
+</View>
+`;

@@ -3,7 +3,7 @@ import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
 
 import { Provider } from 'react-redux';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import type { Store } from 'redux';
 import type { ReduxState } from './redux/modules';
@@ -15,6 +15,7 @@ import config from './constants/config';
 import Feed from './screens/Feed';
 import Profile from './screens/Profile';
 import MapScreen from './screens/Map';
+import EventDetail from './screens/EventDetail';
 
 const App = TabNavigator(
   {
@@ -26,8 +27,17 @@ const App = TabNavigator(
       screen: Feed,
       path: 'feed',
     },
+
     Map: {
-      screen: MapScreen,
+      screen: StackNavigator({
+        Map: {
+          screen: MapScreen,
+        },
+        EventDetail: {
+          screen: EventDetail,
+          path: 'eventdetail/:eventId',
+        },
+      }),
       path: 'map',
     },
   },

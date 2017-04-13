@@ -28,7 +28,8 @@ const ds = new ListView.DataSource({ rowHasChanged });
 type Props = {
   // navigation: Object,
   // router: Object,
-  fetchStories: Function,
+  fetchStories: () => void,
+  refetchStories: () => void,
   error: boolean,
   loading: boolean,
   refetching: boolean,
@@ -123,7 +124,7 @@ const mapState = ({ feed }: ReduxState) => ({
   ...feed,
 });
 
-const mapActions = dispatch => ({
+const mapActions = (dispatch: Function) => ({
   fetchStories: () => dispatch(fetchStories()),
   refetchStories: () => dispatch(refetchStories()),
 });

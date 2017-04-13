@@ -20,6 +20,10 @@ exports[`test renders correctly 1`] = `
       }
     }>
     <Image
+      onError={[Function]}
+      onLoad={[Function]}
+      onLoadStart={[Function]}
+      onProgress={[Function]}
       resizemode="contain"
       source={
         Object {

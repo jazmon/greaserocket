@@ -26,8 +26,15 @@ exports[`test renders correctly 1`] = `
           "routeName": "Feed",
         },
         Object {
+          "index": 0,
           "key": "Map",
           "routeName": "Map",
+          "routes": Array [
+            Object {
+              "key": "Init",
+              "routeName": "Map",
+            },
+          ],
         },
       ],
     }

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Dimensions, ActivityIndicator, Text } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
@@ -26,7 +26,6 @@ const REGION = {
   latitudeDelta: LATITUDE_DELTA,
   longitudeDelta: LONGITUDE_DELTA,
 };
-
 
 type Props = {
   navigation: Object,
@@ -104,6 +103,12 @@ class MapScreen extends React.Component {
 
   props: Props;
 
+  onMarkerPressed = (marker: MapMarker) => {
+    console.log('onrpress');
+    const { navigate } = this.props.navigation;
+    navigate('EventDetail', { eventId: marker.id });
+  };
+
   render() {
     const { locations, loading } = this.props;
     return (
@@ -127,7 +132,15 @@ class MapScreen extends React.Component {
                   coordinate={marker.latlng}
                   title={marker.title}
                   description={marker.description}
-                />
+                  // onPress={this.onMarkerPressed}
+                  // onSelect={() => console.log('onselect')}
+                  onSelect={this.onMarkerPressed}
+                  onCalloutPress={() => console.log('onCalloutPress') || this.onMarkerPressed}
+                >
+                  <MapView.Callout {...marker} onPress={() => console.log('foobar')} >
+                    <Text>{marker.title}</Text>
+                  </MapView.Callout>
+                </MapView.Marker>
               ))}
         </MapView>
         {loading && <LoadingOverlay />}
