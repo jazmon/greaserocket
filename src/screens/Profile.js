@@ -25,27 +25,24 @@ type Props = {
 
 class Profile extends React.Component {
   static navigationOptions = {
-    tabBar: {
-      label: 'Profile',
-      icon: ({ tintColor }) => <Icon name="ios-person" size={30} color={tintColor} />,
-    },
+    tabBarLabel: 'Profile',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="ios-person" size={30} color={tintColor} />
+    ),
   };
 
   props: Props;
 
   componentDidMount() {
-    setTimeout(
-      () => {
-        // FIXME
-        if (
-          !this.props.profile ||
-          moment(this.props.loginDate).isBefore(moment().subtract(20, 'seconds'))
-        ) {
-          this.props.login();
-        }
-      },
-      400,
-    );
+    setTimeout(() => {
+      // FIXME
+      if (
+        !this.props.profile ||
+        moment(this.props.loginDate).isBefore(moment().subtract(20, 'seconds'))
+      ) {
+        this.props.login();
+      }
+    }, 400);
   }
 
   render() {
@@ -74,7 +71,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  loadingContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   text: { color: theme.BLACK, fontSize: 16 },
 });
 

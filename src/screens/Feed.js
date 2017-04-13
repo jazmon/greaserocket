@@ -38,10 +38,10 @@ type Props = {
 
 class Feed extends React.Component {
   static navigationOptions = {
-    tabBar: {
-      label: 'Feed',
-      icon: ({ tintColor }) => <Icon name="ios-paper" size={30} color={tintColor} />,
-    },
+    tabBarLabel: 'Feed',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="ios-paper" size={30} color={tintColor} />
+    ),
   };
 
   props: Props;
@@ -93,8 +93,15 @@ class Feed extends React.Component {
             renderRow={this.renderRow}
             renderSeparator={this.renderSeparator}
             enableEmptySections
-            renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
-            refreshControl={<RefreshControl refreshing={refetching} onRefresh={this.onRefresh} />}
+            renderSectionHeader={(sectionData, sectionId) => (
+              <View key={`sh-${sectionId}`} />
+            )}
+            refreshControl={
+              <RefreshControl
+                refreshing={refetching}
+                onRefresh={this.onRefresh}
+              />
+            }
           />
           {loading && this.renderLoading()}
         </View>

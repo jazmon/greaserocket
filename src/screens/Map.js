@@ -1,6 +1,12 @@
 // @flow
 import React from 'react';
-import { View, StyleSheet, Dimensions, ActivityIndicator, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  ActivityIndicator,
+  Text,
+} from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
@@ -53,10 +59,10 @@ const LoadingOverlay = (): ElementType => (
 class MapScreen extends React.Component {
   map: Object;
   static navigationOptions = {
-    tabBar: {
-      label: 'Map',
-      icon: ({ tintColor }) => <Icon name="ios-map" size={30} color={tintColor} />,
-    },
+    tabBarLabel: 'Map',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="ios-map" size={30} color={tintColor} />
+    ),
   };
 
   static defaultProps = {
@@ -88,7 +94,8 @@ class MapScreen extends React.Component {
             latitude: center.latitude - latlng.latitude,
             longitude: center.longitude - latlng.longitude,
           };
-          const outside = Math.abs(diff.longitude) > MAX_DELTA_LONGITUDE ||
+          const outside =
+            Math.abs(diff.longitude) > MAX_DELTA_LONGITUDE ||
             Math.abs(diff.latitude) > MAX_DELTA_LATITUDE;
           return !outside;
         });
@@ -124,24 +131,26 @@ class MapScreen extends React.Component {
           showsMyLocationButton={true}
         >
           {!loading &&
-            locations
-              .map(toMarker)
-              .map(marker => (
-                <MapView.Marker
-                  key={marker.id}
-                  coordinate={marker.latlng}
-                  title={marker.title}
-                  description={marker.description}
-                  // onPress={this.onMarkerPressed}
-                  // onSelect={() => console.log('onselect')}
-                  onSelect={this.onMarkerPressed}
-                  onCalloutPress={() => console.log('onCalloutPress') || this.onMarkerPressed}
+            locations.map(toMarker).map(marker => (
+              <MapView.Marker
+                key={marker.id}
+                coordinate={marker.latlng}
+                title={marker.title}
+                description={marker.description}
+                // onPress={this.onMarkerPressed}
+                // onSelect={() => console.log('onselect')}
+                onSelect={this.onMarkerPressed}
+                onCalloutPress={() =>
+                  console.log('onCalloutPress') || this.onMarkerPressed}
+              >
+                <MapView.Callout
+                  {...marker}
+                  onPress={() => console.log('foobar')}
                 >
-                  <MapView.Callout {...marker} onPress={() => console.log('foobar')} >
-                    <Text>{marker.title}</Text>
-                  </MapView.Callout>
-                </MapView.Marker>
-              ))}
+                  <Text>{marker.title}</Text>
+                </MapView.Callout>
+              </MapView.Marker>
+            ))}
         </MapView>
         {loading && <LoadingOverlay />}
       </View>
@@ -172,7 +181,9 @@ const mapState = ({ map }: ReduxState) => ({
   ...map,
 });
 
-const mapDispatchtoProps = dispatch => ({ fetchLocations: () => dispatch(fetchLocations()) });
+const mapDispatchtoProps = dispatch => ({
+  fetchLocations: () => dispatch(fetchLocations()),
+});
 
 export const MapScreenComponent = MapScreen;
 export default connect(mapState, mapDispatchtoProps)(MapScreen);

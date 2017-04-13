@@ -1,4 +1,6 @@
-exports[`test renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
 <View
   configureTransition={[Function]}
   initialLayout={
@@ -47,18 +49,21 @@ exports[`test renders correctly 1`] = `
   renderHeader={undefined}
   renderPager={[Function]}
   renderScene={[Function]}
+  screenProps={undefined}
   style={
     Object {
       "flex": 1,
     }
-  }>
+  }
+>
   <View
     style={
       Object {
         "flex": 1,
         "overflow": "hidden",
       }
-    }>
+    }
+  >
     <RCTScrollView
       alwaysBounceHorizontal={false}
       alwaysBounceVertical={false}
@@ -114,8 +119,9 @@ exports[`test renders correctly 1`] = `
             "flexGrow": 1,
           },
         ]
-      }>
-      <View
+      }
+    >
+      <RCTScrollContentView
         collapsable={false}
         removeClippedSubviews={undefined}
         style={
@@ -127,7 +133,8 @@ exports[`test renders correctly 1`] = `
               "flexGrow": 1,
             },
           ]
-        }>
+        }
+      >
         <View
           style={
             Object {
@@ -135,7 +142,8 @@ exports[`test renders correctly 1`] = `
               "overflow": "hidden",
             }
           }
-          testID={undefined}>
+          testID={undefined}
+        >
           <View
             style={
               Object {
@@ -145,7 +153,8 @@ exports[`test renders correctly 1`] = `
                 "flexDirection": "column",
                 "justifyContent": "center",
               }
-            }>
+            }
+          >
             <View
               style={
                 Object {
@@ -153,22 +162,26 @@ exports[`test renders correctly 1`] = `
                   "flexDirection": "row",
                   "justifyContent": "center",
                 }
-              }>
+              }
+            >
               <ActivityIndicator
                 animating={true}
                 color="#999999"
                 hidesWhenStopped={true}
-                size="large" />
+                size="large"
+              />
             </View>
           </View>
         </View>
         <View
           style={null}
-          testID={undefined} />
+          testID={undefined}
+        />
         <View
           style={null}
-          testID={undefined} />
-      </View>
+          testID={undefined}
+        />
+      </RCTScrollContentView>
     </RCTScrollView>
     <View
       style={
@@ -182,7 +195,8 @@ exports[`test renders correctly 1`] = `
           },
           undefined,
         ]
-      }>
+      }
+    >
       <View
         accessibilityComponentType={undefined}
         accessibilityLabel={undefined}
@@ -204,13 +218,15 @@ exports[`test renders correctly 1`] = `
             "justifyContent": "flex-end",
           }
         }
-        testID={undefined}>
+        testID={undefined}
+      >
         <View
           style={
             Object {
               "flexGrow": 1,
             }
-          }>
+          }
+        >
           <View
             style={
               Object {
@@ -223,7 +239,8 @@ exports[`test renders correctly 1`] = `
                 "right": 0,
                 "top": 0,
               }
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -241,7 +258,8 @@ exports[`test renders correctly 1`] = `
                     "fontWeight": "normal",
                   },
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
@@ -257,7 +275,8 @@ exports[`test renders correctly 1`] = `
                 "right": 0,
                 "top": 0,
               }
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -275,7 +294,8 @@ exports[`test renders correctly 1`] = `
                     "fontWeight": "normal",
                   },
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
@@ -292,7 +312,8 @@ exports[`test renders correctly 1`] = `
               "marginBottom": 1.5,
               "textAlign": "center",
             }
-          }>
+          }
+        >
           Profile
         </Text>
       </View>
@@ -317,13 +338,15 @@ exports[`test renders correctly 1`] = `
             "justifyContent": "flex-end",
           }
         }
-        testID={undefined}>
+        testID={undefined}
+      >
         <View
           style={
             Object {
               "flexGrow": 1,
             }
-          }>
+          }
+        >
           <View
             style={
               Object {
@@ -336,7 +359,8 @@ exports[`test renders correctly 1`] = `
                 "right": 0,
                 "top": 0,
               }
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -354,7 +378,8 @@ exports[`test renders correctly 1`] = `
                     "fontWeight": "normal",
                   },
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
@@ -370,7 +395,8 @@ exports[`test renders correctly 1`] = `
                 "right": 0,
                 "top": 0,
               }
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -388,7 +414,8 @@ exports[`test renders correctly 1`] = `
                     "fontWeight": "normal",
                   },
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
@@ -405,7 +432,8 @@ exports[`test renders correctly 1`] = `
               "marginBottom": 1.5,
               "textAlign": "center",
             }
-          }>
+          }
+        >
           Feed
         </Text>
       </View>
@@ -430,13 +458,15 @@ exports[`test renders correctly 1`] = `
             "justifyContent": "flex-end",
           }
         }
-        testID={undefined}>
+        testID={undefined}
+      >
         <View
           style={
             Object {
               "flexGrow": 1,
             }
-          }>
+          }
+        >
           <View
             style={
               Object {
@@ -449,7 +479,8 @@ exports[`test renders correctly 1`] = `
                 "right": 0,
                 "top": 0,
               }
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -467,7 +498,8 @@ exports[`test renders correctly 1`] = `
                     "fontWeight": "normal",
                   },
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
@@ -483,7 +515,8 @@ exports[`test renders correctly 1`] = `
                 "right": 0,
                 "top": 0,
               }
-            }>
+            }
+          >
             <Text
               accessible={true}
               allowFontScaling={false}
@@ -501,7 +534,8 @@ exports[`test renders correctly 1`] = `
                     "fontWeight": "normal",
                   },
                 ]
-              }>
+              }
+            >
               
             </Text>
           </View>
@@ -518,7 +552,8 @@ exports[`test renders correctly 1`] = `
               "marginBottom": 1.5,
               "textAlign": "center",
             }
-          }>
+          }
+        >
           Map
         </Text>
       </View>
