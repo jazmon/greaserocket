@@ -181,7 +181,7 @@ const mapState = ({ map }: ReduxState) => ({
   ...map,
 });
 
-const mapDispatchtoProps = dispatch => ({
+const mapDispatchtoProps = (dispatch: Dispatch) => ({
   fetchLocations: () => dispatch(fetchLocations()),
 });
 

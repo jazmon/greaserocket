@@ -9,16 +9,15 @@
 		"lint": "eslint -c .eslintrc.js src",
 		"lint:fix": "npm run lint -- --fix",
 		"flow": "flow",
-		"test": "jest --notify",
-		"coverage": "jest --coverage",
+		"test": "NODE_ENV=test jest --notify",
+		"coverage": "NODE_ENV=test jest --coverage",
     "prettier": "prettier",
-		"snapshot:update": "jest --updateSnapshot",
-		"test:watch": "jest --watch",
+		"snapshot:update": "NODE_ENV=test jest --updateSnapshot",
+		"test:watch": "NODE_ENV=test jest --watch",
     "lint-staged": "lint-staged"
 	},
 	"pre-commit": [
 		"lint-staged",
-		"flow",
 		"test"
 	],
 	"dependencies": {

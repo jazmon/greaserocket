@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 
 const mapState = ({ user }: ReduxState) => ({ ...user });
 
-const mapActions = dispatch => ({ login: () => dispatch(login()) });
+const mapActions = (dispatch: Dispatch) => ({ login: () => dispatch(login()) });
 
 export const ProfileComponent = Profile;
 export default connect(mapState, mapActions)(Profile);

@@ -131,7 +131,7 @@ const mapState = ({ feed }: ReduxState) => ({
   ...feed,
 });
 
-const mapActions = (dispatch: Function) => ({
+const mapActions = (dispatch: Dispatch) => ({
   fetchStories: () => dispatch(fetchStories()),
   refetchStories: () => dispatch(refetchStories()),
 });
