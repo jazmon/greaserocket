@@ -11,16 +11,17 @@
 		"flow": "flow",
 		"test": "NODE_ENV=test jest --notify",
 		"coverage": "NODE_ENV=test jest --coverage",
-    "prettier": "prettier",
+		"prettier": "prettier",
 		"snapshot:update": "NODE_ENV=test jest --updateSnapshot",
 		"test:watch": "NODE_ENV=test jest --watch",
-    "lint-staged": "lint-staged"
+		"lint-staged": "lint-staged"
 	},
 	"pre-commit": [
 		"lint-staged",
 		"test"
 	],
 	"dependencies": {
+		"babel-plugin-module-resolver": "^2.7.0",
 		"color": "^1.0.3",
 		"idx": "^1.5.0",
 		"lodash": "^4.17.4",
@@ -29,8 +30,8 @@
 		"react-native": "^0.43.3",
 		"react-native-image-progress": "^0.6.0",
 		"react-native-lock": "^0.4.0",
-		"react-native-maps": "https://github.com/airbnb/react-native-maps.git#0.13.0",
-		"react-native-vector-icons": "^4.0.0",
+		"react-native-maps": "https://github.com/airbnb/react-native-maps.git#v0.14.0",
+		"react-native-vector-icons": "^4.0.1",
 		"react-navigation": "https://github.com/react-community/react-navigation#4c55887990e1de2b92d400dafae19fb76c68da6a",
 		"react-redux": "^5.0.4",
 		"redux": "^3.6.0",
@@ -57,8 +58,8 @@
 		"jest": "^19.0.2",
 		"lint-staged": "^3.4.0",
 		"pre-commit": "^1.2.2",
-		"prettier": "^1.0.2",
-		"react-test-renderer": "~15.4.0-rc.4",
+		"prettier": "^1.1.0",
+		"react-test-renderer": "^15.5.4",
 		"redux-logger": "^3.0.1",
 		"remote-redux-devtools": "^0.5.7"
 	},
@@ -72,11 +73,11 @@
 			"node_modules/?!(react-navigation)"
 		]
 	},
-  "lint-staged": {
-    "*.js": [
-      "prettier --trailing-comma es5 --single-quote --parser flow --write",
-      "eslint --fix",
-      "git add"
-    ]
-  }
+	"lint-staged": {
+		"*.js": [
+			"prettier --trailing-comma es5 --single-quote --parser flow --write",
+			"eslint --fix",
+			"git add"
+		]
+	}
 }

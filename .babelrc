@@ -1,7 +1,10 @@
 {
   "plugins": [
     "lodash",
-    "idx"
+    "idx",
+    ["module-resolver", {
+      "root": ["./src"]
+    }]
   ],
   "presets": [
     "react-native"
