@@ -34,7 +34,6 @@
 		"react-navigation": "https://github.com/react-community/react-navigation#4c55887990e1de2b92d400dafae19fb76c68da6a",
 		"react-redux": "^5.0.4",
 		"redux": "^3.6.0",
-		"redux-actions": "^1.2.1",
 		"redux-loop": "^2.2.2",
 		"redux-persist": "^4.6.0",
 		"reselect": "^3.0.0"
