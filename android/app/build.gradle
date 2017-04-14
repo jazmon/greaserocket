@@ -99,10 +99,10 @@ android {
     }
     signingConfigs {
        release {
-           storeFile file(TAMPEREEN_TAPAHTUMAT_RELEASE_STORE_FILE)
-           storePassword TAMPEREEN_TAPAHTUMAT_RELEASE_STORE_PASSWORD
-           keyAlias TAMPEREEN_TAPAHTUMAT_RELEASE_KEY_ALIAS
-           keyPassword TAMPEREEN_TAPAHTUMAT_RELEASE_KEY_PASSWORD
+           storeFile file(GREASEROCKET_RELEASE_STORE_FILE)
+           storePassword GREASEROCKET_RELEASE_STORE_PASSWORD
+           keyAlias GREASEROCKET_RELEASE_KEY_ALIAS
+           keyPassword GREASEROCKET_RELEASE_KEY_PASSWORD
        }
    }
     splits {
@@ -139,6 +139,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-linear-gradient')
     compile project(':react-native-code-push')
     compile project(':react-native-lock')
     compile project(':react-native-maps')

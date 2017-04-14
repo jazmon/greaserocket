@@ -3,6 +3,7 @@ import React from 'react';
 import {
   View,
   ListView,
+  ScrollView,
   RefreshControl,
   StyleSheet,
   Platform,
@@ -20,6 +21,7 @@ import { fetchStories, refetchStories } from 'redux/modules/feed';
 import Story from 'components/Story';
 import Base from 'components/Base';
 import theme from 'constants/theme';
+import PlaceholderComponent from 'components/PlaceholderComponent';
 
 const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 
@@ -36,15 +38,49 @@ type Props = {
   stories: Array<StoryType>,
 };
 
-class Feed extends React.Component {
+type State = {};
+
+const PlaceholderStory = () => (
+  <View
+    style={{
+      height: 120,
+      flex: 1,
+      flexDirection: 'row',
+      marginBottom: 8,
+      opacity: 0.5,
+    }}
+  >
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 120,
+      }}
+    >
+      <PlaceholderComponent style={{ width: 100, height: 100 }} />
+    </View>
+    <View
+      style={{
+        flex: 1,
+        padding: 16,
+      }}
+    >
+      <PlaceholderComponent style={{ flex: 0, flexDirection: 'row', height: 14, paddingTop: 2, paddingBottom: 2 }} />
+      <PlaceholderComponent style={{ flex: 0, flexDirection: 'row', height: 14, marginTop: 2, paddingBottom: 2 }} />
+    </View>
+  </View>
+);
+
+class Feed extends React.Component<*, Props, State> {
   static navigationOptions = {
     tabBarLabel: 'Feed',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-paper" size={30} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }) => <Icon name="ios-paper" size={30} color={tintColor} />,
   };
 
-  props: Props;
+  static defaultProps = {
+    stories: [],
+  };
+
   dataSource: Object;
 
   constructor(props: Props) {
@@ -87,23 +123,20 @@ class Feed extends React.Component {
     return (
       <Base>
         <View style={styles.container}>
-          <ListView
-            dataSource={this.dataSource}
-            pageSize={6}
-            renderRow={this.renderRow}
-            renderSeparator={this.renderSeparator}
-            enableEmptySections
-            renderSectionHeader={(sectionData, sectionId) => (
-              <View key={`sh-${sectionId}`} />
-            )}
-            refreshControl={
-              <RefreshControl
-                refreshing={refetching}
-                onRefresh={this.onRefresh}
-              />
-            }
-          />
-          {loading && this.renderLoading()}
+          {!loading &&
+            <ListView
+              dataSource={this.dataSource}
+              pageSize={6}
+              renderRow={this.renderRow}
+              renderSeparator={this.renderSeparator}
+              enableEmptySections
+              renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
+              refreshControl={<RefreshControl refreshing={refetching} onRefresh={this.onRefresh} />}
+            />}
+          {loading &&
+            <ScrollView>
+              {[1, 2, 3, 4, 5, 6].map(a => <PlaceholderStory key={String(a)} />)}
+            </ScrollView>}
         </View>
       </Base>
     );
