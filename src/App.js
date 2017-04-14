@@ -2,6 +2,8 @@
 import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
 import codePush from 'react-native-code-push';
+import Raven from 'raven-js';
+import ravenRN from 'raven-js/plugins/react-native';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
@@ -16,17 +18,18 @@ import Profile from 'screens/Profile';
 import MapScreen from 'screens/Map';
 import EventDetail from 'screens/EventDetail';
 
+// require('raven-js/plugins/react-native')(Raven);
+ravenRN(Raven);
 const App = TabNavigator(
   {
-    Profile: {
-      screen: Profile,
-      path: 'profile/:name',
-    },
     Feed: {
       screen: Feed,
       path: 'feed',
     },
-
+    Profile: {
+      screen: Profile,
+      path: 'profile/:name',
+    },
     Map: {
       screen: StackNavigator({
         Map: {
