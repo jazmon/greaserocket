@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
-
+import codePush from 'react-native-code-push';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
@@ -58,7 +58,7 @@ const App = TabNavigator(
         ? `${config.NAVIGATION.URI_PREFIX}://${config.NAVIGATION.URI_PREFIX}/`
         : `${config.NAVIGATION.URI_PREFIX}://`,
     },
-  },
+  }
 );
 
 const store: Store<ReduxState, Action<*>> = configureStore();
@@ -68,6 +68,12 @@ const Root = () => (
   </Provider>
 );
 
-AppRegistry.registerComponent('Greaserocket', () => Root);
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+};
 
-export default Root;
+const WrappedRoot = codePush(codePushOptions)(Root);
+AppRegistry.registerComponent('Greaserocket', () => WrappedRoot);
+
+export const AppComponent = Root;
+export default WrappedRoot;

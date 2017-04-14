@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">lOgb3q_R4-JGVawgMz5nvfhx1L-_V1j1HqYpG</string>
     <string name="app_name">Greaserocket</string>
 </resources>
