@@ -18,7 +18,10 @@ class ResponseError extends Error {
 type JsonData = Array<Object> | Object;
 
 declare class Response {
-  constructor(input?: string | URLSearchParams | FormData | Blob, init?: ResponseOptions): void,
+  constructor(
+    input?: string | URLSearchParams | FormData | Blob,
+    init?: ResponseOptions
+  ): void,
   clone(): Response,
   static error(): Response,
   static redirect(url: string, status: number): Response,
@@ -52,7 +55,11 @@ function checkStatus(response: Response): Response {
   throw error;
 }
 
-async function callApi(endpoint: string, authenticated: boolean, token: ?Auth0Token): Promise<any> {
+async function callApi(
+  endpoint: string,
+  authenticated: boolean,
+  token: ?Auth0Token
+): Promise<any> {
   let fetchConfig = {};
 
   if (authenticated) {
@@ -82,42 +89,52 @@ async function callApi(endpoint: string, authenticated: boolean, token: ?Auth0To
   }
 }
 
-type ApiAction = Action<{ types: Array<string>, authenticated?: boolean, endpoint: string }>;
+type ApiAction = Action<{
+  types: Array<string>,
+  authenticated?: boolean,
+  endpoint: string,
+}>;
 
 const middleware: Middleware<ReduxState, Action<any>> = (
-  store: MiddlewareAPI<ReduxState, Action<any>>,
-) =>
-  (next: Dispatch<Action<any>>) =>
-    (action: ApiAction): Promise<Dispatch<Action<any>>> => {
-      if (action.type !== CALL_API) {
-        return next(action);
-      }
+  store: MiddlewareAPI<ReduxState, Action<any>>
+) => (next: Dispatch<Action<any>>) => (
+  action: ApiAction
+): Promise<Dispatch<Action<any>>> => {
+  if (action.type !== CALL_API) {
+    return next(action);
+  }
 
-      const token: ?Auth0Token = store.getState().user.token;
-      const { endpoint, types, authenticated } = action.payload;
-      const [startType, successType, errorType] = types;
-      store.dispatch({
-        type: startType,
-      });
-      return callApi(endpoint, authenticated, token)
-        .then(
-          (response: JsonData) =>
-            next({ payload: response, meta: authenticated, error: false, type: successType }),
-          (error: Error) =>
-            next({
-              payload: error,
-              error: true,
-              meta: error.message || 'Error during api call',
-              type: errorType,
-            }),
-        )
-        .catch((error: Error) =>
-          next({
-            payload: error,
-            error: true,
-            meta: error.message || 'Error during api call',
-            type: errorType,
-          }));
-    };
+  const token: ?Auth0Token = store.getState().user.token;
+  const { endpoint, types, authenticated } = action.payload;
+  const [startType, successType, errorType] = types;
+  store.dispatch({
+    type: startType,
+  });
+  return callApi(endpoint, authenticated, token)
+    .then(
+      (response: JsonData) =>
+        next({
+          payload: response,
+          meta: authenticated,
+          error: false,
+          type: successType,
+        }),
+      (error: Error) =>
+        next({
+          payload: error,
+          error: true,
+          meta: error.message || 'Error during api call',
+          type: errorType,
+        })
+    )
+    .catch((error: Error) =>
+      next({
+        payload: error,
+        error: true,
+        meta: error.message || 'Error during api call',
+        type: errorType,
+      })
+    );
+};
 
 export default middleware;

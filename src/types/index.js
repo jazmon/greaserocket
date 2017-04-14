@@ -22,7 +22,7 @@ type Author = {
   id: string,
   profilePictureUrl: string,
   name: string,
-}
+};
 
 export type Story = {
   id: string,

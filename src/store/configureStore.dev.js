@@ -17,21 +17,25 @@ const enhancer = compose(
   // Middleware you want to use in development:
   applyMiddleware(apiMiddleware, loggerMiddleware),
   // autoRehydrate(),
-  devTools(),
+  devTools()
 );
 
 const configureStore = (initialState?: Object) => {
   const store = createStore(rootReducer, initialState, enhancer);
 
   // begin periodically persisting the store
-  persistStore(store, { storage: AsyncStorage, keyPrefix: 'GREASEROCKET/PERSIST_STORE' });
+  persistStore(store, {
+    storage: AsyncStorage,
+    keyPrefix: 'GREASEROCKET/PERSIST_STORE',
+  });
 
   if (module.hot) {
     // eslint-disable-next-line max-len
     // $FlowIssue Line below produces "call of method `accept`. Method cannot be called on 'hot' of unknown type".
     module.hot.accept('../redux/modules/index', () =>
       // eslint-disable-next-line global-require
-      store.replaceReducer(require('../redux/modules/index').default));
+      store.replaceReducer(require('../redux/modules/index').default)
+    );
   }
 
   return store;

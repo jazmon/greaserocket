@@ -16,6 +16,10 @@ export type ReduxState = {
   map: MapState,
 };
 
-const rootReducer: Reducer<ReduxState, Action> = combineReducers({ feed, user, map });
+const rootReducer: Reducer<ReduxState, Action> = combineReducers({
+  feed,
+  user,
+  map,
+});
 
 export default rootReducer;

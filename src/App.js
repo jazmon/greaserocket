@@ -16,7 +16,6 @@ import Profile from 'screens/Profile';
 import MapScreen from 'screens/Map';
 import EventDetail from 'screens/EventDetail';
 
-
 const App = TabNavigator(
   {
     Profile: {

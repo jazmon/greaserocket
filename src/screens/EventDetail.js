@@ -1,10 +1,6 @@
 // @flow
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import theme from 'constants/theme';
 
 type Props = {

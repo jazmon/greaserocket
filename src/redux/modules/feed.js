@@ -12,9 +12,19 @@ export const REFETCH_FEED_START = 'GREASEROCKET/FEED/REFETCH_FEED_START';
 export const REFETCH_FEED_SUCCESS = 'GREASEROCKET/FEED/REFETCH_FEED_SUCCESS';
 export const REFETCH_FEED_FAILURE = 'GREASEROCKET/FEED/REFETCH_FEED_FAILURE';
 
-export type State = { loading: boolean, refetching: boolean, stories: Array<Story>, error: ?Error };
+export type State = {
+  loading: boolean,
+  refetching: boolean,
+  stories: Array<Story>,
+  error: ?Error,
+};
 
-const initialState: State = { loading: false, refetching: false, stories: [], error: null };
+const initialState: State = {
+  loading: false,
+  refetching: false,
+  stories: [],
+  error: null,
+};
 
 export function fetchStories() {
   return {

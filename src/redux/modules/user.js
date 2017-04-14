@@ -12,8 +12,10 @@ import createReducer from 'utils/createReducer';
 import type { Action, Handler } from 'types';
 
 export const REFRESH_SESSION = 'GREASEROCKET/USER/REFRESH_SESSION';
-export const REFRESH_SESSION_SUCCESS = 'GREASEROCKET/USER/REFRESH_SESSION_SUCCESS';
-export const REFRESH_SESSION_FAILURE = 'GREASEROCKET/USER/REFRESH_SESSION_FAILURE';
+export const REFRESH_SESSION_SUCCESS =
+  'GREASEROCKET/USER/REFRESH_SESSION_SUCCESS';
+export const REFRESH_SESSION_FAILURE =
+  'GREASEROCKET/USER/REFRESH_SESSION_FAILURE';
 export const LOGIN_START = 'GREASEROCKET/USER/LOGIN_START';
 export const LOGIN_SUCCESS = 'GREASEROCKET/USER/LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'GREASEROCKET/USER/LOGIN_FAILURE';
@@ -36,7 +38,10 @@ export function login() {
 }
 
 export function doLogin(token: ?Auth0Token) {
-  const lock = new Auth0Lock({ clientId: config.AUTH.CLIENT_ID, domain: config.AUTH.DOMAIN });
+  const lock = new Auth0Lock({
+    clientId: config.AUTH.CLIENT_ID,
+    domain: config.AUTH.DOMAIN,
+  });
   const auth0 = lock.authenticationAPI();
 
   // TODO refactor this
@@ -83,7 +88,12 @@ export function doLogin(token: ?Auth0Token) {
   });
 }
 
-export type State = { profile: ?Auth0Profile, token: ?Auth0Token, loginDate: ?Date, error: ?Error };
+export type State = {
+  profile: ?Auth0Profile,
+  token: ?Auth0Token,
+  loginDate: ?Date,
+  error: ?Error,
+};
 
 const initialState: State = {
   profile: null,
@@ -95,7 +105,10 @@ const initialState: State = {
 
 const handlers: Handler<State> = {
   [LOGIN_START](state: State) {
-    return loop({ ...state, loading: true, error: null }, Effects.promise(doLogin, state.token));
+    return loop(
+      { ...state, loading: true, error: null },
+      Effects.promise(doLogin, state.token)
+    );
   },
   [LOGIN_SUCCESS](state: State, action: Action<LoginData>) {
     return {
@@ -137,7 +150,9 @@ const handlers: Handler<State> = {
     if (
       action.payload.user &&
       action.payload.user.loginDate &&
-      moment(action.payload.user.loginDate).isBefore(moment().subtract(1, 'weeks'))
+      moment(action.payload.user.loginDate).isBefore(
+        moment().subtract(1, 'weeks')
+      )
     ) {
       return state;
     }

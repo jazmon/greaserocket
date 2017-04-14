@@ -4,8 +4,8 @@ module.exports = {
       node: {
         extensions: ['.js', '.android.js', '.ios.js'],
         moduleDirectory: ['node_modules', 'src'],
-      }
-    }
+      },
+    },
   },
   parser: 'babel-eslint',
   env: {
@@ -19,15 +19,19 @@ module.exports = {
     FormData: true,
     alert: true,
   },
-  extends: ['plugin:react/recommended', 'plugin:flowtype/recommended', 'airbnb'],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:flowtype/recommended',
+    'airbnb',
+  ],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 6,
     impliedStrict: false,
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   plugins: [
     'babel',
@@ -35,7 +39,7 @@ module.exports = {
     'sort-class-members',
     'flowtype',
     'react',
-    'react-native'
+    'react-native',
   ],
   rules: {
     'react-native/no-unused-styles': 2,
@@ -127,40 +131,26 @@ module.exports = {
           'TabNavigator',
           'DrawerNavigator',
           'StackNavigator',
-        ]
+        ],
       },
     ],
-    indent: [
-      'warn',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    quotes: [
-      'error',
-      'single'
-    ],
-    'semi': 0,
-    'babel/semi': [
-      'error',
-      'always'
-    ],
-    'comma-dangle': [
-      'warn',
-      'always-multiline'
-    ],
+    indent: ['warn', 2],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: 0,
+    'babel/semi': ['error', 'always'],
+    'comma-dangle': ['warn', 'always-multiline'],
     'no-unused-vars': 1,
     'no-use-before-define': 0,
-    'no-console': [
-      'warn', { allow: ['warn', 'error']}
-    ],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-mixed-operators': 0,
     'class-methods-use-this': 0,
     'react/forbid-prop-types': 1, // replace with 1 for very strict type checks
-    'no-plusplus': ['error', { 'allowForLoopAfterthoughts': true }],
-    'import/no-extraneous-dependencies': ['error', {'devDependencies': ['**/*.test.js', '**/*.spec.js']}],
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/*.test.js', '**/*.spec.js'] },
+    ],
     'react/no-unused-prop-types': 'warn',
-  }
+  },
 };
