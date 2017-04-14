@@ -5,15 +5,15 @@ import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 
-import type { ReduxState } from '../redux/modules';
+import type { ReduxState } from 'redux/modules';
 
 // import type {
 //   NavigationScreenProp,
 //   NavigationAction
 // } from 'react-navigation/lib/TypeDefinition';
 
-import { login } from '../redux/modules/user';
-import theme from '../constants/theme';
+import { login } from 'redux/modules/user';
+import theme from 'constants/theme';
 
 type Props = {
   // navigation: NavigationScreenProp<*, NavigationAction>,

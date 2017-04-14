@@ -13,7 +13,8 @@
 ; "node_modules/react-native" but in the source repo it is in the root
 .*/Libraries/react-native/React.js
 .*/Libraries/react-native/ReactNative.js
-
+.*/node_modules/react-native/packager/.*[.]js
+.*/node_modules/react-native/local-cli/.*[.]js
 [include]
 ; .*/src/**/*.js
 
@@ -32,6 +33,8 @@ experimental.strict_type_args=true
 munge_underscores=true
 
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
+
+module.system.node.resolve_dirname=src
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe

@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import theme from '../constants/theme';
+import theme from 'constants/theme';
 
 type Props = {
   navigation: Object,

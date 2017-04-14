@@ -3,10 +3,10 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import { login } from '../redux/modules/user';
-import theme from '../constants/theme';
+import { login } from 'redux/modules/user';
+import theme from 'constants/theme';
 
-import type { ReduxState } from '../redux/modules';
+import type { ReduxState } from 'redux/modules';
 
 type Props = {
   navigation: Object,

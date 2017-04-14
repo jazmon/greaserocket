@@ -12,11 +12,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 
-import { fetchLocations } from '../redux/modules/map';
-import theme from '../constants/theme';
+import { fetchLocations } from 'redux/modules/map';
+import theme from 'constants/theme';
 
-import type { Location } from '../../types';
-import type { ReduxState } from '../redux/modules';
+import type { Location } from 'types';
+import type { ReduxState } from 'redux/modules';
 
 const { width, height } = Dimensions.get('window');
 

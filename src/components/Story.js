@@ -4,9 +4,9 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import Image from 'react-native-image-progress';
 // import Image from './Image';
-import theme from '../constants/theme';
+import theme from 'constants/theme';
 
-import type { Story as StoryType } from '../../types';
+import type { Story as StoryType } from 'types';
 
 type Props = {
   story: StoryType,

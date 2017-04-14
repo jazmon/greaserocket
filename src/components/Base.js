@@ -2,7 +2,7 @@
 import React from 'react';
 import type { Children } from 'react';
 import { View, StatusBar, StyleSheet } from 'react-native';
-import theme from '../constants/theme';
+import theme from 'constants/theme';
 
 type Props = {
   style?: Style,

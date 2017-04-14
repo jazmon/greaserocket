@@ -6,16 +6,16 @@ import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import type { Store } from 'redux';
-import type { ReduxState } from './redux/modules';
-import type { Action } from '../types';
+import type { ReduxState } from 'redux/modules';
+import type { Action } from 'types';
 
-import configureStore from './store/configureStore';
+import configureStore from 'store/configureStore';
+import config from 'constants/config';
+import Feed from 'screens/Feed';
+import Profile from 'screens/Profile';
+import MapScreen from 'screens/Map';
+import EventDetail from 'screens/EventDetail';
 
-import config from './constants/config';
-import Feed from './screens/Feed';
-import Profile from './screens/Profile';
-import MapScreen from './screens/Map';
-import EventDetail from './screens/EventDetail';
 
 const App = TabNavigator(
   {

@@ -12,14 +12,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 
-import type { Story as StoryType } from '../../types';
-import type { ReduxState } from '../redux/modules';
+import type { Story as StoryType } from 'types';
+import type { ReduxState } from 'redux/modules';
 
-import { fetchStories, refetchStories } from '../redux/modules/feed';
+import { fetchStories, refetchStories } from 'redux/modules/feed';
 
-import Story from '../components/Story';
-import Base from '../components/Base';
-import theme from '../constants/theme';
+import Story from 'components/Story';
+import Base from 'components/Base';
+import theme from 'constants/theme';
 
 const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 

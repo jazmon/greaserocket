@@ -2,7 +2,8 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.android.js', '.ios.js']
+        extensions: ['.js', '.android.js', '.ios.js'],
+        moduleDirectory: ['node_modules', 'src'],
       }
     }
   },

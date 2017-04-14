@@ -2,7 +2,7 @@
 // https://gist.github.com/grabbou/16484dfb1aa9f787bb2d0b8f7dd08d29
 
 import type { Reducer } from 'redux';
-import type { Action } from '../../types';
+import type { Action } from 'types';
 
 type Handler = (state: Object, action: Action) => Object;
 

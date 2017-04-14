@@ -1,8 +1,8 @@
 // @flow
-import { CALL_API } from '../middleware/api';
-import createReducer from '../../utils/createReducer';
+import { CALL_API } from 'redux/middleware/api';
+import createReducer from 'utils/createReducer';
 
-import type { Action, Handler, Story } from '../../../types';
+import type { Action, Handler, Story } from 'types';
 
 // Constants
 export const FETCH_FEED_START = 'GREASEROCKET/FEED/FETCH_FEED_START';

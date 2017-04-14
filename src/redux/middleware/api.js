@@ -1,8 +1,8 @@
 // @flow
 import type { Middleware, MiddlewareAPI, Dispatch } from 'redux';
-import config from '../../constants/config';
-import type { Action } from '../../../types';
-import type { ReduxState } from '../modules';
+import config from 'constants/config';
+import type { Action } from 'types';
+import type { ReduxState } from 'redux/modules';
 
 function trimBaseUrl(url: string): string {
   return url.endsWith('/') ? url.substring(0, url.length - 1) : url;

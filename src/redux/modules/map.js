@@ -1,8 +1,8 @@
 // @flow
-import { CALL_API } from '../middleware/api';
-import createReducer from '../../utils/createReducer';
+import { CALL_API } from 'redux/middleware/api';
+import createReducer from 'utils/createReducer';
 
-import type { Action, Handler, Location } from '../../../types';
+import type { Action, Handler, Location } from 'types';
 
 export const FETCH_LOCATIONS_START = 'GREASEROCKET/MAP/FETCH_LOCATIONS_START';
 export const FETCH_LOCATIONS_SUCCESS = 'GREASEROCKET/MAP/FETCH_LOCATIONS_SUCCESS';

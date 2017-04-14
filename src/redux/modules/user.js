@@ -6,10 +6,10 @@ import moment from 'moment';
 import Auth0Lock from 'react-native-lock';
 import { REHYDRATE } from 'redux-persist/constants';
 
-import config from '../../constants/config';
-import createReducer from '../../utils/createReducer';
+import config from 'constants/config';
+import createReducer from 'utils/createReducer';
 
-import type { Action, Handler } from '../../../types';
+import type { Action, Handler } from 'types';
 
 export const REFRESH_SESSION = 'GREASEROCKET/USER/REFRESH_SESSION';
 export const REFRESH_SESSION_SUCCESS = 'GREASEROCKET/USER/REFRESH_SESSION_SUCCESS';
