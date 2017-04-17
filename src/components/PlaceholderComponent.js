@@ -7,7 +7,7 @@ import chroma from 'chroma-js';
 
 const Container = Animated.createAnimatedComponent(
   styled(LinearGradient)`
-`,
+`
 );
 
 type Props = {
@@ -32,7 +32,7 @@ function getDirection(
   currentDirection: -1 | 1 = 1,
   color: number = 0,
   min: number = 0,
-  max: number = 100,
+  max: number = 100
 ) {
   let direction = currentDirection;
   if (color >= max) {
@@ -57,7 +57,12 @@ class PlaceholderComponent extends React.PureComponent<*, Props, State> {
 
   updateColor = () => {
     this.setState(prevState => {
-      const direction = getDirection(prevState.direction, prevState.color, MIN, MAX);
+      const direction = getDirection(
+        prevState.direction,
+        prevState.color,
+        MIN,
+        MAX
+      );
       const newColor = prevState.color + direction;
       return { color: newColor, direction };
     });
