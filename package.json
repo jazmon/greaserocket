@@ -10,6 +10,7 @@
 		"lint:fix": "npm run lint -- --fix",
 		"flow": "flow",
 		"test": "NODE_ENV=test jest",
+		"test:precommit": "NODE_ENV=test jest --findRelatedTests",
 		"coverage": "NODE_ENV=test jest --coverage",
 		"prettier": "prettier",
 		"snapshot:update": "NODE_ENV=test jest --updateSnapshot",
@@ -18,7 +19,7 @@
 	},
 	"pre-commit": [
 		"lint-staged",
-		"test"
+		"test:precommit"
 	],
 	"dependencies": {
 		"babel-plugin-module-resolver": "^2.7.0",
@@ -36,7 +37,7 @@
 		"react-native-lock": "^0.4.0",
 		"react-native-maps": "https://github.com/airbnb/react-native-maps.git#v0.14.0",
 		"react-native-vector-icons": "^4.0.1",
-		"react-navigation": "https://github.com/react-community/react-navigation#4c55887990e1de2b92d400dafae19fb76c68da6a",
+		"react-navigation": "https://github.com/react-community/react-navigation#e94c9c1061151a1478b47640710bcafdbe738848",
 		"react-redux": "^5.0.4",
 		"redux": "^3.6.0",
 		"redux-loop": "^2.2.2",
@@ -60,6 +61,7 @@
 		"eslint-plugin-react-native": "^2.3.2",
 		"eslint-plugin-sort-class-members": "^1.1.1",
 		"flow-bin": "^0.40.0",
+		"isomorphic-fetch": "^2.2.1",
 		"jest": "^19.0.2",
 		"lint-staged": "^3.4.0",
 		"pre-commit": "^1.2.2",
@@ -71,6 +73,7 @@
 	"jest": {
 		"preset": "react-native",
 		"coverageDirectory": "coverage",
+		"clearMocks": true,
 		"setupFiles": [
 			"./jest/setup.js"
 		],

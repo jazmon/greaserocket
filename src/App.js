@@ -19,7 +19,8 @@ import MapScreen from 'screens/Map';
 import EventDetail from 'screens/EventDetail';
 import theme from 'constants/theme';
 
-ravenRN(Raven);
+const TEST: boolean = process.env.NODE_ENV !== 'test';
+if (!TEST) ravenRN(Raven);
 const App = TabNavigator(
   {
     Feed: {
@@ -54,12 +55,10 @@ const App = TabNavigator(
     tabBarOptions: {
       activeTintColor: '#e91e63',
     },
-    containerOptions: {
-      // on Android, the URI prefix typically contains a host in addition to scheme
-      URIPrefix: Platform.OS === 'android'
-        ? `${config.NAVIGATION.URI_PREFIX}://${config.NAVIGATION.URI_PREFIX}/`
-        : `${config.NAVIGATION.URI_PREFIX}://`,
-    },
+    // on Android, the URI prefix typically contains a host in addition to scheme
+    uriPrefix: Platform.OS === 'android'
+      ? `${config.NAVIGATION.URI_PREFIX}://${config.NAVIGATION.URI_PREFIX}/`
+      : `${config.NAVIGATION.URI_PREFIX}://`,
   }
 );
 

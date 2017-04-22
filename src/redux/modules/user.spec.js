@@ -1,10 +1,13 @@
-import reducer, { login, LOGIN_START, LOGIN_SUCCESS, doLogin } from './user';
+import reducer, {
+  login,
+  LOGIN_START /* ,  LOGIN_SUCCESS, doLogin */,
+} from './user';
 
 describe('user', () => {
-  beforeAll(() => {
-    // jest.mock('react-native-lock');
-    // jest.mock('Auth0Lock');
-  });
+  // beforeAll(() => {
+  //   // jest.mock('react-native-lock');
+  //   // jest.mock('Auth0Lock');
+  // });
   describe('login', () => {
     it(`should return '${LOGIN_START}' type action`, () => {
       expect(login()).toEqual({ type: LOGIN_START });
