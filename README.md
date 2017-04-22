@@ -1,4 +1,11 @@
-# Greaserocket
+# Greaserocket 
+[![Build Status](https://travis-ci.org/jazmon/greaserocket.svg?branch=master)](https://travis-ci.org/jazmon/greaserocket)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/jazmon/greaserocket.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jazmon/greaserocket/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/jazmon/greaserocket.svg)](https://github.com/jazmon/greaserocket/issues)
+
+
 A heavily opionated React Native boilerplate. Still under construction 🚧👷
 Also this readme is just a dump of notes about stuff i'll document better. Just here so i won't forget 
 
