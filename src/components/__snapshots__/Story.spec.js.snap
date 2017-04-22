@@ -5,9 +5,11 @@ exports[`renders correctly 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#FFF",
-        "flex": 1,
+        "backgroundColor": "#FFFFFF",
+        "flexBasis": 0,
         "flexDirection": "row",
+        "flexGrow": 1,
+        "flexShrink": 1,
         "height": 120,
       },
       undefined,
@@ -16,11 +18,14 @@ exports[`renders correctly 1`] = `
 >
   <View
     style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-        "width": 120,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "width": 120,
+        },
+        undefined,
+      ]
     }
   >
     <Image
@@ -35,26 +40,47 @@ exports[`renders correctly 1`] = `
         }
       }
       style={
-        Object {
-          "height": 100,
-          "width": 100,
-        }
+        Array [
+          Object {
+            "height": 100,
+            "width": 100,
+          },
+          undefined,
+        ]
       }
     />
   </View>
   <View
     style={
-      Object {
-        "flex": 1,
-        "flexDirection": "column",
-        "padding": 16,
-      }
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexDirection": "column",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "paddingBottom": 16,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 16,
+        },
+        undefined,
+      ]
     }
   >
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      secondary={true}
+      style={
+        Array [
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "fontSize": 16,
+          },
+          undefined,
+        ]
+      }
     >
       foo
     </Text>
@@ -63,10 +89,13 @@ exports[`renders correctly 1`] = `
       allowFontScaling={true}
       ellipsizeMode="tail"
       style={
-        Object {
-          "color": "#000",
-          "fontSize": 16,
-        }
+        Array [
+          Object {
+            "color": "rgba(0, 0, 0, 0.87)",
+            "fontSize": 16,
+          },
+          undefined,
+        ]
       }
     >
       foo

@@ -45,7 +45,7 @@ declare class Response {
   text(): Promise<string>,
 }
 
-function checkStatus(response: Response): Response {
+export function checkStatus(response: Response): Response {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -55,7 +55,7 @@ function checkStatus(response: Response): Response {
   throw error;
 }
 
-async function callApi(
+export async function callApi(
   endpoint: string,
   authenticated: boolean,
   token: ?Auth0Token
@@ -89,13 +89,13 @@ async function callApi(
   }
 }
 
-type ApiAction = Action<{
+export type ApiAction = Action<{
   types: Array<string>,
   authenticated?: boolean,
   endpoint: string,
 }>;
 
-const middleware: Middleware<ReduxState, Action<any>> = (
+export const middleware: Middleware<ReduxState, Action<any>> = (
   store: MiddlewareAPI<ReduxState, Action<any>>
 ) => (next: Dispatch<Action<any>>) => (
   action: ApiAction

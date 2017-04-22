@@ -3,11 +3,16 @@
 exports[`renders correctly 1`] = `
 <View
   style={
-    Object {
-      "backgroundColor": "#FFF",
-      "flex": 1,
-      "flexDirection": "column",
-    }
+    Array [
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "flexBasis": 0,
+        "flexDirection": "column",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      undefined,
+    ]
   }
 >
   <Text
@@ -15,10 +20,13 @@ exports[`renders correctly 1`] = `
     allowFontScaling={true}
     ellipsizeMode="tail"
     style={
-      Object {
-        "color": "#000",
-        "fontSize": 16,
-      }
+      Array [
+        Object {
+          "color": "rgba(0, 0, 0, 0.87)",
+          "fontSize": 16,
+        },
+        undefined,
+      ]
     }
   >
     EventDetail

@@ -3,13 +3,16 @@
 exports[`renders correctly 1`] = `
 <View
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#FFF",
-      "flex": 1,
-      "flexDirection": "column",
-      "justifyContent": "center",
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "flexDirection": "column",
+        "flexGrow": 1,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
   }
 />
 `;

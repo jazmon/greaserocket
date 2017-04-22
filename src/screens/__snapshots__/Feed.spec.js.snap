@@ -5,8 +5,10 @@ exports[`renders correctly 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#FFF",
-        "flex": 1,
+        "backgroundColor": "#FFFFFF",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
       },
       undefined,
     ]
@@ -14,12 +16,17 @@ exports[`renders correctly 1`] = `
 >
   <View
     style={
-      Object {
-        "backgroundColor": "#FFF",
-        "flex": 1,
-        "flexDirection": "column",
-        "marginTop": 24,
-      }
+      Array [
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "flexBasis": 0,
+          "flexDirection": "column",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "marginTop": 24,
+        },
+        undefined,
+      ]
     }
   >
     <RCTScrollView

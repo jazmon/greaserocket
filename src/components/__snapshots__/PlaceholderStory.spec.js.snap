@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexDirection": "row",
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "height": 120,
+        "marginBottom": 8,
+        "opacity": 0.5,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "width": 120,
+        },
+        undefined,
+      ]
+    }
+  >
+    <BVLinearGradient
+      colors={
+        Array [
+          4284900966,
+          4288256409,
+        ]
+      }
+      end={
+        Object {
+          "x": 1,
+          "y": 0.5,
+        }
+      }
+      locations={null}
+      start={
+        Object {
+          "x": 0,
+          "y": 0.5,
+        }
+      }
+      style={
+        Array [
+          Object {},
+          Object {
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "paddingBottom": 16,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 16,
+        },
+        undefined,
+      ]
+    }
+  >
+    <BVLinearGradient
+      colors={
+        Array [
+          4284900966,
+          4288256409,
+        ]
+      }
+      end={
+        Object {
+          "x": 1,
+          "y": 0.5,
+        }
+      }
+      locations={null}
+      start={
+        Object {
+          "x": 0,
+          "y": 0.5,
+        }
+      }
+      style={
+        Array [
+          Object {},
+          Object {
+            "flexDirection": "row",
+            "flexGrow": 0,
+            "height": 14,
+            "marginTop": 0,
+            "paddingBottom": 2,
+            "paddingTop": 2,
+          },
+        ]
+      }
+      upper={true}
+    />
+    <BVLinearGradient
+      colors={
+        Array [
+          4284900966,
+          4288256409,
+        ]
+      }
+      end={
+        Object {
+          "x": 1,
+          "y": 0.5,
+        }
+      }
+      locations={null}
+      lower={true}
+      start={
+        Object {
+          "x": 0,
+          "y": 0.5,
+        }
+      }
+      style={
+        Array [
+          Object {},
+          Object {
+            "flexDirection": "row",
+            "flexGrow": 0,
+            "height": 14,
+            "marginTop": 2,
+            "paddingBottom": 2,
+            "paddingTop": 0,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;

@@ -7,15 +7,8 @@ exports[`renders correctly 1`] = `
       Object {
         "backgroundColor": "#FFFFFF",
         "flexBasis": 0,
-        "flexDirection": "column",
         "flexGrow": 1,
         "flexShrink": 1,
-        "justifyContent": "center",
-        "marginTop": 24,
-        "paddingBottom": 16,
-        "paddingLeft": 16,
-        "paddingRight": 16,
-        "paddingTop": 16,
       },
       undefined,
     ]

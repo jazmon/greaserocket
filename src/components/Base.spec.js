@@ -5,12 +5,12 @@ import renderer from 'react-test-renderer';
 import { ThemeProvider } from 'styled-components';
 import theme from 'constants/theme';
 
-import { LoginComponent as Login } from './Login';
+import Base from './Base';
 
 it('renders correctly', () => {
   const tree = renderer.create(
     <ThemeProvider theme={theme}>
-      <Login login={jest.fn} />
+      <Base />
     </ThemeProvider>
   );
   expect(tree).toMatchSnapshot();
