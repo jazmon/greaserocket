@@ -6,7 +6,7 @@ import Raven from 'raven-js';
 import ravenRN from 'raven-js/plugins/react-native';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-
+import { ThemeProvider } from 'styled-components';
 import type { Store } from 'redux';
 import type { ReduxState } from 'redux/modules';
 import type { Action } from 'types';
@@ -17,8 +17,8 @@ import Feed from 'screens/Feed';
 import Profile from 'screens/Profile';
 import MapScreen from 'screens/Map';
 import EventDetail from 'screens/EventDetail';
+import theme from 'constants/theme';
 
-// require('raven-js/plugins/react-native')(Raven);
 ravenRN(Raven);
 const App = TabNavigator(
   {
@@ -66,7 +66,9 @@ const App = TabNavigator(
 const store: Store<ReduxState, Action<*>> = configureStore();
 const Root = () => (
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>
 );
 

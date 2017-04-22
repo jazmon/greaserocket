@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
+import styled from 'styled-components/native';
 
 import type { ReduxState } from 'redux/modules';
 
@@ -13,7 +14,7 @@ import type { ReduxState } from 'redux/modules';
 // } from 'react-navigation/lib/TypeDefinition';
 
 import { login } from 'redux/modules/user';
-import theme from 'constants/theme';
+import type { ThemeType } from 'constants/theme';
 
 type Props = {
   // navigation: NavigationScreenProp<*, NavigationAction>,
@@ -23,12 +24,29 @@ type Props = {
   loading: boolean,
 };
 
+const Container = styled.View`
+  flex-grow: 1;
+  flex-direction: column;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+  align-items: center;
+  justify-content: center;
+`;
+
+const LoadingContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const BaseText = styled.Text`
+  color: ${({ theme }: { theme: ThemeType }) => theme.text.colors.primary};
+  font-size: 16;
+`;
+
 class Profile extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Profile',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-person" size={30} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }) => <Icon name="ios-person" size={30} color={tintColor} />,
   };
 
   props: Props;
@@ -48,36 +66,20 @@ class Profile extends React.Component {
   render() {
     const { profile, loading } = this.props;
     return (
-      <View style={styles.container}>
+      <Container>
         {loading &&
-          <View style={styles.loadingContainer}>
+          <LoadingContainer>
             <ActivityIndicator size="large" />
-          </View>}
+          </LoadingContainer>}
         {profile &&
           <View>
-            <Text style={styles.text}>{profile.name}</Text>
-            <Text style={styles.text}>{profile.email}</Text>
+            <BaseText>{profile.name}</BaseText>
+            <BaseText>{profile.email}</BaseText>
           </View>}
-      </View>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: theme.WHITE,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  loadingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: { color: theme.BLACK, fontSize: 16 },
-});
 
 const mapState = ({ user }: ReduxState) => ({ ...user });
 

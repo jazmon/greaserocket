@@ -1,29 +1,31 @@
 // @flow
 import React from 'react';
 import type { Children } from 'react';
-import { View, StatusBar, StyleSheet } from 'react-native';
-import theme from 'constants/theme';
+import { StatusBar } from 'react-native';
+import styled, { withTheme } from 'styled-components/native';
+import { getStatusBarTextColor } from 'constants/theme';
+
+import type { ThemeType } from 'constants/theme';
 
 type Props = {
   style?: Style,
   children?: ?Children,
+  theme: ThemeType,
 };
 
-const Base = ({ children, style }: Props): ElementType => (
-  <View style={[styles.container, style]}>
+const Container = styled.View`
+  flex: 1;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+`;
+
+const Base = ({ children, style, theme }: Props): ElementType => (
+  <Container style={style}>
     <StatusBar
-      backgroundColor={theme.DARK_PRIMARY_COLOR}
-      barStyle={theme.LIGHT_STATUS_BAR ? 'light-content' : 'dark-content'}
+      backgroundColor={theme.colors.primary.dark}
+      barStyle={getStatusBarTextColor(theme.colors.primary.dark)}
     />
     {children}
-  </View>
+  </Container>
 );
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.WHITE,
-  },
-});
-
-export default Base;
+export default withTheme(Base);

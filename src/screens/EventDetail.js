@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import theme from 'constants/theme';
+import styled from 'styled-components/native';
+import type { ThemeType } from 'constants/theme';
 
 type Props = {
   navigation: Object,
@@ -12,6 +12,16 @@ type Props = {
 type State = {
   text: string,
 };
+
+const Container = styled.View`
+  flex: 1;
+  flex-direction: column;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+`;
+const BaseText = styled.Text`
+  color: ${({ theme }: { theme: ThemeType }) => theme.text.colors.primary};
+  font-size: 16;
+`;
 
 class EventDetail extends React.Component {
   props: Props;
@@ -29,24 +39,12 @@ class EventDetail extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{text}</Text>
-      </View>
+      <Container>
+        <BaseText>{text}</BaseText>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: theme.WHITE,
-  },
-  text: {
-    color: theme.BLACK,
-    fontSize: 16,
-  },
-});
 
 export const EventDetailComponent = EventDetail;
 export default EventDetail;

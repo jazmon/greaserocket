@@ -5,7 +5,6 @@ import {
   ListView,
   ScrollView,
   RefreshControl,
-  StyleSheet,
   Platform,
   ActivityIndicator,
 } from 'react-native';
@@ -15,13 +14,14 @@ import { connect } from 'react-redux';
 
 import type { Story as StoryType } from 'types';
 import type { ReduxState } from 'redux/modules';
+import styled from 'styled-components/native';
 
 import { fetchStories, refetchStories } from 'redux/modules/feed';
 
 import Story from 'components/Story';
+import PlaceholderStory from 'components/PlaceholderStory';
 import Base from 'components/Base';
-import theme from 'constants/theme';
-import PlaceholderComponent from 'components/PlaceholderComponent';
+import type { ThemeType } from 'constants/theme';
 
 const rowHasChanged = (r1, r2) => r1.id !== r2.id;
 
@@ -38,61 +38,30 @@ type Props = {
   stories: Array<StoryType>,
 };
 
-type State = {};
+const LoadingContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.transparent};
+`;
+const Separator = styled.View`
+  height: 8;
+`;
+const Container = styled.View`
+  flex: 1;
+  margin-top: ${Platform.OS === 'ios' ? 24 : 0};
+  flex-direction: column;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+`;
 
-const PlaceholderStory = () => (
-  <View
-    style={{
-      height: 120,
-      flex: 1,
-      flexDirection: 'row',
-      marginBottom: 8,
-      opacity: 0.5,
-    }}
-  >
-    <View
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 120,
-      }}
-    >
-      <PlaceholderComponent style={{ width: 100, height: 100 }} />
-    </View>
-    <View
-      style={{
-        flex: 1,
-        padding: 16,
-      }}
-    >
-      <PlaceholderComponent
-        style={{
-          flex: 0,
-          flexDirection: 'row',
-          height: 14,
-          paddingTop: 2,
-          paddingBottom: 2,
-        }}
-      />
-      <PlaceholderComponent
-        style={{
-          flex: 0,
-          flexDirection: 'row',
-          height: 14,
-          marginTop: 2,
-          paddingBottom: 2,
-        }}
-      />
-    </View>
-  </View>
-);
-
-class Feed extends React.Component<*, Props, State> {
+class Feed extends React.Component<*, Props, void> {
   static navigationOptions = {
     tabBarLabel: 'Feed',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-paper" size={30} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }) => <Icon name="ios-paper" size={30} color={tintColor} />,
   };
 
   static defaultProps = {
@@ -126,21 +95,19 @@ class Feed extends React.Component<*, Props, State> {
 
   renderRow = (story: StoryType) => <Story story={story} key={story.id} />;
 
-  renderSeparator = (sID: string, rID: string) => (
-    <View style={styles.separator} key={`${sID}-${rID}`} />
-  );
+  renderSeparator = (sID: string, rID: string) => <Separator key={`${sID}-${rID}`} />;
 
   renderLoading = () => (
-    <View style={styles.loadingContainer}>
+    <LoadingContainer>
       <ActivityIndicator animating size="large" />
-    </View>
+    </LoadingContainer>
   );
 
   render() {
     const { loading, refetching } = this.props;
     return (
       <Base>
-        <View style={styles.container}>
+        <Container>
           {!loading &&
             <ListView
               dataSource={this.dataSource}
@@ -148,44 +115,18 @@ class Feed extends React.Component<*, Props, State> {
               renderRow={this.renderRow}
               renderSeparator={this.renderSeparator}
               enableEmptySections
-              renderSectionHeader={(sectionData, sectionId) => (
-                <View key={`sh-${sectionId}`} />
-              )}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refetching}
-                  onRefresh={this.onRefresh}
-                />
-              }
+              renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
+              refreshControl={<RefreshControl refreshing={refetching} onRefresh={this.onRefresh} />}
             />}
           {loading &&
             <ScrollView>
-              {[1, 2, 3, 4, 5, 6].map(a => (
-                <PlaceholderStory key={String(a)} />
-              ))}
+              {[1, 2, 3, 4, 5, 6].map(a => <PlaceholderStory key={String(a)} />)}
             </ScrollView>}
-        </View>
+        </Container>
       </Base>
     );
   }
 }
-
-const styles: Style = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: Platform.OS === 'ios' ? 24 : 0,
-    flexDirection: 'column',
-    backgroundColor: theme.WHITE,
-  },
-  loadingContainer: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.TRANSPARENT,
-  },
-  separator: { height: 8 },
-});
 
 const mapState = ({ feed }: ReduxState) => ({
   ...feed,

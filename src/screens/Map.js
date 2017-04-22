@@ -1,19 +1,13 @@
 // @flow
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  ActivityIndicator,
-  Text,
-} from 'react-native';
+import { Dimensions, ActivityIndicator, Text } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
-
+import styled from 'styled-components/native';
 import { fetchLocations } from 'redux/modules/map';
-import theme from 'constants/theme';
+import type { ThemeType } from 'constants/theme';
 
 import type { Location } from 'types';
 import type { ReduxState } from 'redux/modules';
@@ -50,19 +44,44 @@ function toMarker(location: Location): MapMarker {
   };
 }
 
+const LoadingContainer = styled.View`
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.transparent};
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+`;
+const Container = styled.View`
+  flex: 1;
+  flex-grow: 1;
+  flex-direction: column;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+`;
+const StyledMap = styled(MapView)`
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+`;
+
 const LoadingOverlay = (): ElementType => (
-  <View style={styles.loadingContainer}>
+  <LoadingContainer>
     <ActivityIndicator size="large" />
-  </View>
+  </LoadingContainer>
 );
 
-class MapScreen extends React.Component {
+class MapScreen extends React.Component<*, Props, void> {
   map: Object;
   static navigationOptions = {
     tabBarLabel: 'Map',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-map" size={30} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }) => <Icon name="ios-map" size={30} color={tintColor} />,
   };
 
   static defaultProps = {
@@ -108,23 +127,22 @@ class MapScreen extends React.Component {
     }
   }
 
-  props: Props;
-
   onMarkerPressed = (marker: MapMarker) => {
     console.log('onrpress');
     const { navigate } = this.props.navigation;
     navigate('EventDetail', { eventId: marker.id });
   };
 
+  bindMap = (map: Object) => {
+    this.map = map;
+  };
+
   render() {
     const { locations, loading } = this.props;
     return (
-      <View style={styles.container}>
-        <MapView
-          ref={map => {
-            this.map = map;
-          }}
-          style={styles.map}
+      <Container>
+        <StyledMap
+          ref={this.bindMap}
           initialRegion={REGION}
           loadingEnabled={false}
           showsUserLocation={true}
@@ -140,42 +158,19 @@ class MapScreen extends React.Component {
                 // onPress={this.onMarkerPressed}
                 // onSelect={() => console.log('onselect')}
                 onSelect={this.onMarkerPressed}
-                onCalloutPress={() =>
-                  console.log('onCalloutPress') || this.onMarkerPressed}
+                onCalloutPress={() => console.log('onCalloutPress') || this.onMarkerPressed}
               >
-                <MapView.Callout
-                  {...marker}
-                  onPress={() => console.log('foobar')}
-                >
+                <MapView.Callout {...marker} onPress={() => console.log('foobar')}>
                   <Text>{marker.title}</Text>
                 </MapView.Callout>
               </MapView.Marker>
             ))}
-        </MapView>
+        </StyledMap>
         {loading && <LoadingOverlay />}
-      </View>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexGrow: 1,
-    flexDirection: 'column',
-    backgroundColor: theme.WHITE,
-  },
-  loadingContainer: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.TRANSPARENT,
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});
 
 const mapState = ({ map }: ReduxState) => ({
   ...map,

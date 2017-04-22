@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components/native';
-import { Animated, Text } from 'react-native';
+import { Animated } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import chroma from 'chroma-js';
 
@@ -33,7 +33,7 @@ function getDirection(
   color: number = 0,
   min: number = 0,
   max: number = 100
-) {
+): -1 | 1 {
   let direction = currentDirection;
   if (color >= max) {
     direction = Directions.DOWN;
@@ -57,12 +57,7 @@ class PlaceholderComponent extends React.PureComponent<*, Props, State> {
 
   updateColor = () => {
     this.setState(prevState => {
-      const direction = getDirection(
-        prevState.direction,
-        prevState.color,
-        MIN,
-        MAX
-      );
+      const direction = getDirection(prevState.direction, prevState.color, MIN, MAX);
       const newColor = prevState.color + direction;
       return { color: newColor, direction };
     });

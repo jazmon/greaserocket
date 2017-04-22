@@ -1,10 +1,11 @@
 // @flow
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text } from 'react-native';
 import { connect } from 'react-redux';
+import styled from 'styled-components/native';
 
 import { login } from 'redux/modules/user';
-import theme from 'constants/theme';
+import type { ThemeType } from 'constants/theme';
 
 import type { ReduxState } from 'redux/modules';
 
@@ -18,15 +19,16 @@ type Props = {
   token: ?Auth0Token,
 };
 
-type State = {};
+const Container = styled.View`
+  flex: 1;
+  flex-direction: column;
+  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+  margin-top: 24;
+  justify-content: center;
+  padding: 16;
+`;
 
-// type State = {error: ?Error, profile: ?Auth0Profile, token: ?Auth0Token};
-
-// const initialState: State = { error: null, profile: null, token: null };
-
-class Login extends React.Component {
-  props: Props;
-
+class Login extends React.Component<*, Props, void> {
   componentDidMount() {
     this.props.login();
   }
@@ -37,38 +39,25 @@ class Login extends React.Component {
     }
   }
 
-  state: State;
-
   render() {
     const { profile, token, error } = this.props;
     if (profile && token) {
       return (
-        <View style={styles.container}>
+        <Container>
           <Text>Welcome {profile.name}</Text>
           <Text>Your email is: {profile.email}</Text>
-        </View>
+        </Container>
       );
     } else if (error) {
       return (
-        <View style={styles.container}>
+        <Container>
           <Text>{error}</Text>
-        </View>
+        </Container>
       );
     }
-    return <View />;
+    return <Container />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: theme.WHITE,
-    marginTop: 24,
-    justifyContent: 'center',
-    padding: 16,
-  },
-});
 
 const mapState = ({ user }: ReduxState) => ({ ...user });
 
