@@ -4,5 +4,3 @@ node_js:
   - "7"
 install:
   - cp src/constants/config.js.example src/constants/config.js
-script:
-  - npm test
