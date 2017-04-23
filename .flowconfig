@@ -15,6 +15,7 @@
 .*/Libraries/react-native/ReactNative.js
 .*/node_modules/react-native/packager/.*[.]js
 .*/node_modules/react-native/local-cli/.*[.]js
+.*/node_modules/styled-components/.*
 [include]
 ; .*/src/**/*.js
 

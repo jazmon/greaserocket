@@ -28,7 +28,8 @@ import type { StoreEnhancer } from 'redux';
    declare function loop<M, E>(
      model: M,
      effect: E,
-   ): [M, E];
+   ): M;
+  //  ): [M, E];
 
    declare function isLoop(array: Array<any>): Boolean;
 
