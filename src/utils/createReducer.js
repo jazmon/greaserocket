@@ -4,15 +4,15 @@
 import type { Reducer } from 'redux';
 import type { Action } from 'types';
 
-type Handler = (state: Object, action: Action) => Object;
+type Handler = (state: Object, action: Action<mixed>) => Object;
 
 type Handlers = { [key: string]: Handler };
 
 function createReducer(
   initialState: Object,
   handlers: Handlers
-): Reducer<*, Action> {
-  return function reducer(state: Object = initialState, action: Action) {
+): Reducer<*, Action<mixed>> {
+  return function reducer(state: Object = initialState, action: Action<mixed>) {
     return typeof handlers[action.type] === 'function'
       ? handlers[action.type](state, action)
       : state;

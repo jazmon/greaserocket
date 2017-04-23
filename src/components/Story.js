@@ -12,7 +12,10 @@ type Props = {
   style?: ?any,
 };
 
-const getTextColor = ({ theme, secondary = false }: { theme: ThemeType, secondary?: boolean }) =>
+const getTextColor = ({
+  theme,
+  secondary = false,
+}: { theme: ThemeType, secondary?: boolean }) =>
   (secondary ? theme.text.colors.secondary : theme.text.colors.primary);
 
 const Container = styled.View`

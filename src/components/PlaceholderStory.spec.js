@@ -5,10 +5,7 @@ import renderer from 'react-test-renderer';
 
 import PlaceholderStory from './PlaceholderStory';
 
-
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <PlaceholderStory />
-  );
+  const tree = renderer.create(<PlaceholderStory />);
   expect(tree).toMatchSnapshot();
 });

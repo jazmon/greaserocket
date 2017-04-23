@@ -16,5 +16,5 @@ describe('createReducer', () => {
     const reducer = createReducer(initialState, handlers);
     const state = reducer(initialState, { type: 'BAR' });
     expect(state).toEqual(initialState);
-  })
+  });
 });

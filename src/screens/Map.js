@@ -102,6 +102,10 @@ class MapScreen extends React.Component<*, Props, void> {
       };
       const coords: Array<LatLng> = this.props.locations
         .filter(location => !!location.latitude && !!location.longitude)
+        .map((location: Location): LatLng => ({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }))
         .filter(latlng => {
           const center: LatLng = {
             latitude: 61.497418,
@@ -128,7 +132,6 @@ class MapScreen extends React.Component<*, Props, void> {
   }
 
   onMarkerPressed = (marker: MapMarker) => {
-    console.log('onrpress');
     const { navigate } = this.props.navigation;
     navigate('EventDetail', { eventId: marker.id });
   };
@@ -158,9 +161,9 @@ class MapScreen extends React.Component<*, Props, void> {
                 // onPress={this.onMarkerPressed}
                 // onSelect={() => console.log('onselect')}
                 onSelect={this.onMarkerPressed}
-                onCalloutPress={() => console.log('onCalloutPress') || this.onMarkerPressed}
+                onCalloutPress={this.onMarkerPressed}
               >
-                <MapView.Callout {...marker} onPress={() => console.log('foobar')}>
+                <MapView.Callout {...marker}>
                   <Text>{marker.title}</Text>
                 </MapView.Callout>
               </MapView.Marker>

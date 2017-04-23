@@ -29,7 +29,9 @@ const theme = {
 
 export type ThemeType = typeof theme;
 
-export function getStatusBarTextColor(backgroundColor: string): 'light-content' | 'dark-content' {
+export function getStatusBarTextColor(
+  backgroundColor: string
+): 'light-content' | 'dark-content' {
   return color(backgroundColor).dark() ? 'light-content' : 'dark-content';
 }
 

@@ -46,7 +46,9 @@ const BaseText = styled.Text`
 class Profile extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Profile',
-    tabBarIcon: ({ tintColor }) => <Icon name="ios-person" size={30} color={tintColor} />,
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="ios-person" size={30} color={tintColor} />
+    ),
   };
 
   props: Props;

@@ -5,10 +5,7 @@ import renderer from 'react-test-renderer';
 
 import PlaceholderComponent from './PlaceholderComponent';
 
-
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <PlaceholderComponent />
-  );
+  const tree = renderer.create(<PlaceholderComponent />);
   expect(tree).toMatchSnapshot();
 });

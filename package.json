@@ -9,12 +9,12 @@
 		"lint": "eslint -c .eslintrc.js src",
 		"lint:fix": "npm run lint -- --fix",
 		"flow": "flow",
-		"test": "NODE_ENV=test jest",
+		"test": "NODE_ENV=test jest --forceExit",
 		"test:precommit": "./pre-commit.sh",
-		"coverage": "NODE_ENV=test jest --coverage",
+		"coverage": "npm run test -- --coverage",
 		"prettier": "prettier",
-		"snapshot:update": "NODE_ENV=test jest --updateSnapshot",
-		"test:watch": "NODE_ENV=test jest --watch",
+		"snapshot:update": "npm run test -- --updateSnapshot",
+		"test:watch": "npm run test -- --watch",
 		"lint-staged": "lint-staged"
 	},
 	"pre-commit": [

@@ -57,7 +57,12 @@ class PlaceholderComponent extends React.PureComponent<*, Props, State> {
 
   updateColor = () => {
     this.setState(prevState => {
-      const direction = getDirection(prevState.direction, prevState.color, MIN, MAX);
+      const direction = getDirection(
+        prevState.direction,
+        prevState.color,
+        MIN,
+        MAX
+      );
       const newColor = prevState.color + direction;
       return { color: newColor, direction };
     });

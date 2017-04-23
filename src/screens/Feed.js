@@ -61,7 +61,9 @@ const Container = styled.View`
 class Feed extends React.Component<*, Props, void> {
   static navigationOptions = {
     tabBarLabel: 'Feed',
-    tabBarIcon: ({ tintColor }) => <Icon name="ios-paper" size={30} color={tintColor} />,
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="ios-paper" size={30} color={tintColor} />
+    ),
   };
 
   static defaultProps = {
@@ -95,7 +97,9 @@ class Feed extends React.Component<*, Props, void> {
 
   renderRow = (story: StoryType) => <Story story={story} key={story.id} />;
 
-  renderSeparator = (sID: string, rID: string) => <Separator key={`${sID}-${rID}`} />;
+  renderSeparator = (sID: string, rID: string) => (
+    <Separator key={`${sID}-${rID}`} />
+  );
 
   renderLoading = () => (
     <LoadingContainer>
@@ -115,12 +119,21 @@ class Feed extends React.Component<*, Props, void> {
               renderRow={this.renderRow}
               renderSeparator={this.renderSeparator}
               enableEmptySections
-              renderSectionHeader={(sectionData, sectionId) => <View key={`sh-${sectionId}`} />}
-              refreshControl={<RefreshControl refreshing={refetching} onRefresh={this.onRefresh} />}
+              renderSectionHeader={(sectionData, sectionId) => (
+                <View key={`sh-${sectionId}`} />
+              )}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refetching}
+                  onRefresh={this.onRefresh}
+                />
+              }
             />}
           {loading &&
             <ScrollView>
-              {[1, 2, 3, 4, 5, 6].map(a => <PlaceholderStory key={String(a)} />)}
+              {[1, 2, 3, 4, 5, 6].map(a => (
+                <PlaceholderStory key={String(a)} />
+              ))}
             </ScrollView>}
         </Container>
       </Base>

@@ -1,13 +1,13 @@
+// @flow
 export type Action<T> = {
   type: string,
   error?: ?boolean,
-  payload?: ?T,
-  error?: ?Boolean,
-  meta?: ?string,
+  payload: T,
+  meta?: ?any,
 };
 
-export type Handler<T> = {
-  [key: string]: (state: T, action: Action<*>) => T,
+export type Handler<S> = {
+  [key: string]: (state: S, action: Action<any>) => S,
 };
 
 export type Location = {
