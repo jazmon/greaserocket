@@ -3,13 +3,14 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { install as installLoop } from 'redux-loop';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
+import thunk from 'redux-thunk';
 import rootReducer from 'redux/modules/index';
 import apiMiddleware from 'redux/middleware/api';
 
 // Middleware you want to use in production:
 const enhancer = compose(
   installLoop(),
-  applyMiddleware(apiMiddleware),
+  applyMiddleware(thunk, apiMiddleware),
   autoRehydrate()
 );
 

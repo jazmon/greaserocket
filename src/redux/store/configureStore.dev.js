@@ -5,6 +5,7 @@ import devTools from 'remote-redux-devtools';
 import { createLogger } from 'redux-logger';
 import { install as installLoop } from 'redux-loop';
 import { persistStore, autoRehydrate } from 'redux-persist';
+import thunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native';
 
 import rootReducer from 'redux/modules/index';
@@ -15,7 +16,7 @@ const loggerMiddleware = createLogger();
 const enhancer = compose(
   installLoop(),
   // Middleware you want to use in development:
-  applyMiddleware(apiMiddleware, loggerMiddleware),
+  applyMiddleware(thunk, apiMiddleware, loggerMiddleware),
   // autoRehydrate(),
   devTools()
 );
@@ -32,9 +33,9 @@ const configureStore = (initialState?: Object) => {
   if (module.hot) {
     // eslint-disable-next-line max-len
     // $FlowIssue Line below produces "call of method `accept`. Method cannot be called on 'hot' of unknown type".
-    module.hot.accept('../redux/modules/index', () =>
+    module.hot.accept('redux/modules/index', () =>
       // eslint-disable-next-line global-require
-      store.replaceReducer(require('../redux/modules/index').default)
+      store.replaceReducer(require('redux/modules/index').default)
     );
   }
 

@@ -1,22 +1,24 @@
 // @flow
 import { CALL_API } from 'redux/middleware/api';
-import createReducer from 'utils/createReducer';
 
-import type { Action, Handler, Location } from 'types';
+import type { Location } from 'types';
 
-export const FETCH_LOCATIONS_START = 'GREASEROCKET/MAP/FETCH_LOCATIONS_START';
-export const FETCH_LOCATIONS_SUCCESS =
-  'GREASEROCKET/MAP/FETCH_LOCATIONS_SUCCESS';
-export const FETCH_LOCATIONS_FAILURE =
-  'GREASEROCKET/MAP/FETCH_LOCATIONS_FAILURE';
+export const FETCH_LOCATIONS_START = 'FETCH_LOCATIONS_START';
+export const FETCH_LOCATIONS_SUCCESS = 'FETCH_LOCATIONS_SUCCESS';
+export const FETCH_LOCATIONS_FAILURE = 'FETCH_LOCATIONS_FAILURE';
 
-export type State = {
-  loading: boolean,
-  locations: Array<Location>,
-  error: ?Error,
-};
+export type MapState = {|
+  +loading: boolean,
+  +locations: Array<Location>,
+  +error: ?Error,
+|};
 
-const initialState: State = { loading: false, locations: [], error: null };
+export type MapAction =
+  | { type: 'FETCH_LOCATIONS_START', payload: Array<Location> }
+  | { type: 'FETCH_LOCATIONS_SUCCESS' }
+  | { type: 'FETCH_LOCATIONS_FAILURE', payload: Error, +meta?: string };
+
+const initialState: MapState = { loading: false, locations: [], error: null };
 
 export function fetchLocations() {
   return {
@@ -33,27 +35,27 @@ export function fetchLocations() {
   };
 }
 
-const handlers: Handler<State> = {
-  [FETCH_LOCATIONS_START](state: State) {
+export default function map(state: MapState = initialState, action: MapAction) {
+  switch (action.type) {
+  case FETCH_LOCATIONS_START:
     return {
       ...state,
       loading: true,
     };
-  },
-  [FETCH_LOCATIONS_SUCCESS](state: State, action: Action<Array<Location>>) {
+  case FETCH_LOCATIONS_SUCCESS:
     return {
       ...state,
       loading: false,
       error: null,
       locations: action.payload || [],
     };
-  },
-  [FETCH_LOCATIONS_FAILURE](state: State, action: Action<Error>) {
+  case FETCH_LOCATIONS_FAILURE:
     return {
       ...state,
+      loading: false,
       error: action.payload,
     };
-  },
-};
-
-export default createReducer(initialState, handlers);
+  default:
+    return state;
+  }
+}

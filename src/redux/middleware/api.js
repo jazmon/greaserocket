@@ -9,7 +9,7 @@ function trimBaseUrl(url: string): string {
 }
 const BASE_URL: string = trimBaseUrl(config.BACKEND.URL);
 
-export const CALL_API = 'greaserocket/api/CALL_API';
+export const CALL_API = 'CALL_API';
 
 class ResponseError extends Error {
   response: Response;
@@ -59,7 +59,7 @@ export async function callApi(
   endpoint: string,
   authenticated: boolean,
   token: ?Auth0Token
-): Promise<any> {
+): Promise<JsonData> {
   let fetchConfig = {};
 
   if (authenticated) {
@@ -89,52 +89,50 @@ export async function callApi(
   }
 }
 
-export type ApiAction = Action<{
-  types: Array<string>,
-  authenticated?: boolean,
-  endpoint: string,
-}>;
+type ApiActionProps = {|
+  +types: Array<string>,
+  +authenticated?: boolean,
+  +endpoint: string,
+|};
 
-export const middleware: Middleware<ReduxState, Action<any>> = (
-  store: MiddlewareAPI<ReduxState, Action<any>>
-) => (next: Dispatch<Action<any>>) => (
-  action: ApiAction
-): Promise<Dispatch<Action<any>>> => {
+// export type ApiAction = Action<ApiActionProps>;
+export type ApiAction = {|
+  +type: 'CALL_API',
+  +payload: ApiActionProps,
+|};
+
+export const middleware: Middleware<ReduxState, Object> = (
+  store: MiddlewareAPI<ReduxState, Object>
+) => (next: Dispatch<Action<*>>) => async (action: Object): Promise<*> => {
   if (action.type !== CALL_API) {
     return next(action);
   }
 
   const token: ?Auth0Token = store.getState().user.token;
-  const { endpoint, types, authenticated } = action.payload;
+  // cast the type now that it's known
+  // $FlowIssue
+  const { endpoint, types, authenticated = true } = (action: ApiAction).payload;
   const [startType, successType, errorType] = types;
+  // Dispatch that the action has started
   store.dispatch({
     type: startType,
   });
-  return callApi(endpoint, authenticated, token)
-    .then(
-      (response: JsonData) =>
-        next({
-          payload: response,
-          meta: authenticated,
-          error: false,
-          type: successType,
-        }),
-      (error: Error) =>
-        next({
-          payload: error,
-          error: true,
-          meta: error.message || 'Error during api call',
-          type: errorType,
-        })
-    )
-    .catch((error: Error) =>
-      next({
-        payload: error,
-        error: true,
-        meta: error.message || 'Error during api call',
-        type: errorType,
-      })
-    );
+  try {
+    const response = await callApi(endpoint, authenticated, token);
+    // dispatch the success action
+    return next({
+      payload: response,
+      meta: authenticated,
+      type: successType,
+    });
+  } catch (error) {
+    // dispatch the failure action
+    return next({
+      payload: error,
+      meta: error.message || 'Error during api call',
+      type: errorType,
+    });
+  }
 };
 
 export default middleware;

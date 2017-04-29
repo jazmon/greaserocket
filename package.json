@@ -42,6 +42,7 @@
 		"redux": "^3.6.0",
 		"redux-loop": "^2.2.2",
 		"redux-persist": "^4.6.0",
+		"redux-thunk": "^2.2.0",
 		"reselect": "^3.0.0",
 		"styled-components": "^1.4.5"
 	},

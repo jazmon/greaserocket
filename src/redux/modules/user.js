@@ -7,34 +7,51 @@ import Auth0Lock from 'react-native-lock';
 import { REHYDRATE } from 'redux-persist/constants';
 
 import config from 'constants/config';
-import createReducer from 'utils/createReducer';
 
-import type { Action, Handler } from 'types';
+import type { Action } from 'types';
+import type { ReduxState } from './index';
 
-export const REFRESH_SESSION = 'GREASEROCKET/USER/REFRESH_SESSION';
-export const REFRESH_SESSION_SUCCESS =
-  'GREASEROCKET/USER/REFRESH_SESSION_SUCCESS';
-export const REFRESH_SESSION_FAILURE =
-  'GREASEROCKET/USER/REFRESH_SESSION_FAILURE';
-export const LOGIN_START = 'GREASEROCKET/USER/LOGIN_START';
-export const LOGIN_SUCCESS = 'GREASEROCKET/USER/LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'GREASEROCKET/USER/LOGIN_FAILURE';
-export const LOGOUT_START = 'GREASEROCKET/USER/LOGOUT_START';
-export const LOGOUT_SUCCESS = 'GREASEROCKET/USER/LOGOUT_SUCCESS';
+export const REFRESH_SESSION = 'REFRESH_SESSION';
+export const REFRESH_SESSION_SUCCESS = 'REFRESH_SESSION_SUCCESS';
+export const REFRESH_SESSION_FAILURE = 'REFRESH_SESSION_FAILURE';
+export const LOGIN_START = 'LOGIN_START';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT_START = 'LOGOUT_START';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 type LoginData = {
   token: Auth0Token,
   profile: Auth0Profile,
 };
+
 type RefreshData = {
   token: Auth0Token,
 };
 
-export function login() {
-  const action: Action<*> = {
+export type UserState = {|
+  +profile: ?Auth0Profile,
+  +token: ?Auth0Token,
+  +loading: boolean,
+  +loginDate: ?Date,
+  +error: ?Error,
+|};
+
+export type UserAction =
+  | { type: 'REFRESH_SESSION' }
+  | { type: 'REFRESH_SESSION_SUCCESS', payload: RefreshData }
+  | { type: 'REFRESH_SESSION_FAILURE', payload: Error }
+  | { type: 'LOGIN_START' }
+  | { type: 'LOGIN_SUCCESS', payload: LoginData }
+  | { type: 'LOGIN_FAILURE', payload: Error }
+  | { type: 'LOGOUT_START' }
+  | { type: 'LOGOUT_SUCCESS' }
+  | { type: 'persist/REHYDRATE', payload: ReduxState };
+
+export function login(): UserAction {
+  return {
     type: LOGIN_START,
   };
-  return action;
 }
 
 export function doLogin(token: ?Auth0Token) {
@@ -88,14 +105,7 @@ export function doLogin(token: ?Auth0Token) {
   });
 }
 
-export type State = {
-  profile: ?Auth0Profile,
-  token: ?Auth0Token,
-  loginDate: ?Date,
-  error: ?Error,
-};
-
-const initialState: State = {
+const initialState: UserState = {
   profile: null,
   token: null,
   loginDate: null,
@@ -103,14 +113,17 @@ const initialState: State = {
   error: null,
 };
 
-const handlers: Handler<State> = {
-  [LOGIN_START](state: State) {
+export default function user(
+  state: UserState = initialState,
+  action: UserAction
+) {
+  switch (action.type) {
+  case LOGIN_START:
     return loop(
-      { ...state, loading: true, error: null },
-      Effects.promise(doLogin, state.token)
-    );
-  },
-  [LOGIN_SUCCESS](state: State, action: Action<LoginData>) {
+        { ...state, loading: true, error: null },
+        Effects.promise(doLogin, state.token)
+      );
+  case LOGIN_SUCCESS:
     return {
       ...state,
       loading: false,
@@ -119,15 +132,15 @@ const handlers: Handler<State> = {
       token: action.payload.token,
       loginDate: new Date(),
     };
-  },
-  [LOGIN_FAILURE](state: State, action: Action<Error>) {
+  case LOGIN_FAILURE:
     return {
       ...state,
       error: action.payload,
       loading: false,
     };
-  },
-  [REFRESH_SESSION_SUCCESS](state: State, action: Action<RefreshData>) {
+  case REFRESH_SESSION:
+    return state;
+  case REFRESH_SESSION_SUCCESS:
     return {
       ...state,
       loading: false,
@@ -138,26 +151,27 @@ const handlers: Handler<State> = {
         ...action.payload,
       },
     };
-  },
-  [REFRESH_SESSION_FAILURE](state: State, action: Action<Error>) {
+  case REFRESH_SESSION_FAILURE:
     return {
       ...state,
       loading: false,
       error: action.payload,
     };
-  },
-  [REHYDRATE](state: State, action: Action<Object>) {
+  case REHYDRATE:
     if (
-      action.payload.user &&
-      action.payload.user.loginDate &&
-      moment(action.payload.user.loginDate).isBefore(
-        moment().subtract(1, 'weeks')
-      )
-    ) {
+        // $FlowIssue
+        action.payload.user &&
+        action.payload.user.loginDate &&
+        moment(action.payload.user.loginDate).isBefore(
+          moment().subtract(1, 'weeks')
+        )
+      ) {
       return state;
     }
+      // $FlowIssue
     return { ...state, ...action.payload.user };
-  },
-};
 
-export default createReducer(initialState, handlers);
+  default:
+    return state;
+  }
+}
