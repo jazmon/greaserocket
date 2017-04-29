@@ -1,14 +1,14 @@
 // @flow
 import { combineReducers } from 'redux-loop';
 import type { Reducer } from 'redux';
-import type { Action } from 'types';
 import feed from './feed';
 import user from './user';
 import map from './map';
 
-import type { State as FeedState } from './feed';
-import type { State as UserState } from './user';
-import type { State as MapState } from './map';
+import type { FeedState, FeedAction } from './feed';
+import type { UserState, UserAction } from './user';
+import type { MapState, MapAction } from './map';
+import type { ApiAction } from '../middleware/api';
 
 export type ReduxState = {
   feed: FeedState,
@@ -16,7 +16,8 @@ export type ReduxState = {
   map: MapState,
 };
 
-const rootReducer: Reducer<ReduxState, Action> = combineReducers({
+export type ReduxAction = FeedAction | MapAction | UserAction | ApiAction;
+const rootReducer: Reducer<ReduxState, ReduxAction> = combineReducers({
   feed,
   user,
   map,

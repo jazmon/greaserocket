@@ -1,25 +1,24 @@
 // @flow
 import { CALL_API } from 'redux/middleware/api';
-import createReducer from 'utils/createReducer';
 
-import type { Action, Handler, Story } from 'types';
+import type { Story } from 'types';
 
 // Constants
-export const FETCH_FEED_START = 'GREASEROCKET/FEED/FETCH_FEED_START';
-export const FETCH_FEED_SUCCESS = 'GREASEROCKET/FEED/FETCH_FEED_SUCCESS';
-export const FETCH_FEED_FAILURE = 'GREASEROCKET/FEED/FETCH_FEED_FAILURE';
-export const REFETCH_FEED_START = 'GREASEROCKET/FEED/REFETCH_FEED_START';
-export const REFETCH_FEED_SUCCESS = 'GREASEROCKET/FEED/REFETCH_FEED_SUCCESS';
-export const REFETCH_FEED_FAILURE = 'GREASEROCKET/FEED/REFETCH_FEED_FAILURE';
+export const FETCH_FEED_START = 'FETCH_FEED_START';
+export const FETCH_FEED_SUCCESS = 'FETCH_FEED_SUCCESS';
+export const FETCH_FEED_FAILURE = 'FETCH_FEED_FAILURE';
+export const REFETCH_FEED_START = 'REFETCH_FEED_START';
+export const REFETCH_FEED_SUCCESS = 'REFETCH_FEED_SUCCESS';
+export const REFETCH_FEED_FAILURE = 'REFETCH_FEED_FAILURE';
 
-export type State = {
-  loading: boolean,
-  refetching: boolean,
-  stories: Array<Story>,
-  error: ?Error,
-};
+export type FeedState = {|
+  +loading: boolean,
+  +refetching: boolean,
+  +stories: Array<Story>,
+  +error: ?Error,
+|};
 
-const initialState: State = {
+const initialState: FeedState = {
   loading: false,
   refetching: false,
   stories: [],
@@ -32,7 +31,7 @@ export function fetchStories() {
     payload: {
       endpoint: 'feed',
       authenticated: false,
-      types: [FETCH_FEED_START, FETCH_FEED_SUCCESS, FETCH_FEED_FAILURE],
+      types: ['FETCH_FEED_START', 'FETCH_FEED_SUCCESS', 'FETCH_FEED_FAILURE'],
     },
   };
 }
@@ -46,49 +45,41 @@ export const refetchStories = () => ({
   },
 });
 
-const handlers: Handler<State> = {
-  [FETCH_FEED_START](state: State) {
-    return {
-      ...state,
-      loading: true,
-    };
-  },
-  [FETCH_FEED_SUCCESS](state: State, action: Action<Array<Story>>) {
-    return {
-      ...state,
-      loading: false,
-      error: null,
-      stories: action.payload || [],
-    };
-  },
-  [FETCH_FEED_FAILURE](state: State, action: Action<Error>) {
-    return {
-      ...state,
-      loading: false,
-      error: action.payload,
-    };
-  },
-  [REFETCH_FEED_START](state: State) {
-    return {
-      ...state,
-      refetching: true,
-    };
-  },
-  [REFETCH_FEED_SUCCESS](state: State, action: Action<Array<Story>>) {
-    return {
-      ...state,
-      refetching: false,
-      error: null,
-      stories: action.payload || [],
-    };
-  },
-  [REFETCH_FEED_FAILURE](state: State, action: Action<Error>) {
-    return {
-      ...state,
-      refetching: false,
-      error: action.payload,
-    };
-  },
-};
+export type FeedAction =
+  | { +type: 'FETCH_FEED_START' }
+  | { +type: 'FETCH_FEED_SUCCESS', +payload: Array<Story> }
+  | { +type: 'FETCH_FEED_FAILURE', +payload: Error, +meta?: string }
+  | { +type: 'REFETCH_FEED_START' }
+  | { +type: 'REFETCH_FEED_SUCCESS', +payload: Array<Story> }
+  | { +type: 'REFETCH_FEED_FAILURE', +payload: Error, +meta?: string };
 
-export default createReducer(initialState, handlers);
+export default function feed(
+  state: FeedState = initialState,
+  action: FeedAction
+) {
+  switch (action.type) {
+  case FETCH_FEED_START:
+    return { ...state, loading: true };
+  case FETCH_FEED_SUCCESS:
+    return { ...state, loading: false, error: null, stories: action.payload };
+  case FETCH_FEED_FAILURE:
+    return { ...state, loading: false, error: action.payload };
+  case REFETCH_FEED_START:
+    return { ...state, refetching: true };
+  case REFETCH_FEED_SUCCESS:
+    return {
+      ...state,
+      refetching: false,
+      error: null,
+      stories: action.payload || [],
+    };
+  case REFETCH_FEED_FAILURE:
+    return {
+      ...state,
+      refetching: false,
+      error: action.payload,
+    };
+  default:
+    return state;
+  }
+}

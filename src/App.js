@@ -11,7 +11,7 @@ import type { Store } from 'redux';
 import type { ReduxState } from 'redux/modules';
 import type { Action } from 'types';
 
-import configureStore from 'store/configureStore';
+import configureStore from 'redux/store/configureStore';
 import config from 'constants/config';
 import Feed from 'screens/Feed';
 import Profile from 'screens/Profile';
