@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "a backend for the greaserocket",
   "scripts": {
-    "start": "nodemon",
-    "production": "node src/index.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon"
   },
   "main": "index.js",
   "repository": {},
