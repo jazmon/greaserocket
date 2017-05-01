@@ -29,7 +29,7 @@ export function fetchStories() {
   return {
     type: CALL_API,
     payload: {
-      endpoint: 'feed',
+      endpoint: 'posts',
       authenticated: false,
       types: ['FETCH_FEED_START', 'FETCH_FEED_SUCCESS', 'FETCH_FEED_FAILURE'],
     },
@@ -39,18 +39,23 @@ export function fetchStories() {
 export const refetchStories = () => ({
   type: CALL_API,
   payload: {
-    endpoint: 'feed',
+    endpoint: 'posts',
     authenticated: false,
     types: [REFETCH_FEED_START, REFETCH_FEED_SUCCESS, REFETCH_FEED_FAILURE],
   },
 });
 
+type Payload = {
+  data: Array<Story>,
+  error: boolean,
+};
+
 export type FeedAction =
   | { +type: 'FETCH_FEED_START' }
-  | { +type: 'FETCH_FEED_SUCCESS', +payload: Array<Story> }
+  | { +type: 'FETCH_FEED_SUCCESS', +payload: Payload }
   | { +type: 'FETCH_FEED_FAILURE', +payload: Error, +meta?: string }
   | { +type: 'REFETCH_FEED_START' }
-  | { +type: 'REFETCH_FEED_SUCCESS', +payload: Array<Story> }
+  | { +type: 'REFETCH_FEED_SUCCESS', +payload: Payload }
   | { +type: 'REFETCH_FEED_FAILURE', +payload: Error, +meta?: string };
 
 export default function feed(
@@ -61,7 +66,12 @@ export default function feed(
   case FETCH_FEED_START:
     return { ...state, loading: true };
   case FETCH_FEED_SUCCESS:
-    return { ...state, loading: false, error: null, stories: action.payload };
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      stories: action.payload.data,
+    };
   case FETCH_FEED_FAILURE:
     return { ...state, loading: false, error: action.payload };
   case REFETCH_FEED_START:
@@ -71,7 +81,7 @@ export default function feed(
       ...state,
       refetching: false,
       error: null,
-      stories: action.payload || [],
+      stories: action.payload.data || [],
     };
   case REFETCH_FEED_FAILURE:
     return {

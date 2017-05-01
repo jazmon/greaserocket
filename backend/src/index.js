@@ -102,8 +102,8 @@ app.get('/posts', async (req, res) => {
   try {
     const rows = await knex
       .table('posts')
-      .join('users', 'posts.user_id', 'users.user_id')
-      .select();
+      .innerJoin('users', 'posts.user_id', 'users.user_id')
+      .select(knex.raw('posts.*, row_to_json(users.*) as author'));
     return res
       .status(200)
       .set('Content-Type', 'application/json')

@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'react-native-image-progress';
 import styled from 'styled-components/native';
 import type { ThemeType } from 'constants/theme';
+import defaultPicture from 'assets/default_user.png';
 
 import type { Story as StoryType } from 'types';
 
@@ -32,6 +33,7 @@ const ImageContainer = styled.View`
 const AuthorImage = styled(Image)`
   width: 100;
   height: 100;
+
 `;
 const TextArea = styled.View`
   flex: 1;
@@ -48,13 +50,15 @@ const Story = ({ story, style }: Props): ElementType => (
   <Container style={style}>
     <ImageContainer>
       <AuthorImage
-        source={{ uri: story.author.profilePictureUrl }}
-        resizemode="contain"
+        source={
+          story.author.picture ? { uri: story.author.picture } : defaultPicture
+        }
+        resizemode="cover"
       />
     </ImageContainer>
     <TextArea>
       <BaseText secondary>{story.author.name}</BaseText>
-      <BaseText>{story.text}</BaseText>
+      <BaseText>{story.content}</BaseText>
     </TextArea>
   </Container>
 );

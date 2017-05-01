@@ -20,12 +20,13 @@ export type Location = {
 
 type Author = {
   id: string,
-  profilePictureUrl: string,
+  picture: ?string,
   name: string,
+  nickname: string,
 };
 
 export type Story = {
   id: string,
-  text: string,
+  content: string,
   author: Author,
 };

@@ -4,7 +4,9 @@
   "description": "a backend for the greaserocket",
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "seed": "knex seed:run",
+    "migrate": "knex migrate:latest"
   },
   "main": "index.js",
   "repository": {},
