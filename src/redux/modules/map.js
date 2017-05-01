@@ -13,9 +13,14 @@ export type MapState = {|
   +error: ?Error,
 |};
 
+type Payload = {
+  data: Array<Location>,
+  error: boolean,
+};
+
 export type MapAction =
-  | { type: 'FETCH_LOCATIONS_START', payload: Array<Location> }
-  | { type: 'FETCH_LOCATIONS_SUCCESS' }
+  | { type: 'FETCH_LOCATIONS_START' }
+  | { type: 'FETCH_LOCATIONS_SUCCESS', payload: Payload }
   | { type: 'FETCH_LOCATIONS_FAILURE', payload: Error, +meta?: string };
 
 const initialState: MapState = { loading: false, locations: [], error: null };
@@ -47,7 +52,7 @@ export default function map(state: MapState = initialState, action: MapAction) {
       ...state,
       loading: false,
       error: null,
-      locations: action.payload || [],
+      locations: action.payload.data || [],
     };
   case FETCH_LOCATIONS_FAILURE:
     return {
