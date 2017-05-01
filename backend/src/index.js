@@ -129,7 +129,23 @@ app.get('/locations', async (req, res) => {
       .json({ error: false, data: { message: e.message } });
   }
 });
-io.on('connection', () => {});
+io.on('connection', (socket) => {
+  const defaultRoom = 'general';
+  socket.on('new user', (data) => {
+    console.log('new user', data);
+    socket.join(defaultRoom);
+    io.in(defaultRoom).emit('user joined', data);
+  });
+  socket.on('new message', async (data) => {
+    console.log('new mewssage', data);
+    // TODO: joi validation
+    await knex.table('messages')
+      .insert({
+        content: data.content,
+        user_id: data.userId,
+      });
+  });
+});
 
 server.listen(PORT, () => {
   console.log(`Greased launchpad listening on port ${PORT}!`);

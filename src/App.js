@@ -16,6 +16,7 @@ import config from 'constants/config';
 import Feed from 'screens/Feed';
 import Profile from 'screens/Profile';
 import MapScreen from 'screens/Map';
+import Messages from 'screens/Messages';
 import EventDetail from 'screens/EventDetail';
 import theme from 'constants/theme';
 
@@ -26,6 +27,10 @@ const App = TabNavigator(
     Feed: {
       screen: Feed,
       path: 'feed',
+    },
+    Messages: {
+      screen: Messages,
+      path: 'messages',
     },
     Profile: {
       screen: Profile,
