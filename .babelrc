@@ -3,7 +3,8 @@
     "lodash",
     "idx",
     ["module-resolver", {
-      "root": ["./src"]
+      "root": ["./src"],
+      "extensions": [".js", ".jsx", ".ts", ".tsx"]
     }]
   ],
   "presets": [

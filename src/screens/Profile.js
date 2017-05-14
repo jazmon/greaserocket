@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 
 import type { ReduxState } from 'redux/modules';
+import { TestComponent } from 'components/TestComponent';
 
 // import type {
 //   NavigationScreenProp,
@@ -75,6 +76,7 @@ class Profile extends React.Component {
           </LoadingContainer>}
         {profile &&
           <View>
+            <TestComponent />
             <BaseText>{profile.name}</BaseText>
             <BaseText>{profile.email}</BaseText>
           </View>}
