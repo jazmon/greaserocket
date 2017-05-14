@@ -9,12 +9,12 @@ import type { ReduxState } from 'redux/modules';
 
 type Props = {
   loading: boolean,
-  profile: ?Auth0Profile,
+  profile: ?Auth0Profile
 };
 
 type State = {
   messages: Array<string>,
-  text: string,
+  text: string
 };
 
 const Container = styled.View`
@@ -52,7 +52,6 @@ class Messages extends Component<*, Props, State> {
   constructor(props: Props) {
     super(props);
     this.socket = SocketIOClient('http://localhost:9000');
-    this.socket.on('message', this.onReceiveMessage);
     this.state = {
       messages: [],
       text: '',
@@ -63,6 +62,7 @@ class Messages extends Component<*, Props, State> {
   }
 
   componentDidMount() {
+    this.socket.on('message', this.onReceiveMessage);
     fetch('http://localhost:9000/messages')
       .then(res => res.json())
       .then(json => {
@@ -82,9 +82,11 @@ class Messages extends Component<*, Props, State> {
     this.socket.emit('new user', { userId: profile.userId });
   };
 
-  onReceiveMessage = (messages: Array<string>) => {
+  // onReceiveMessage = (messages: Array<string>) => {
+  onReceiveMessage = (message: string) => {
+    console.log('received message', message);
     this.setState(prevState => ({
-      messages: [...prevState.messages, messages],
+      messages: [...prevState.messages, message],
     }));
   };
 
@@ -93,12 +95,14 @@ class Messages extends Component<*, Props, State> {
       content: this.state.text,
       userId: this.props.profile.userId,
     });
-    this.setState(prevState => ({ text: '', messages: [...prevState.messages, this.state.text] }));
+    this.setState(prevState => ({
+      text: '',
+      // messages: [...prevState.messages, this.state.text]
+    }));
   };
 
   render() {
     const { messages, text } = this.state;
-    console.log('this.props', this.props);
     return (
       <Container>
         <MessageArea>

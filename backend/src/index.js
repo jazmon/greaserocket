@@ -1,4 +1,5 @@
 /* eslint-env node */
+// TODO: add winston
 require('dotenv').config();
 const Promise = require('bluebird');
 
@@ -131,19 +132,24 @@ app.get('/locations', async (req, res) => {
 });
 io.on('connection', (socket) => {
   const defaultRoom = 'general';
-  socket.on('new user', (data) => {
+  socket.on('new user', async(data) => {
     console.log('new user', data);
+    await knex('users').insert({
+      user_id: data.userId,
+    });
     socket.join(defaultRoom);
     io.in(defaultRoom).emit('user joined', data);
   });
   socket.on('new message', async (data) => {
     console.log('new mewssage', data);
     // TODO: joi validation
-    await knex.table('messages')
+    const messages = await knex.table('messages')
       .insert({
         content: data.content,
         user_id: data.userId,
-      });
+      }).returning(['content', 'user_id']);
+    console.log('message', messages);
+    socket.emit('message', messages[0].content);
   });
 });
 
