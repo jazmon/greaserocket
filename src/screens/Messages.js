@@ -1,11 +1,30 @@
 // @flow
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import SocketIOClient from 'socket.io-client';
 import { connect } from 'react-redux';
+import ChatMessage from 'components/ChatMessage.tsx';
 
 import type { ReduxState } from 'redux/modules';
+
+type User = {
+  created_at: string,
+  updated_at: string,
+  name: string,
+  email: string,
+  picture: string,
+  nickname: string,
+  user_id: string
+};
+
+type Message = {
+  id: string,
+  content: string,
+  created_at: string,
+  updated_at: string,
+  user: User
+};
 
 type Props = {
   loading: boolean,
@@ -13,7 +32,7 @@ type Props = {
 };
 
 type State = {
-  messages: Array<string>,
+  messages: Array<Message>,
   text: string
 };
 
@@ -29,13 +48,15 @@ const BaseText = styled.Text`
   font-size: 16;
 `;
 
-const ChatMessage = styled.Text`
-  text-align: left;
-  font-size: 12;
-`;
+// const ChatMessage = styled.Text`
+//   text-align: left;
+//   font-size: 12;
+// `;
 
 const InputContainer = styled.View`
   justify-content: flex-end;
+  display: flex;
+  margin-top: 8;
 `;
 
 const MessageArea = styled.View`
@@ -48,27 +69,24 @@ class Messages extends Component<*, Props, State> {
   static defaultProps = {
     profile: null,
   };
+  state = {
+    messages: [],
+    text: '',
+  };
 
-  constructor(props: Props) {
-    super(props);
+  componentDidMount() {
     this.socket = SocketIOClient('http://localhost:9000');
-    this.state = {
-      messages: [],
-      text: '',
-    };
+    this.socket.on('message_emitted', this.onReceiveMessage);
+    fetch('http://localhost:9000/messages')
+      .then(res => res.json())
+      .then((json: { data: Array<Message>, error: boolean }) => {
+        console.log('json', json);
+        this.setState({ messages: json.data });
+      })
+      .catch(err => alert(err.message) || console.error(err.message, err));
     if (this.props.profile) {
       this.onShouldConnect(this.props.profile);
     }
-  }
-
-  componentDidMount() {
-    this.socket.on('message', this.onReceiveMessage);
-    fetch('http://localhost:9000/messages')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ messages: json.data.map(j => j.content) });
-      })
-      .catch(err => alert(err.message) || console.error(err.message, err));
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -77,47 +95,64 @@ class Messages extends Component<*, Props, State> {
     }
   }
 
+  componentWillUnmount() {
+    if (this.props.profile) {
+      this.socket.emit('disconnect');
+    }
+  }
+
   onShouldConnect = (profile: Auth0Profile) => {
-    console.log('onShouldConnect');
-    this.socket.emit('new user', { userId: profile.userId });
+    this.socket.emit('connection', {
+      userId: profile.userId,
+      email: profile.email,
+      name: profile.name,
+      picture: profile.picture,
+      nickname: profile.nickname,
+    });
   };
 
   // onReceiveMessage = (messages: Array<string>) => {
-  onReceiveMessage = (message: string) => {
-    console.log('received message', message);
-    this.setState(prevState => ({
+  onReceiveMessage = (message: Message) => {
+    this.setState((prevState: State) => ({
       messages: [...prevState.messages, message],
     }));
   };
 
   sendMessage = () => {
-    this.socket.emit('new message', {
+    if (!this.props.profile) return;
+    this.socket.emit('new_message', {
       content: this.state.text,
       userId: this.props.profile.userId,
     });
-    this.setState(prevState => ({
+    this.setState({
       text: '',
-      // messages: [...prevState.messages, this.state.text]
-    }));
+    });
   };
 
   render() {
     const { messages, text } = this.state;
+    console.log('this.state.messages', this.state.messages);
     return (
       <Container>
         <MessageArea>
-          <Text>{this.props.profile && this.props.profile.userId}</Text>
-          {messages.map((message, i) => <ChatMessage key={i}>{message}</ChatMessage>)}
+          <FlatList
+            data={messages}
+            renderItem={({ item: message }: { item: Message }) => (
+              <ChatMessage key={message.id} {...message} />
+            )}
+            style={{ flex: 1 }}
+          />
         </MessageArea>
         <InputContainer>
           <TextInput
             style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={txt => this.setState({ text: txt })}
             value={text}
+            onSubmitEditing={this.sendMessage}
+            returnKeyType="send"
           />
           <Button onPress={this.sendMessage} title="Send" />
         </InputContainer>
-
       </Container>
     );
   }
