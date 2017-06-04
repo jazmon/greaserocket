@@ -49,31 +49,33 @@ const BaseText = styled.Text`
   font-size: 16;
 `;
 
-// const ChatMessage = styled.Text`
-//   text-align: left;
-//   font-size: 12;
-// `;
-
 const List = styled.FlatList`
-
-
 `;
 
 const InputContainer = styled.View`
   justify-content: flex-end;
   display: flex;
   margin-top: 8;
+  flex-direction: row;
+`;
+const MessageInput = styled.TextInput`
+  height: 40;
+  border: 1 solid gray;
+  flex-grow: 1;
 `;
 
 const MessageArea = styled.View`
   flex-grow: 1;
 `;
 
-const extractKey = ({ id }: Message) => id;
+const extractKey = ({ id }: Message): string => id;
 
 class Messages extends Component<*, Props, State> {
-  socket: Object;
-  list: Object;
+  socket: {
+    emit: (type: string, props?: any) => void,
+    on: (type: string, handler: Function) => void
+  };
+  list: ?{ scrollToEnd: () => void };
 
   static defaultProps = {
     profile: null,
@@ -98,7 +100,7 @@ class Messages extends Component<*, Props, State> {
       this.onShouldConnect(this.props.profile);
     }
     if (this.props.messages) {
-      this.list.scrollToEnd();
+      if (this.list) this.list.scrollToEnd();
     }
   }
 
@@ -108,7 +110,9 @@ class Messages extends Component<*, Props, State> {
     }
 
     if (nextProps.messages && !this.state.initialMessages) {
-      this.setState({ initialMessages: true }, () => this.list.scrollToEnd());
+      this.setState({ initialMessages: true }, () => {
+        if (this.list) this.list.scrollToEnd();
+      });
     }
   }
 
@@ -138,7 +142,9 @@ class Messages extends Component<*, Props, State> {
       (prevState: State) => ({
         messages: [...prevState.messages, message],
       }),
-      () => this.list.scrollToEnd()
+      () => {
+        if (this.list) this.list.scrollToEnd();
+      }
     );
   };
 
@@ -155,22 +161,23 @@ class Messages extends Component<*, Props, State> {
 
   render() {
     const { messages, text } = this.state;
+    const { profile } = this.props;
     console.log('this.state.messages', this.state.messages);
     return (
       <Container>
         <MessageArea>
-          <List
-            ref={this.bindList}
-            data={messages}
-            renderItem={({ item: message }: { item: Message }) => (
-              <ChatMessage key={message.id} message={message} />
-            )}
-            keyExtractor={extractKey}
-          />
+          {profile &&
+            <List
+              ref={this.bindList}
+              data={messages}
+              renderItem={({ item: message }: { item: Message }) => (
+                <ChatMessage key={message.id} message={message} userId={profile.userId} />
+              )}
+              keyExtractor={extractKey}
+            />}
         </MessageArea>
         <InputContainer>
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          <MessageInput
             onChangeText={txt => this.setState({ text: txt })}
             value={text}
             onSubmitEditing={this.sendMessage}

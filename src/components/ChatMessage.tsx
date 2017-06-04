@@ -1,7 +1,10 @@
-import * as React from 'react';
-import { View } from 'react-native';
+import React, { StatelessComponent } from 'react';
+import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 import Image from 'react-native-image-progress';
+import _ from 'lodash';
+import format from 'date-fns/format';
+import fiLocale from 'date-fns/locale/fi';
 
 const Container = styled.View`
   background-color: #e9e6e6;
@@ -10,12 +13,18 @@ const Container = styled.View`
   border-radius: 12;
   flex-direction: column;
   align-items: flex-start;
-  border: 1 solid green;
   justify-content: flex-start;
   flex-shrink: 1;
 `;
 
-const UserImage = styled(Image)`
+const Wrapper: any = styled.View`
+  flex-direction: row;
+  flex-grow: 1;
+  flex: 1;
+  justify-content: ${({ alignRight }) => (alignRight ? 'flex-end' : 'flex-start')}
+`;
+
+const UserImage: any = styled(Image)`
   width: 60;
   height: 60;
   margin-right: 8;
@@ -36,35 +45,65 @@ const TextContainer = styled.View`
   flex: 1;
   flex-grow: 1;
   flex-direction: column;
-  border: 1 solid red;
+`;
+
+const InfoContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const DateText = styled.Text`
+  font-size: 10;
+  margin-left: 8;
 `;
 
 interface Props {
   message: {
     content: string,
+    created_at: string,
     user: {
       name: string,
+      user_id: string,
       picture: string
     }
   },
-  picture: boolean
+  showPicture: boolean,
+  showDate: boolean,
+  userId: string
 }
 
-const ChatMessage = ({ message, picture }: Props) => (
-  <Container>
-    {picture &&
-      <View>
-        <UserImage source={{ uri: message.user.picture }} resizeMode="cover" />
-      </View>}
-    <TextContainer>
-      <UserName>{message.user.name}</UserName>
-      <Content>{message.content}</Content>
-    </TextContainer>
-  </Container>
+const formatDate = (date: string): string => {
+  const result = format(new Date(date), 'H:m', { locale: fiLocale });
+  return result;
+};
+
+const ChatMessage: StatelessComponent<Props> = ({
+  message,
+  showPicture,
+  showDate,
+  userId,
+}: Props) => (
+  <Wrapper alignRight={userId === message.user.user_id}>
+    <Container>
+      {showPicture &&
+        <View>
+          <UserImage source={{ uri: message.user.picture }} resizeMode="cover" />
+        </View>}
+      <TextContainer>
+        <InfoContainer>
+          <UserName>{message.user.name}</UserName>
+          {showDate && <DateText>{formatDate(message.created_at)}</DateText>}
+        </InfoContainer>
+
+        <Content>{message.content}</Content>
+      </TextContainer>
+    </Container>
+  </Wrapper>
 );
 
 ChatMessage.defaultProps = {
-  picture: false,
+  showPicture: false,
+  showDate: true,
 };
 
 export default ChatMessage;
