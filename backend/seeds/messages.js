@@ -6,13 +6,13 @@ exports.seed = function (knex, Promise) {
       .insert([
         {
           name: 'Kikki Hiiri',
-          picture: 'http://res.hattrick.org/teamlogo/13/122/1220/1219063/1219063.jpg',
+          picture: 'https://i.ytimg.com/vi/nWMMXPlpeRM/hqdefault.jpg',
           nickname: 'Kikki',
           user_id: 'kikki',
         },
         {
           name: 'Gooby',
-          picture: 'http://res.hattrick.org/teamlogo/13/122/1220/1219063/1219063.jpg',
+          picture: 'https://i.imgur.com/e91m7sk.jpg',
           nickname: 'Gooby',
           user_id: 'gooby',
         },
