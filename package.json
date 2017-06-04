@@ -8,7 +8,7 @@
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"lint": "eslint -c .eslintrc.js src",
 		"lint:fix": "npm run lint -- --fix",
-    "tslint": "tslint -c tslint.json src/**/*.tsx src/**/*.ts",
+		"tslint": "tslint -c tslint.json src/**/*.tsx src/**/*.ts",
 		"flow": "flow",
 		"test": "NODE_ENV=test jest --forceExit",
 		"test:precommit": "./pre-commit.sh",
@@ -52,6 +52,7 @@
 		"typescript": "^2.3.2"
 	},
 	"devDependencies": {
+		"@types/node": "^7.0.27",
 		"babel-eslint": "^7.2.3",
 		"babel-jest": "^19.0.0",
 		"babel-plugin-idx": "^1.5.1",

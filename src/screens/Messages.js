@@ -34,7 +34,7 @@ type Props = {
 type State = {
   messages: Array<Message>,
   text: string,
-  initialMessages: boolean,
+  initialMessages: boolean
 };
 
 const Container = styled.View`
@@ -54,6 +54,11 @@ const BaseText = styled.Text`
 //   font-size: 12;
 // `;
 
+const List = styled.FlatList`
+
+
+`;
+
 const InputContainer = styled.View`
   justify-content: flex-end;
   display: flex;
@@ -63,6 +68,8 @@ const InputContainer = styled.View`
 const MessageArea = styled.View`
   flex-grow: 1;
 `;
+
+const extractKey = ({ id }: Message) => id;
 
 class Messages extends Component<*, Props, State> {
   socket: Object;
@@ -111,7 +118,7 @@ class Messages extends Component<*, Props, State> {
     }
   }
 
-  bindList = list => {
+  bindList = (list: Object) => {
     this.list = list;
   };
 
@@ -127,9 +134,12 @@ class Messages extends Component<*, Props, State> {
 
   // onReceiveMessage = (messages: Array<string>) => {
   onReceiveMessage = (message: Message) => {
-    this.setState((prevState: State) => ({
-      messages: [...prevState.messages, message],
-    }), () => this.list.scrollToEnd());
+    this.setState(
+      (prevState: State) => ({
+        messages: [...prevState.messages, message],
+      }),
+      () => this.list.scrollToEnd()
+    );
   };
 
   sendMessage = () => {
@@ -149,13 +159,13 @@ class Messages extends Component<*, Props, State> {
     return (
       <Container>
         <MessageArea>
-          <FlatList
+          <List
             ref={this.bindList}
             data={messages}
             renderItem={({ item: message }: { item: Message }) => (
-              <ChatMessage key={message.id} {...message} />
+              <ChatMessage key={message.id} message={message} />
             )}
-            style={{ flex: 1 }}
+            keyExtractor={extractKey}
           />
         </MessageArea>
         <InputContainer>

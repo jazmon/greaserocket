@@ -6,10 +6,13 @@ import Image from 'react-native-image-progress';
 const Container = styled.View`
   background-color: #e9e6e6;
   margin: 4 0;
-  padding: 4;
-  border-radius: 2;
-  flex-direction: row;
-  align-items: center;
+  padding: 8;
+  border-radius: 12;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1 solid green;
+  justify-content: flex-start;
+  flex-shrink: 1;
 `;
 
 const UserImage = styled(Image)`
@@ -29,24 +32,39 @@ const Content = styled.Text`
   font-size: 14;
 `;
 
+const TextContainer = styled.View`
+  flex: 1;
+  flex-grow: 1;
+  flex-direction: column;
+  border: 1 solid red;
+`;
+
 interface Props {
-  content: string,
-  user: {
-    name: string,
-    picture: string
-  }
+  message: {
+    content: string,
+    user: {
+      name: string,
+      picture: string
+    }
+  },
+  picture: boolean
 }
 
-const ChatMessage = ({ content, user }: Props) => (
+const ChatMessage = ({ message, picture }: Props) => (
   <Container>
-    <View>
-      <UserImage source={{ uri: user.picture }} resizeMode="cover" />
-    </View>
-    <View>
-      <UserName>{user.name}</UserName>
-      <Content>{content}</Content>
-    </View>
+    {picture &&
+      <View>
+        <UserImage source={{ uri: message.user.picture }} resizeMode="cover" />
+      </View>}
+    <TextContainer>
+      <UserName>{message.user.name}</UserName>
+      <Content>{message.content}</Content>
+    </TextContainer>
   </Container>
 );
+
+ChatMessage.defaultProps = {
+  picture: false,
+};
 
 export default ChatMessage;
