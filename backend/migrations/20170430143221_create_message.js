@@ -3,7 +3,11 @@ exports.up = function (knex, Promise) {
     t.bigIncrements().primary();
     t.timestamps(true, true);
     t.text('content');
-    t.string('user_id').references('users.user_id').onUpdate('CASCADE').onDelete('SET NULL');
+    t
+      .string('user_id')
+      .references('users.user_id')
+      .onUpdate('CASCADE')
+      .onDelete('SET NULL');
   });
 };
 

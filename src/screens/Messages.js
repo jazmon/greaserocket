@@ -33,7 +33,8 @@ type Props = {
 
 type State = {
   messages: Array<Message>,
-  text: string
+  text: string,
+  initialMessages: boolean,
 };
 
 const Container = styled.View`
@@ -65,6 +66,7 @@ const MessageArea = styled.View`
 
 class Messages extends Component<*, Props, State> {
   socket: Object;
+  list: Object;
 
   static defaultProps = {
     profile: null,
@@ -72,6 +74,7 @@ class Messages extends Component<*, Props, State> {
   state = {
     messages: [],
     text: '',
+    initialMessages: false,
   };
 
   componentDidMount() {
@@ -87,11 +90,18 @@ class Messages extends Component<*, Props, State> {
     if (this.props.profile) {
       this.onShouldConnect(this.props.profile);
     }
+    if (this.props.messages) {
+      this.list.scrollToEnd();
+    }
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (!this.props.profile && nextProps.profile) {
       this.onShouldConnect(nextProps.profile);
+    }
+
+    if (nextProps.messages && !this.state.initialMessages) {
+      this.setState({ initialMessages: true }, () => this.list.scrollToEnd());
     }
   }
 
@@ -100,6 +110,10 @@ class Messages extends Component<*, Props, State> {
       this.socket.emit('disconnect');
     }
   }
+
+  bindList = list => {
+    this.list = list;
+  };
 
   onShouldConnect = (profile: Auth0Profile) => {
     this.socket.emit('connection', {
@@ -115,11 +129,11 @@ class Messages extends Component<*, Props, State> {
   onReceiveMessage = (message: Message) => {
     this.setState((prevState: State) => ({
       messages: [...prevState.messages, message],
-    }));
+    }), () => this.list.scrollToEnd());
   };
 
   sendMessage = () => {
-    if (!this.props.profile) return;
+    if (!this.props.profile || this.state.text === '') return;
     this.socket.emit('new_message', {
       content: this.state.text,
       userId: this.props.profile.userId,
@@ -136,6 +150,7 @@ class Messages extends Component<*, Props, State> {
       <Container>
         <MessageArea>
           <FlatList
+            ref={this.bindList}
             data={messages}
             renderItem={({ item: message }: { item: Message }) => (
               <ChatMessage key={message.id} {...message} />

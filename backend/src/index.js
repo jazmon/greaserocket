@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 9000;
 logger.level = process.env.LOG_LEVEL || 'silly';
 logger.add(logger.transports.File, { filename: 'server.log' });
 
-const printJson = (json) => JSON.stringify(json, null, 2);
+const printJson = json => JSON.stringify(json, null, 2);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -60,15 +60,12 @@ app
         })
       )
       .catch(err =>
-        res
-          .status(500)
-          .set('Content-Type', 'application/json')
-          .json({
-            error: true,
-            data: {
-              message: err.message,
-            },
-          })
+        res.status(500).set('Content-Type', 'application/json').json({
+          error: true,
+          data: {
+            message: err.message,
+          },
+        })
       );
   });
 app
@@ -93,7 +90,9 @@ app
   })
   .post(async (req, res) => {
     try {
-      const id = await knex('messages').returning('id').insert(Object.assign({}, req.body));
+      const id = await knex('messages')
+        .returning('id')
+        .insert(Object.assign({}, req.body));
       return res
         .status(200)
         .set('Content-Type', 'application/json')
@@ -145,7 +144,9 @@ app.get('/locations', async (req, res) => {
 io.on('connection', socket => {
   const defaultRoom = 'general';
   socket.on('connection', async data => {
-    const maybeUsers = await knex('users').select('user_id').where('user_id', data.userId);
+    const maybeUsers = await knex('users')
+      .select('user_id')
+      .where('user_id', data.userId);
     logger.debug('maybeUsers', maybeUsers);
     if (maybeUsers.length === 0) {
       logger.silly('inserting new user', data.userId);
@@ -178,7 +179,10 @@ io.on('connection', socket => {
     logger.debug('message', message);
     // get the user
 
-    const user = await knex.table('users').where('user_id', message.user_id).select('*');
+    const user = await knex
+      .table('users')
+      .where('user_id', message.user_id)
+      .select('*');
     const msgWithUser = Object.assign({}, message, { user: user[0] });
     logger.debug('msgWithUser', printJson(msgWithUser));
     socket.emit('message_emitted', msgWithUser);

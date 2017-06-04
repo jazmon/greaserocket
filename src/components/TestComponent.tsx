@@ -6,5 +6,5 @@ export function TestComponent() {
     <View>
       <Text>Test</Text>
     </View>
-  )
+  );
 }

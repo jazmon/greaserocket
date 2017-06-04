@@ -16,7 +16,7 @@ const UserImage = styled(Image)`
   width: 60;
   height: 60;
   margin-right: 8;
-`
+`;
 const UserName = styled.Text`
   text-align: left;
   font-size: 10;
@@ -33,21 +33,18 @@ interface Props {
   content: string,
   user: {
     name: string,
-    picture: string,
-  },
+    picture: string
+  }
 }
 
 const ChatMessage = ({ content, user }: Props) => (
   <Container>
     <View>
-      <UserImage
-        source={{ uri: user.picture }}
-        resizeMode="cover"
-      />
+      <UserImage source={{ uri: user.picture }} resizeMode="cover" />
     </View>
     <View>
-    <UserName>{user.name}</UserName>
-    <Content>{content}</Content>
+      <UserName>{user.name}</UserName>
+      <Content>{content}</Content>
     </View>
   </Container>
 );

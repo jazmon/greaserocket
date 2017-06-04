@@ -8,6 +8,7 @@
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"lint": "eslint -c .eslintrc.js src",
 		"lint:fix": "npm run lint -- --fix",
+    "tslint": "tslint -c tslint.json src/**/*.tsx src/**/*.ts",
 		"flow": "flow",
 		"test": "NODE_ENV=test jest --forceExit",
 		"test:precommit": "./pre-commit.sh",
@@ -73,7 +74,9 @@
 		"prettier": "^1.2.2",
 		"react-test-renderer": "^15.5.4",
 		"redux-logger": "^3.0.1",
-		"remote-redux-devtools": "^0.5.7"
+		"remote-redux-devtools": "^0.5.7",
+		"tslint": "^5.4.2",
+		"tslint-config-airbnb": "^5.0.1"
 	},
 	"jest": {
 		"preset": "react-native",
