@@ -6,7 +6,7 @@ const Promise = require('bluebird');
 global.Promise = Promise;
 const express = require('express');
 const knex = require('./db');
-const logger = require('winston');
+const logger = require('./logger');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -15,14 +15,13 @@ const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
 const helmet = require('helmet');
 const schema = require('./api/schema');
 const { Messages, Users } = require('./api/sql/models');
+const createRouter = require('./router');
 
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const PORT = process.env.PORT || 9000;
-logger.level = process.env.LOG_LEVEL || 'silly';
-logger.add(logger.transports.File, { filename: 'server.log' });
 
 const printJson = json => JSON.stringify(json, null, 2);
 
@@ -31,6 +30,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(cors());
+
+app.use('/v1', createRouter());
 
 app.use(
   '/graphiql',
@@ -178,22 +179,22 @@ app.get('/posts', async (req, res) => {
       .json({ error: false, data: { message: e.message } });
   }
 });
-app.get('/locations', async (req, res) => {
-  try {
-    const locations = await knex.table('locations').select();
-    logger.debug('locations', locations);
-    return res
-      .status(200)
-      .set('Content-Type', 'application/json')
-      .json({ error: false, data: locations });
-  } catch (e) {
-    logger.error(e);
-    return res
-      .status(500)
-      .set('Content-Type', 'application/json')
-      .json({ error: false, data: { message: e.message } });
-  }
-});
+// app.get('/locations', async (req, res) => {
+//   try {
+//     const locations = await knex.table('locations').select();
+//     logger.debug('locations', locations);
+//     return res
+//       .status(200)
+//       .set('Content-Type', 'application/json')
+//       .json({ error: false, data: locations });
+//   } catch (e) {
+//     logger.error(e);
+//     return res
+//       .status(500)
+//       .set('Content-Type', 'application/json')
+//       .json({ error: false, data: { message: e.message } });
+//   }
+// });
 
 io.on('connection', socket => {
   const defaultRoom = 'general';
