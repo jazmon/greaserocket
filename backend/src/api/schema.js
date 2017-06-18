@@ -5,10 +5,10 @@ const { schema: sqlSchema, resolvers: sqlResolvers } = require('./sql/schema');
 const rootSchema = [
   `
 type Query {
-  #posts: [Post]
+  posts: [Post]
   messages: [Message]
-  #locations: [Location]
-  #users: [User]
+  locations: [Location]
+  users: [User]
   # Return the currently logged in user, or null if nobody is logged in
   currentUser: User
 }
@@ -25,6 +25,15 @@ const rootResolvers = {
     },
     currentUser(root, args, context) {
       return context.user || null;
+    },
+    posts(root, args, context) {
+      return context.Posts.getAll();
+    },
+    locations(root, args, context) {
+      return context.Locations.getAll();
+    },
+    users(root, args, context) {
+      return context.Users.getAll();
     },
   },
 };

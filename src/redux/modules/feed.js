@@ -30,7 +30,7 @@ export function fetchStories() {
     type: CALL_API,
     payload: {
       endpoint: 'posts',
-      authenticated: false,
+      authenticated: true,
       types: ['FETCH_FEED_START', 'FETCH_FEED_SUCCESS', 'FETCH_FEED_FAILURE'],
     },
   };
@@ -40,7 +40,7 @@ export const refetchStories = () => ({
   type: CALL_API,
   payload: {
     endpoint: 'posts',
-    authenticated: false,
+    authenticated: true,
     types: [REFETCH_FEED_START, REFETCH_FEED_SUCCESS, REFETCH_FEED_FAILURE],
   },
 });

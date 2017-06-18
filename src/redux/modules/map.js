@@ -30,7 +30,7 @@ export function fetchLocations() {
     type: CALL_API,
     payload: {
       endpoint: 'locations',
-      authenticated: false,
+      authenticated: true,
       types: [
         FETCH_LOCATIONS_START,
         FETCH_LOCATIONS_SUCCESS,

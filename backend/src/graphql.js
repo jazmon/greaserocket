@@ -1,6 +1,6 @@
 const { execute, subscribe } = require('graphql');
 const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
-const { Messages, Users } = require('./api/sql/models');
+const { Messages, Users, Locations, Posts } = require('./api/sql/models');
 const schema = require('./api/schema');
 
 const graphql = graphqlExpress(req => {
@@ -15,14 +15,7 @@ const graphql = graphqlExpress(req => {
 
   let user;
   if (req.user) {
-    // We get req.user from passport-github with some pretty oddly named fields,
-    // let's convert that to the fields in our schema, which match the GitHub
-    // API field names.
-    user = {
-      login: req.user.username,
-      html_url: req.user.profileUrl,
-      avatar_url: req.user.photos[0].value,
-    };
+    user = Object.assign({}, req.user);
   }
 
   return {
@@ -31,6 +24,8 @@ const graphql = graphqlExpress(req => {
       user,
       Messages: new Messages(),
       Users: new Users(),
+      Locations: new Locations(),
+      Posts: new Posts(),
     },
   };
 });

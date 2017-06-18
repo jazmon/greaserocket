@@ -13,6 +13,7 @@ const helmet = require('helmet');
 const jwt = require('express-jwt');
 const createRouter = require('./router');
 const authenticator = require('./middleware/authenticator');
+const errorHandler = require('./middleware/errorHandler');
 const { graphql, graphiql } = require('./graphql');
 
 const app = express();
@@ -27,17 +28,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(cors());
-// app.use(jwt({ secret: Buffer.from(process.env.AUTH0_SECRET).toString('base64') }));
-// app.use(authenticator);
+app.use('/graphiql', graphiql);
+app.use('/graphql', graphql);
+
+app.use(jwt({ secret: process.env.AUTH0_SECRET }));
+app.use(authenticator);
 
 app.use('/v1', createRouter());
 
-app.use('/graphiql', graphiql);
-app.use('/graphql', graphql);
 
 app.get('/health', async (req, res) => {
   res.status(200).send('Ok');
 });
+
+app.use(errorHandler);
 
 server.listen(PORT, () => {
   logger.info(`Greased launchpad listening on port ${PORT}!`);
