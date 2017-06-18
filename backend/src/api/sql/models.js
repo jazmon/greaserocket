@@ -29,6 +29,16 @@ class Messages {
 exports.Messages = Messages;
 
 class Posts {
+  async getAll() {
+    return knex('posts');
+  }
+  async getAllWithUsers() {
+    const posts = await knex
+      .table('posts')
+      .innerJoin('users', 'posts.user_id', 'users.user_id')
+      .select(knex.raw('posts.*, row_to_json(users.*) as author'));
+    return posts;
+  }
   getPostById(id) {
     const query = knex('posts').where({ id });
     return query.then(([row]) => row);
@@ -50,9 +60,17 @@ class Locations {
 exports.Locations = Locations;
 
 class Users {
+  async getAll() {
+    return knex('users');
+  }
   getUserById(id) {
     const query = knex('users').where({ user_id: id });
     return query.then(([row]) => row);
+  }
+  async createUser({ userId, name, email, picture, nickname }) {
+    return knex('users')
+      .insert({ user_id: userId, name, email, picture, nickname })
+      .returning('user_id');
   }
 }
 

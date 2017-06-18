@@ -15,7 +15,7 @@ type User = {
   email: string,
   picture: string,
   nickname: string,
-  user_id: string
+  user_id: string,
 };
 
 type Message = {
@@ -23,18 +23,18 @@ type Message = {
   content: string,
   created_at: string,
   updated_at: string,
-  user: User
+  user: User,
 };
 
 type Props = {
   loading: boolean,
-  profile: ?Auth0Profile
+  profile: ?Auth0Profile,
 };
 
 type State = {
   messages: Array<Message>,
   text: string,
-  initialMessages: boolean
+  initialMessages: boolean,
 };
 
 const Container = styled.View`
@@ -73,7 +73,7 @@ const extractKey = ({ id }: Message): string => id;
 class Messages extends Component<*, Props, State> {
   socket: {
     emit: (type: string, props?: any) => void,
-    on: (type: string, handler: Function) => void
+    on: (type: string, handler: Function) => void,
   };
   list: ?{ scrollToEnd: () => void };
 
@@ -89,7 +89,7 @@ class Messages extends Component<*, Props, State> {
   componentDidMount() {
     this.socket = SocketIOClient('http://localhost:9000');
     this.socket.on('message_emitted', this.onReceiveMessage);
-    fetch('http://localhost:9000/messages')
+    fetch('http://localhost:9000/v1/messages')
       .then(res => res.json())
       .then((json: { data: Array<Message>, error: boolean }) => {
         console.log('json', json);
@@ -171,7 +171,11 @@ class Messages extends Component<*, Props, State> {
               ref={this.bindList}
               data={messages}
               renderItem={({ item: message }: { item: Message }) => (
-                <ChatMessage key={message.id} message={message} userId={profile.userId} />
+                <ChatMessage
+                  key={message.id}
+                  message={message}
+                  userId={profile.userId}
+                />
               )}
               keyExtractor={extractKey}
             />}

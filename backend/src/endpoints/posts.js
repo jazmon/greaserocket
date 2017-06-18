@@ -3,7 +3,7 @@ const { createJsonRoute } = require('../utils/endpoint');
 
 const posts = new Posts();
 const getPosts = createJsonRoute(async () => {
-  const ps = await posts.getAll();
+  const ps = await posts.getAllWithUsers();
   return ps;
 });
 
