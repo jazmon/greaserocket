@@ -86,8 +86,12 @@ class Feed extends React.Component<*, Props, void> {
     if (nextProps.stories) {
       this.dataSource = ds.cloneWithRows(nextProps.stories);
     }
+    if (nextProps.token && !this.props.token) {
+      this.props.fetchStories();
+    }
     if (nextProps.error) {
-      alert(nextProps.error.message || 'Error!');
+      console.log(nextProps.error.message || 'error fetching data for feed', nextProps.error.stack);
+      // alert(nextProps.error.message || 'Error!');
     }
   }
 
@@ -141,8 +145,9 @@ class Feed extends React.Component<*, Props, void> {
   }
 }
 
-const mapState = ({ feed }: ReduxState) => ({
+const mapState = ({ feed, user }: ReduxState) => ({
   ...feed,
+  token: user.token
 });
 
 const mapActions = (dispatch: Dispatch) => ({

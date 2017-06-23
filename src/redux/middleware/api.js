@@ -109,6 +109,8 @@ export const middleware: Middleware<ReduxState, Object> = (
   }
 
   const token: ?Auth0Token = store.getState().user.token;
+  console.log('store.getState()', store.getState());
+  console.log('FOOBAR token', token);
   // cast the type now that it's known
   // $FlowIssue
   const { endpoint, types, authenticated = true } = (action: ApiAction).payload;

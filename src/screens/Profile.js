@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 
 import type { ReduxState } from 'redux/modules';
-import { TestComponent } from 'components/TestComponent';
+import { TestComponent } from 'components/TestComponent.tsx';
 
 // import type {
 //   NavigationScreenProp,
@@ -67,6 +67,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    console.log('token', this.props.token);
     const { profile, loading } = this.props;
     return (
       <Container>
