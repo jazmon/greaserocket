@@ -2,8 +2,6 @@
 import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
 import codePush from 'react-native-code-push';
-import Raven from 'raven-js';
-import ravenRN from 'raven-js/plugins/react-native';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { ThemeProvider } from 'styled-components';
@@ -20,8 +18,6 @@ import Messages from 'screens/Messages';
 import EventDetail from 'screens/EventDetail';
 import theme from 'constants/theme';
 
-const TEST: boolean = process.env.NODE_ENV !== 'test';
-if (!TEST) ravenRN(Raven);
 const App = TabNavigator(
   {
     Feed: {
