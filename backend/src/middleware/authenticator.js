@@ -1,6 +1,5 @@
 const AuthenticationClient = require('auth0').AuthenticationClient;
 const jwt = require('jwt-decode');
-const Joi = require('joi');
 
 const auth0 = new AuthenticationClient({
   domain: process.env.AUTH0_DOMAIN,
@@ -8,10 +7,10 @@ const auth0 = new AuthenticationClient({
 });
 
 module.exports = async (req, res, next) => {
-  // Extract token from headers, and strip away the 'Bearer'
-  const token = req.get('authorization').substr(7);
   try {
-    // verify tokenn
+    // Extract token from headers, and strip away the 'Bearer'
+    const token = req.get('authorization').substr(7);
+    // verify token
     jwt(token);
 
     const user = await auth0.tokens.getInfo(token);
@@ -25,6 +24,6 @@ module.exports = async (req, res, next) => {
     };
     return next();
   } catch (e) {
-    throw e;
+    return next(e);
   }
 };
