@@ -9,7 +9,11 @@ const auth0 = new AuthenticationClient({
 module.exports = async (req, res, next) => {
   try {
     // Extract token from headers, and strip away the 'Bearer'
-    const token = req.get('authorization').substr(7);
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return next();
+    }
+    const token = authHeader.split('Bearer ')[0];
     // verify token
     jwt(token);
 

@@ -31,7 +31,7 @@ app.use(cors());
 app.use('/graphiql', graphiql);
 app.use('/graphql', graphql);
 
-app.use(jwt({ secret: process.env.AUTH0_SECRET }));
+app.use(jwt({ secret: process.env.AUTH0_SECRET, credentialsRequired: false }));
 app.use(authenticator);
 
 app.use('/v1', createRouter());

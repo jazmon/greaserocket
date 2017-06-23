@@ -14,10 +14,10 @@ const submitMessage = createJsonRoute(async req => {
   // validate
   const user = req.user;
   const schema = {
-    userId: Joi.string().required(),
+    userId: Joi.string().allow(null),
     content: Joi.string().required(),
   };
-  const data = Object.assign({}, { userId: user.userId }, req.body);
+  const data = Object.assign({}, { userId: user ? user.userId : null }, req.body);
 
   validateRequest(data, schema);
   return messages.submitMessage(data);
