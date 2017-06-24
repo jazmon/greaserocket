@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "a backend for the greaserocket",
   "scripts": {
-    "start": "node ./src/index.js",
-    "dev": "nodemon",
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ts-node -- ./src/index.ts",
+    "build": "",
     "seed": "knex seed:run",
     "migrate": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback"
@@ -35,7 +36,29 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "@types/auth0": "^3.0.0",
+    "@types/body-parser": "^1.16.4",
+    "@types/cors": "^2.8.1",
+    "@types/dotenv": "^4.0.0",
+    "@types/express": "^4.0.36",
+    "@types/express-jwt": "^0.0.35",
+    "@types/helmet": "^0.0.35",
+    "@types/joi": "^10.4.0",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/knex": "^0.0.54",
+    "@types/morgan": "^1.7.32",
+    "@types/node": "^8.0.2",
+    "@types/winston": "^2.3.3",
     "apollo-codegen": "^0.10.13",
-    "nodemon": "^1.11.0"
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-config-prettier": "^2.2.0",
+    "eslint-plugin-import": "^2.6.0",
+    "nodemon": "^1.11.0",
+    "prettier": "^1.4.4",
+    "ts-node": "^3.1.0",
+    "tslint": "^5.4.3",
+    "tslint-config-airbnb": "^5.2.0",
+    "typescript": "^2.3.4"
   }
 }

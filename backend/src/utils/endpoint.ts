@@ -1,6 +1,8 @@
-const logger = require('../logger');
+import logger from '../logger';
+import * as express from 'express';
+import { Response } from 'express-serve-static-core';
 
-const createJsonRoute = handler => async (req, res) => {
+export const createJsonRoute = (handler: Function) => async (req: express.Request, res: express.Response) => {
   try {
     const result = await handler(req, res);
     return res.json({
@@ -16,4 +18,3 @@ const createJsonRoute = handler => async (req, res) => {
   }
 };
 
-exports.createJsonRoute = createJsonRoute;

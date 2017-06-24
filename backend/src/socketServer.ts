@@ -1,10 +1,11 @@
-const socketio = require('socket.io');
-const logger = require('./logger');
-const knex = require('./db');
+import * as socketio from 'socket.io';
+import logger from './logger';
+import knex from './db';
+import * as http from 'http';
 
-const printJson = json => JSON.stringify(json, null, 2);
+const printJson = (json: string) => JSON.stringify(json, null, 2);
 
-const createSocketServer = server => {
+const createSocketServer = (server: http.Server) => {
   const io = socketio(server);
   io.on('connection', socket => {
     const defaultRoom = 'general';
@@ -54,4 +55,5 @@ const createSocketServer = server => {
     });
   });
 };
-module.exports = createSocketServer;
+
+export default createSocketServer;

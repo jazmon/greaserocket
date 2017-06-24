@@ -1,7 +1,8 @@
-const Joi = require('joi');
-const { Users } = require('../api/sql/models');
-const { createJsonRoute } = require('../utils/endpoint');
-const { validateRequest } = require('../utils/validator');
+import * as Joi from 'joi';
+import * as express from 'express';
+import { Users } from '../api/sql/models';
+import { createJsonRoute } from '../utils/endpoint';
+import { validateRequest } from '../utils/validator';
 
 const users = new Users();
 const getUsers = createJsonRoute(async () => {
@@ -9,7 +10,7 @@ const getUsers = createJsonRoute(async () => {
   return usrs;
 });
 
-const createUser = createJsonRoute(async req => {
+const createUser = createJsonRoute(async (req: express.Request) => {
   const user = req.user;
   const schema = {
     userId: Joi.string().required(),

@@ -1,21 +1,30 @@
-const knex = require('../../db');
+import { default as knex, User, Location, Post, Message } from '../../db';
 
-class Messages {
-  async getAll() {
+
+export interface PostWithUser extends Post {
+  user: User | null,
+}
+
+export interface MessageWithUser extends Message {
+  user: User | null,
+}
+
+export class Messages {
+  async getAll(): Promise<Array<Message>> {
     return knex('messages');
   }
-  async getAllWithUsers() {
+  async getAllWithUsers(): Promise<Array<MessageWithUser>> {
     const messages = await knex('messages')
       .select(knex.raw('messages.*, row_to_json(users.*) as user'))
       .innerJoin('users', 'messages.user_id', 'users.user_id');
     return messages;
   }
-  getMessageById(id) {
+  async getMessageById(id: string): Promise<Message> {
     const query = knex('messages').where({ id });
     return query.then(([row]) => row);
   }
 
-  async submitMessage({ content, userId }) {
+  async submitMessage({ content, userId }: { content: string, userId: string }): Promise<string> {
     const id = await knex.transaction(trx =>
       trx('messages').insert({
         content,
@@ -26,52 +35,45 @@ class Messages {
   }
 }
 
-exports.Messages = Messages;
 
-class Posts {
-  async getAll() {
+export class Posts {
+  async getAll(): Promise<Post[]> {
     return knex('posts');
   }
-  async getAllWithUsers() {
+  async getAllWithUsers(): Promise<PostWithUser[]> {
     const posts = await knex
       .table('posts')
       .innerJoin('users', 'posts.user_id', 'users.user_id')
       .select(knex.raw('posts.*, row_to_json(users.*) as author'));
     return posts;
   }
-  getPostById(id) {
+  async getPostById(id: string): Promise<Post> {
     const query = knex('posts').where({ id });
     return query.then(([row]) => row);
   }
 }
 
-exports.Posts = Posts;
-
-class Locations {
-  async getAll() {
+export class Locations {
+  async getAll(): Promise<Array<Location>> {
     return knex('locations');
   }
-  getLocationById(id) {
+  async getLocationById(id: string): Promise<Location> {
     const query = knex('locations').where({ id });
     return query.then(([row]) => row);
   }
 }
 
-exports.Locations = Locations;
-
-class Users {
-  async getAll() {
+export class Users {
+  async getAll(): Promise<Array<User>> {
     return knex('users');
   }
-  getUserById(id) {
+  async getUserById(id: string): Promise<User> {
     const query = knex('users').where({ user_id: id });
     return query.then(([row]) => row);
   }
-  async createUser({ userId, name, email, picture, nickname }) {
+  async createUser({ userId, name, email, picture, nickname }: { userId: string, name: string, email: string, picture: string, nickname: string }): Promise<string> {
     return knex('users')
       .insert({ user_id: userId, name, email, picture, nickname })
       .returning('user_id');
   }
 }
-
-exports.Users = Users;
