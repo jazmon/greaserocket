@@ -1,6 +1,8 @@
-const { property, constant } = require('lodash');
+import { property, constant } from 'lodash';
+import { User as dbUser } from '../../db';
+import { Context } from '../../middleware/graphql';
 
-exports.schema = [
+export const schema = [
   `
   type Post {
     # The SQL ID of this entry
@@ -41,18 +43,21 @@ exports.schema = [
   }
 `,
 ];
-exports.resolvers = {
+interface Foo {
+  user_id: string,
+}
+export const resolvers = {
   Message: {
     createdAt: property('created_at'),
     updatedAt: property('updated_at'),
-    user({ user_id }, _, context) {
+    user({ user_id }: Foo, _: any, context: Context) {
       return context.Users.getUserById(user_id);
     },
   },
   Post: {
     createdAt: property('created_at'),
     updatedAt: property('updated_at'),
-    user({ user_id }, _, context) {
+    user({ user_id }: Foo, _: any, context: Context) {
       return context.Users.getUserById(user_id);
     },
   },

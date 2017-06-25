@@ -1,17 +1,22 @@
-const AuthenticationClient = require('auth0').AuthenticationClient;
-const jwt = require('jwt-decode');
+import { AuthenticationClient } from 'auth0';
+import { Request, Response } from 'express';
+import * as jwt from 'jwt-decode';
 
-const auth0 = new AuthenticationClient({
+// HACK: set to any since auth0 type doesn't have tokens property correctly
+const auth0: any = new AuthenticationClient({
   domain: process.env.AUTH0_DOMAIN,
   clientId: process.env.AUTH0_CLIENT_ID,
 });
 
-module.exports = async (req, res, next) => {
+export default async (req: Request, res: Response, next: Function) => {
   try {
     // Extract token from headers, and strip away the 'Bearer'
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       return next();
+    }
+    if (authHeader instanceof Array) {
+      return next(new Error());
     }
     const token = authHeader.split('Bearer ')[0];
     // verify token
