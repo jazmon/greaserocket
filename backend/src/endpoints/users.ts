@@ -10,15 +10,16 @@ const getUsers = createJsonRoute(async () => {
   return usrs;
 });
 
+export const schema = {
+  userId: Joi.string().required(),
+  name: Joi.string(),
+  nickname: Joi.string(),
+  picture: Joi.string(),
+  email: Joi.string(),
+};
+
 const createUser = createJsonRoute(async (req: express.Request) => {
   const user = req.user;
-  const schema = {
-    userId: Joi.string().required(),
-    name: Joi.string(),
-    nickname: Joi.string(),
-    picture: Joi.string(),
-    email: Joi.string(),
-  };
 
   validateRequest(user, schema);
   return users.createUser(user);

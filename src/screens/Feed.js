@@ -46,11 +46,10 @@ const LoadingContainer = styled.View`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.transparent};
+  background-color: ${({ theme }: { theme: ThemeType }) =>
+    theme.colors.transparent};
 `;
-const Separator = styled.View`
-  height: 8;
-`;
+const Separator = styled.View`height: 8;`;
 const Container = styled.View`
   flex: 1;
   margin-top: ${Platform.OS === 'ios' ? 24 : 0};
@@ -61,9 +60,8 @@ const Container = styled.View`
 class Feed extends React.Component<*, Props, void> {
   static navigationOptions = {
     tabBarLabel: 'Feed',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-paper" size={30} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="ios-paper" size={30} color={tintColor} />,
   };
 
   static defaultProps = {
@@ -90,7 +88,10 @@ class Feed extends React.Component<*, Props, void> {
       this.props.fetchStories();
     }
     if (nextProps.error) {
-      console.log(nextProps.error.message || 'error fetching data for feed', nextProps.error.stack);
+      console.log(
+        nextProps.error.message || 'error fetching data for feed',
+        nextProps.error.stack
+      );
       // alert(nextProps.error.message || 'Error!');
     }
   }
@@ -101,15 +102,13 @@ class Feed extends React.Component<*, Props, void> {
 
   renderRow = (story: StoryType) => <Story story={story} key={story.id} />;
 
-  renderSeparator = (sID: string, rID: string) => (
-    <Separator key={`${sID}-${rID}`} />
-  );
+  renderSeparator = (sID: string, rID: string) =>
+    <Separator key={`${sID}-${rID}`} />;
 
-  renderLoading = () => (
+  renderLoading = () =>
     <LoadingContainer>
       <ActivityIndicator animating size="large" />
-    </LoadingContainer>
-  );
+    </LoadingContainer>;
 
   render() {
     const { loading, refetching } = this.props;
@@ -123,9 +122,8 @@ class Feed extends React.Component<*, Props, void> {
               renderRow={this.renderRow}
               renderSeparator={this.renderSeparator}
               enableEmptySections
-              renderSectionHeader={(sectionData, sectionId) => (
-                <View key={`sh-${sectionId}`} />
-              )}
+              renderSectionHeader={(sectionData, sectionId) =>
+                <View key={`sh-${sectionId}`} />}
               refreshControl={
                 <RefreshControl
                   refreshing={refetching}
@@ -135,9 +133,9 @@ class Feed extends React.Component<*, Props, void> {
             />}
           {loading &&
             <ScrollView>
-              {[1, 2, 3, 4, 5, 6].map(a => (
+              {[1, 2, 3, 4, 5, 6].map(a =>
                 <PlaceholderStory key={String(a)} />
-              ))}
+              )}
             </ScrollView>}
         </Container>
       </Base>
@@ -147,7 +145,7 @@ class Feed extends React.Component<*, Props, void> {
 
 const mapState = ({ feed, user }: ReduxState) => ({
   ...feed,
-  token: user.token
+  token: user.token,
 });
 
 const mapActions = (dispatch: Dispatch) => ({

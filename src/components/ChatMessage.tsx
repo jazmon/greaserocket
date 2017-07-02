@@ -21,7 +21,8 @@ const Wrapper: any = styled.View`
   flex-direction: row;
   flex-grow: 1;
   flex: 1;
-  justify-content: ${({ alignRight }) => (alignRight ? 'flex-end' : 'flex-start')}
+  justify-content: ${({ alignRight }) =>
+    alignRight ? 'flex-end' : 'flex-start'}
 `;
 
 const UserImage: any = styled(Image)`
@@ -59,17 +60,17 @@ const DateText = styled.Text`
 
 interface Props {
   message: {
-    content: string,
-    created_at: string,
+    content: string;
+    created_at: string;
     user: {
-      name: string,
-      user_id: string,
-      picture: string
-    }
-  },
-  showPicture: boolean,
-  showDate: boolean,
-  userId: string
+      name: string;
+      user_id: string;
+      picture: string;
+    };
+  };
+  showPicture: boolean;
+  showDate: boolean;
+  userId: string;
 }
 
 const formatDate = (date: string): string => {
@@ -82,12 +83,15 @@ const ChatMessage: StatelessComponent<Props> = ({
   showPicture,
   showDate,
   userId,
-}: Props) => (
+}: Props) =>
   <Wrapper alignRight={userId === message.user.user_id}>
     <Container>
       {showPicture &&
         <View>
-          <UserImage source={{ uri: message.user.picture }} resizeMode="cover" />
+          <UserImage
+            source={{ uri: message.user.picture }}
+            resizeMode="cover"
+          />
         </View>}
       <TextContainer>
         <InfoContainer>
@@ -98,8 +102,7 @@ const ChatMessage: StatelessComponent<Props> = ({
         <Content>{message.content}</Content>
       </TextContainer>
     </Container>
-  </Wrapper>
-);
+  </Wrapper>;
 
 ChatMessage.defaultProps = {
   showPicture: false,
