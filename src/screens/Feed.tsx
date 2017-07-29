@@ -11,9 +11,10 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import type { Story as StoryType } from 'types';
-import type { ReduxState } from 'redux/modules';
+import { Story as StoryType } from 'types';
+import { ReduxState } from 'redux/modules';
 import styled from 'styled-components/native';
 
 import { fetchStories, refetchStories } from 'redux/modules/feed';
@@ -21,21 +22,24 @@ import { fetchStories, refetchStories } from 'redux/modules/feed';
 import Story from 'components/Story';
 import PlaceholderStory from 'components/PlaceholderStory';
 import Base from 'components/Base';
-import type { ThemeType } from 'constants/theme';
+import { ThemeType } from 'constants/theme';
 
-const rowHasChanged = (r1, r2) => r1.id !== r2.id;
+interface HasID {
+  id: number | string;
+}
+const rowHasChanged = (r1: HasID, r2: HasID): boolean => r1.id !== r2.id;
 
 const ds = new ListView.DataSource({ rowHasChanged });
 
 type Props = {
   // navigation: Object,
   // router: Object,
-  fetchStories: () => void,
-  refetchStories: () => void,
-  error: boolean,
-  loading: boolean,
-  refetching: boolean,
-  stories: Array<StoryType>,
+  fetchStories: () => void;
+  refetchStories: () => void;
+  error: boolean;
+  loading: boolean;
+  refetching: boolean;
+  stories: Array<StoryType>;
 };
 
 const LoadingContainer = styled.View`
@@ -57,7 +61,7 @@ const Container = styled.View`
   background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
 `;
 
-class Feed extends React.Component<*, Props, void> {
+class Feed extends React.Component<Props, void> {
   static navigationOptions = {
     tabBarLabel: 'Feed',
     tabBarIcon: ({ tintColor }) =>
@@ -90,7 +94,7 @@ class Feed extends React.Component<*, Props, void> {
     if (nextProps.error) {
       console.log(
         nextProps.error.message || 'error fetching data for feed',
-        nextProps.error.stack
+        nextProps.error.stack,
       );
       // alert(nextProps.error.message || 'Error!');
     }
@@ -134,7 +138,7 @@ class Feed extends React.Component<*, Props, void> {
           {loading &&
             <ScrollView>
               {[1, 2, 3, 4, 5, 6].map(a =>
-                <PlaceholderStory key={String(a)} />
+                <PlaceholderStory key={String(a)} />,
               )}
             </ScrollView>}
         </Container>
@@ -148,7 +152,7 @@ const mapState = ({ feed, user }: ReduxState) => ({
   token: user.token,
 });
 
-const mapActions = (dispatch: Dispatch) => ({
+const mapActions = (dispatch: Dispatch<ReduxState>) => ({
   fetchStories: () => dispatch(fetchStories()),
   refetchStories: () => dispatch(refetchStories()),
 });

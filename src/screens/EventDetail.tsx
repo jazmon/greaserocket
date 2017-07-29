@@ -1,16 +1,16 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components/native';
-import type { ThemeType } from 'constants/theme';
+import { ThemeType } from 'constants/theme';
 
 type Props = {
-  navigation: Object,
-  route: Object,
-  loading: boolean,
+  navigation: Object;
+  route: Object;
+  loading: boolean;
 };
 
 type State = {
-  text: string,
+  text: string;
 };
 
 const Container = styled.View`
@@ -23,7 +23,7 @@ const BaseText = styled.Text`
   font-size: 16;
 `;
 
-class EventDetail extends React.Component {
+class EventDetail extends React.Component<Props, State> {
   props: Props;
 
   constructor(props: Props) {
@@ -40,7 +40,9 @@ class EventDetail extends React.Component {
     const { text } = this.state;
     return (
       <Container>
-        <BaseText>{text}</BaseText>
+        <BaseText>
+          {text}
+        </BaseText>
       </Container>
     );
   }

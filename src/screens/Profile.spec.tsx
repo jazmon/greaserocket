@@ -5,15 +5,13 @@ import renderer from 'react-test-renderer';
 import { ThemeProvider } from 'styled-components';
 import theme from 'constants/theme';
 
-import { MapScreenComponent } from './Map';
-
-jest.mock('react-native-maps');
+import { ProfileComponent as Profile } from './Profile';
 
 it('renders correctly', () => {
   const tree = renderer.create(
     <ThemeProvider theme={theme}>
-      <MapScreenComponent fetchLocations={() => {}} />
-    </ThemeProvider>
+      <Profile login={jest.fn} />
+    </ThemeProvider>,
   );
   expect(tree).toMatchSnapshot();
 });

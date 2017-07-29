@@ -1,6 +1,7 @@
 import React, { StatelessComponent } from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
+
 import Image from 'react-native-image-progress';
 import _ from 'lodash';
 import format from 'date-fns/format';
@@ -17,15 +18,15 @@ const Container = styled.View`
   flex-shrink: 1;
 `;
 
-const Wrapper: any = styled.View`
+const Wrapper = styled.View`
   flex-direction: row;
   flex-grow: 1;
   flex: 1;
-  justify-content: ${({ alignRight }) =>
-    alignRight ? 'flex-end' : 'flex-start'}
+  justify-content: ${({ alignRight }: { alignRight: boolean }) =>
+    alignRight ? 'flex-end' : 'flex-start'};
 `;
 
-const UserImage: any = styled(Image)`
+const UserImage = styled(Image)`
   width: 60;
   height: 60;
   margin-right: 8;
@@ -95,11 +96,18 @@ const ChatMessage: StatelessComponent<Props> = ({
         </View>}
       <TextContainer>
         <InfoContainer>
-          <UserName>{message.user.name}</UserName>
-          {showDate && <DateText>{formatDate(message.created_at)}</DateText>}
+          <UserName>
+            {message.user.name}
+          </UserName>
+          {showDate &&
+            <DateText>
+              {formatDate(message.created_at)}
+            </DateText>}
         </InfoContainer>
 
-        <Content>{message.content}</Content>
+        <Content>
+          {message.content}
+        </Content>
       </TextContainer>
     </Container>
   </Wrapper>;

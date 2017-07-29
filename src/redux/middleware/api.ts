@@ -1,8 +1,9 @@
 // @flow
-import type { Middleware, MiddlewareAPI, Dispatch } from 'redux';
+import { Middleware, MiddlewareAPI, Dispatch } from 'redux';
 import config from 'constants/config';
-import type { Action } from 'types';
-import type { ReduxState } from 'redux/modules';
+import { Action } from 'types';
+import { Auth0Token } from 'types/auth';
+import { ReduxState } from 'redux/modules';
 
 function trimBaseUrl(url: string): string {
   return url.endsWith('/') ? url.substring(0, url.length - 1) : url;
@@ -15,35 +16,7 @@ class ResponseError extends Error {
   response: Response;
 }
 
-type JsonData = Array<Object> | Object;
-
-declare class Response {
-  constructor(
-    input?: string | URLSearchParams | FormData | Blob,
-    init?: ResponseOptions
-  ): void,
-  clone(): Response,
-  static error(): Response,
-  static redirect(url: string, status: number): Response,
-
-  type: ResponseType,
-  url: string,
-  useFinalURL: boolean,
-  ok: boolean,
-  status: number,
-  statusText: string,
-  headers: Headers,
-
-  // Body methods and attributes
-  bodyUsed: boolean,
-  body: ?ReadableStream,
-
-  arrayBuffer(): Promise<ArrayBuffer>,
-  blob(): Promise<Blob>,
-  formData(): Promise<FormData>,
-  json(): Promise<any>,
-  text(): Promise<string>,
-}
+type JsonData = Object[] | Object;
 
 export function checkStatus(response: Response): Response {
   if (response.status >= 200 && response.status < 300) {
@@ -58,7 +31,7 @@ export function checkStatus(response: Response): Response {
 export async function callApi(
   endpoint: string,
   authenticated: boolean,
-  token: ?Auth0Token
+  token: Auth0Token | null,
 ): Promise<JsonData> {
   let fetchConfig = {};
 
@@ -75,12 +48,15 @@ export async function callApi(
   const url = `${BASE_URL}/${endpoint}`;
 
   try {
-    const response: Response = await Promise.race([
+    const response: Response | {} = await Promise.race([
       fetch(url, fetchConfig),
       new Promise((resolve, reject) => {
         setTimeout(() => reject(new Error('request timeout')), 5000);
       }),
     ]);
+    if (!(response instanceof Response)) {
+      throw new Error('request timed out, response was not response');
+    }
     checkStatus(response);
     const json: JsonData = await response.json();
     return json;
@@ -89,31 +65,33 @@ export async function callApi(
   }
 }
 
-type ApiActionProps = {|
-  +types: Array<string>,
-  +authenticated?: boolean,
-  +endpoint: string,
-|};
+type ApiActionProps = {
+  types: string[];
+  authenticated?: boolean;
+  endpoint: string;
+};
 
 // export type ApiAction = Action<ApiActionProps>;
-export type ApiAction = {|
-  +type: 'CALL_API',
-  +payload: ApiActionProps,
-|};
-
-export const middleware: Middleware<ReduxState, Object> = (
-  store: MiddlewareAPI<ReduxState, Object>
-) => (next: Dispatch<Action<*>>) => async (action: Object): Promise<*> => {
+export type ApiAction = {
+  type: 'CALL_API';
+  payload: ApiActionProps;
+};
+interface ActionType {
+  type: string;
+}
+export const middleware: Middleware = (store: MiddlewareAPI<ReduxState>) => (
+  next: Dispatch<ReduxState>,
+) => async (action: Action<any>): Promise<any> => {
   if (action.type !== CALL_API) {
     return next(action);
   }
 
-  const token: ?Auth0Token = store.getState().user.token;
+  const token: Auth0Token | null = store.getState().user.token;
   console.log('store.getState()', store.getState());
   console.log('FOOBAR token', token);
   // cast the type now that it's known
-  // $FlowIssue
-  const { endpoint, types, authenticated = true } = (action: ApiAction).payload;
+  const apiAction: ApiAction = action as ApiAction;
+  const { endpoint, types, authenticated = true } = apiAction.payload;
   const [startType, successType, errorType] = types;
   // Dispatch that the action has started
   store.dispatch({

@@ -5,13 +5,13 @@ import renderer from 'react-test-renderer';
 import { ThemeProvider } from 'styled-components';
 import theme from 'constants/theme';
 
-import { ProfileComponent as Profile } from './Profile';
+import Base from './Base';
 
 it('renders correctly', () => {
   const tree = renderer.create(
     <ThemeProvider theme={theme}>
-      <Profile login={jest.fn} />
-    </ThemeProvider>
+      <Base />
+    </ThemeProvider>,
   );
   expect(tree).toMatchSnapshot();
 });

@@ -4,37 +4,40 @@ import { View, Text, TextInput, Button, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import SocketIOClient from 'socket.io-client';
 import { connect } from 'react-redux';
-import ChatMessage from 'components/ChatMessage.tsx';
+import ChatMessage from 'components/ChatMessage';
+import { Dispatch } from 'redux';
+import { Auth0Profile } from 'types/auth';
+import { Maybe } from 'types';
 
-import type { ReduxState } from 'redux/modules';
+import { ReduxState } from 'redux/modules';
 
 type User = {
-  created_at: string,
-  updated_at: string,
-  name: string,
-  email: string,
-  picture: string,
-  nickname: string,
-  user_id: string,
+  created_at: string;
+  updated_at: string;
+  name: string;
+  email: string;
+  picture: string;
+  nickname: string;
+  userId: string;
 };
 
 type Message = {
-  id: string,
-  content: string,
-  created_at: string,
-  updated_at: string,
-  user: User,
+  id: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  user: User;
 };
 
 type Props = {
-  loading: boolean,
-  profile: ?Auth0Profile,
+  loading: boolean;
+  profile: Maybe<Auth0Profile>;
 };
 
 type State = {
-  messages: Array<Message>,
-  text: string,
-  initialMessages: boolean,
+  messages: Message[];
+  text: string;
+  initialMessages: boolean;
 };
 
 const Container = styled.View`
@@ -48,9 +51,8 @@ const BaseText = styled.Text`
   color: ${({ theme }) => theme.text.colors.primary};
   font-size: 16;
 `;
-
-const List = styled.FlatList`
-`;
+type Foo = React.ComponentClass<any>;
+const List: React.ComponentClass<any> = styled.FlatList``;
 
 const InputContainer = styled.View`
   justify-content: flex-end;
@@ -64,18 +66,16 @@ const MessageInput = styled.TextInput`
   flex-grow: 1;
 `;
 
-const MessageArea = styled.View`
-  flex-grow: 1;
-`;
+const MessageArea = styled.View`flex-grow: 1;`;
 
 const extractKey = ({ id }: Message): string => id;
 
-class Messages extends Component<*, Props, State> {
+class Messages extends Component<Props, State> {
   socket: {
-    emit: (type: string, props?: any) => void,
-    on: (type: string, handler: Function) => void,
+    emit: (type: string, props?: any) => void;
+    on: (type: string, handler: Function) => void;
   };
-  list: ?{ scrollToEnd: () => void };
+  list: { scrollToEnd: () => void } | null;
 
   static defaultProps = {
     profile: null,
@@ -91,7 +91,7 @@ class Messages extends Component<*, Props, State> {
     this.socket.on('message_emitted', this.onReceiveMessage);
     fetch('http://localhost:9000/v1/messages')
       .then(res => res.json())
-      .then((json: { data: Array<Message>, error: boolean }) => {
+      .then((json: { data: Array<Message>; error: boolean }) => {
         console.log('json', json);
         this.setState({ messages: json.data });
       })
@@ -128,7 +128,7 @@ class Messages extends Component<*, Props, State> {
 
   onShouldConnect = (profile: Auth0Profile) => {
     this.socket.emit('connection', {
-      userId: profile.userId,
+      user_id: profile.userId,
       email: profile.email,
       name: profile.name,
       picture: profile.picture,
@@ -144,7 +144,7 @@ class Messages extends Component<*, Props, State> {
       }),
       () => {
         if (this.list) this.list.scrollToEnd();
-      }
+      },
     );
   };
 
@@ -152,7 +152,7 @@ class Messages extends Component<*, Props, State> {
     if (!this.props.profile || this.state.text === '') return;
     this.socket.emit('new_message', {
       content: this.state.text,
-      userId: this.props.profile.userId,
+      user_id: this.props.profile.userId,
     });
     this.setState({
       text: '',
@@ -170,13 +170,12 @@ class Messages extends Component<*, Props, State> {
             <List
               ref={this.bindList}
               data={messages}
-              renderItem={({ item: message }: { item: Message }) => (
+              renderItem={({ item: message }: { item: Message }) =>
                 <ChatMessage
                   key={message.id}
                   message={message}
                   userId={profile.userId}
-                />
-              )}
+                />}
               keyExtractor={extractKey}
             />}
         </MessageArea>
@@ -198,6 +197,6 @@ const mapState = ({ user }: ReduxState) => ({
   ...user,
 });
 
-const mapDispatchtoProps = (dispatch: Dispatch) => ({});
+const mapDispatchtoProps = (dispatch: Dispatch<ReduxState>) => ({});
 export const MessagesComponent = Messages;
 export default connect(mapState, mapDispatchtoProps)(Messages);

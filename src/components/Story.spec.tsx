@@ -17,7 +17,7 @@ it('renders correctly', () => {
   const tree = renderer.create(
     <ThemeProvider theme={theme}>
       <Story story={story} />
-    </ThemeProvider>
+    </ThemeProvider>,
   );
   expect(tree).toMatchSnapshot();
 });

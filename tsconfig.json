@@ -4,7 +4,13 @@
     "module": "es2015",
     "jsx": "react-native",
     "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["./typedefs", "node_modules/@types"]
   }
 }

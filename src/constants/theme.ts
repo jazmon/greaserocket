@@ -30,7 +30,7 @@ const theme = {
 export type ThemeType = typeof theme;
 
 export function getStatusBarTextColor(
-  backgroundColor: string
+  backgroundColor: string = 'light-content',
 ): 'light-content' | 'dark-content' {
   return color(backgroundColor).dark() ? 'light-content' : 'dark-content';
 }

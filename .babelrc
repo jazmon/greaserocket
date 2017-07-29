@@ -2,12 +2,14 @@
   "plugins": [
     "lodash",
     "idx",
-    ["module-resolver", {
-      "root": ["./src"],
-      "extensions": [".js", ".jsx", ".ts", ".tsx"]
-    }]
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ]
   ],
-  "presets": [
-    "react-native"
-  ]
+  "presets": ["react-native"],
+  "sourceMaps": true
 }

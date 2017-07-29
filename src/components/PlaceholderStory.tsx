@@ -23,16 +23,21 @@ const TextArea = styled.View`
   flex: 1;
   padding: 16;
 `;
+
+interface MockTextProps {
+  upper?: boolean;
+  lower?: boolean;
+}
 const MockText = styled(PlaceholderComponent)`
   flex-grow: 0;
   flex-direction: row;
   height: 14;
-  padding-top: ${props => (props.upper ? 2 : 0)};
+  padding-top: ${(props: MockTextProps) => (props.upper ? 2 : 0)};
   padding-bottom: 2;
-  margin-top: ${props => (props.lower ? 2 : 0)};
+  margin-top: ${(props: MockTextProps) => (props.lower ? 2 : 0)};
 `;
 
-const PlaceholderStory = () => (
+const PlaceholderStory = () =>
   <Container>
     <ImageContainer>
       <MockImage />
@@ -41,6 +46,5 @@ const PlaceholderStory = () => (
       <MockText upper />
       <MockText lower />
     </TextArea>
-  </Container>
-);
+  </Container>;
 export default PlaceholderStory;

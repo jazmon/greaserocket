@@ -5,18 +5,20 @@ import { Animated } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import chroma from 'chroma-js';
 
+import { Maybe } from '../types';
+
 const Container = Animated.createAnimatedComponent(
   styled(LinearGradient)`
-`
+`,
 );
 
-type Props = {
-  children?: ?any,
-  style?: ?StyleSheet,
-};
+interface Props {
+  children?: Maybe<any>;
+  style?: Maybe<StyleSheet>;
+}
 type State = {
-  color: number,
-  direction: 1 | -1,
+  color: number;
+  direction: 1 | -1;
 };
 
 const MAX = 80;
@@ -32,7 +34,7 @@ function getDirection(
   currentDirection: -1 | 1 = 1,
   color: number = 0,
   min: number = 0,
-  max: number = 100
+  max: number = 100,
 ): -1 | 1 {
   let direction = currentDirection;
   if (color >= max) {
@@ -43,13 +45,13 @@ function getDirection(
   return direction;
 }
 
-class PlaceholderComponent extends React.PureComponent<*, Props, State> {
+class PlaceholderComponent extends React.PureComponent<Props, State> {
   state = {
     color: MIN,
     direction: getDirection(),
   };
 
-  interval: number;
+  interval: NodeJS.Timer;
 
   componentDidMount() {
     this.interval = setInterval(this.updateColor, DELAY);
@@ -61,7 +63,7 @@ class PlaceholderComponent extends React.PureComponent<*, Props, State> {
         prevState.direction,
         prevState.color,
         MIN,
-        MAX
+        MAX,
       );
       const newColor = prevState.color + direction;
       return { color: newColor, direction };

@@ -4,13 +4,14 @@ import { Dimensions, ActivityIndicator, Text } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { isEqual } from 'lodash';
 import styled from 'styled-components/native';
 import { fetchLocations } from 'redux/modules/map';
-import type { ThemeType } from 'constants/theme';
+import { ThemeType } from 'constants/theme';
 
-import type { Location } from 'types';
-import type { ReduxState } from 'redux/modules';
+import { Location } from 'types';
+import { ReduxState } from 'redux/modules';
 
 const { width, height } = Dimensions.get('window');
 
@@ -28,11 +29,11 @@ const REGION = {
 };
 
 type Props = {
-  navigation: Object,
-  fetchLocations: Function,
-  router: Object,
-  loading: boolean,
-  locations: Array<Location>,
+  navigation: Object;
+  fetchLocations: Function;
+  router: Object;
+  loading: boolean;
+  locations: Array<Location>;
 };
 
 function toMarker(location: Location): MapMarker {
@@ -48,7 +49,8 @@ const LoadingContainer = styled.View`
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.transparent};
+  background-color: ${({ theme }: { theme: ThemeType }) =>
+    theme.colors.transparent};
   bottom: 0;
   top: 0;
   left: 0;
@@ -71,17 +73,17 @@ const StyledMap = styled(MapView)`
   height: 100%;
 `;
 
-const LoadingOverlay = (): ElementType => (
+const LoadingOverlay = (): ElementType =>
   <LoadingContainer>
     <ActivityIndicator size="large" />
-  </LoadingContainer>
-);
+  </LoadingContainer>;
 
-class MapScreen extends React.Component<*, Props, void> {
+class MapScreen extends React.Component<Props, void> {
   map: Object;
   static navigationOptions = {
     tabBarLabel: 'Map',
-    tabBarIcon: ({ tintColor }) => <Icon name="ios-map" size={30} color={tintColor} />,
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="ios-map" size={30} color={tintColor} />,
   };
 
   static defaultProps = {
@@ -152,7 +154,7 @@ class MapScreen extends React.Component<*, Props, void> {
           showsMyLocationButton={true}
         >
           {!loading &&
-            locations.map(toMarker).map(marker => (
+            locations.map(toMarker).map(marker =>
               <MapView.Marker
                 key={marker.id}
                 coordinate={marker.latlng}
@@ -164,10 +166,12 @@ class MapScreen extends React.Component<*, Props, void> {
                 onCalloutPress={this.onMarkerPressed}
               >
                 <MapView.Callout {...marker}>
-                  <Text>{marker.title}</Text>
+                  <Text>
+                    {marker.title}
+                  </Text>
                 </MapView.Callout>
-              </MapView.Marker>
-            ))}
+              </MapView.Marker>,
+            )}
         </StyledMap>
         {loading && <LoadingOverlay />}
       </Container>
@@ -179,7 +183,7 @@ const mapState = ({ map }: ReduxState) => ({
   ...map,
 });
 
-const mapDispatchtoProps = (dispatch: Dispatch) => ({
+const mapDispatchtoProps = (dispatch: Dispatch<ReduxState>) => ({
   fetchLocations: () => dispatch(fetchLocations()),
 });
 

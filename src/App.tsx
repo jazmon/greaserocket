@@ -1,13 +1,12 @@
-// @flow
 import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
 import codePush from 'react-native-code-push';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { ThemeProvider } from 'styled-components';
-import type { Store } from 'redux';
-import type { ReduxState } from 'redux/modules';
-import type { Action } from 'types';
+import { Store } from 'redux';
+import { ReduxState } from 'redux/modules';
+import { Action } from 'types';
 
 import configureStore from 'redux/store/configureStore';
 import config from 'constants/config';
@@ -48,7 +47,7 @@ const App = TabNavigator(
   {
     animationEnabled: true,
     swipeEnabled: true,
-    lazyLoad: true,
+    // lazyLoad: true,
     screenProps: {
       foo: 'bar',
     },
@@ -57,20 +56,20 @@ const App = TabNavigator(
       activeTintColor: '#e91e63',
     },
     // on Android, the URI prefix typically contains a host in addition to scheme
-    uriPrefix: Platform.OS === 'android'
-      ? `${config.NAVIGATION.URI_PREFIX}://${config.NAVIGATION.URI_PREFIX}/`
-      : `${config.NAVIGATION.URI_PREFIX}://`,
-  }
+    uriPrefix:
+      Platform.OS === 'android'
+        ? `${config.NAVIGATION.URI_PREFIX}://${config.NAVIGATION.URI_PREFIX}/`
+        : `${config.NAVIGATION.URI_PREFIX}://`,
+  },
 );
 
-const store: Store<ReduxState, Action<*>> = configureStore();
-const Root = () => (
+const store: Store<ReduxState> = configureStore();
+const Root = () =>
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </Provider>
-);
+  </Provider>;
 
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,

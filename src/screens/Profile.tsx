@@ -6,8 +6,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 
-import type { ReduxState } from 'redux/modules';
-import { TestComponent } from 'components/TestComponent.tsx';
+import { ReduxState } from 'redux/modules';
+import { TestComponent } from 'components/TestComponent';
+import { Maybe } from 'types';
+import { Dispatch } from 'redux';
 
 // import type {
 //   NavigationScreenProp,
@@ -15,15 +17,16 @@ import { TestComponent } from 'components/TestComponent.tsx';
 // } from 'react-navigation/lib/TypeDefinition';
 
 import { login } from 'redux/modules/user';
-import type { ThemeType } from 'constants/theme';
+import { ThemeType } from 'constants/theme';
 
-type Props = {
+interface Props {
   // navigation: NavigationScreenProp<*, NavigationAction>,
-  login(): void,
-  loginDate: Date,
-  profile: ?Auth0Profile,
-  loading: boolean,
-};
+  login(): void;
+  loginDate: Date;
+  profile: Maybe<Auth0Profile>;
+  loading: boolean;
+  token: Maybe<Auth0Token>;
+}
 
 const Container = styled.View`
   flex-grow: 1;
@@ -44,15 +47,12 @@ const BaseText = styled.Text`
   font-size: 16;
 `;
 
-class Profile extends React.Component {
+class Profile extends React.Component<Props, void> {
   static navigationOptions = {
     tabBarLabel: 'Profile',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-person" size={30} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }: { tintColor: string }) =>
+      <Icon name="ios-person" size={30} color={tintColor} />,
   };
-
-  props: Props;
 
   componentDidMount() {
     setTimeout(() => {
@@ -78,8 +78,12 @@ class Profile extends React.Component {
         {profile &&
           <View>
             <TestComponent />
-            <BaseText>{profile.name}</BaseText>
-            <BaseText>{profile.email}</BaseText>
+            <BaseText>
+              {profile.name}
+            </BaseText>
+            <BaseText>
+              {profile.email}
+            </BaseText>
           </View>}
       </Container>
     );
@@ -88,7 +92,9 @@ class Profile extends React.Component {
 
 const mapState = ({ user }: ReduxState) => ({ ...user });
 
-const mapActions = (dispatch: Dispatch) => ({ login: () => dispatch(login()) });
+const mapActions = (dispatch: Dispatch<ReduxState>) => ({
+  login: () => dispatch(login()),
+});
 
 export const ProfileComponent = Profile;
 export default connect(mapState, mapActions)(Profile);

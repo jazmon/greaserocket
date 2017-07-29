@@ -10,7 +10,7 @@ it('renders correctly', () => {
   const tree = renderer.create(
     <ThemeProvider theme={theme}>
       <Feed fetchStories={jest.fn} stories={[]} loading={false} />
-    </ThemeProvider>
+    </ThemeProvider>,
   );
   expect(tree).toMatchSnapshot();
 });

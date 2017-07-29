@@ -1,13 +1,12 @@
-// @flow
-const { Platform } = require('react-native');
+import { Platform } from 'react-native';
 
 const isAndroid = Platform.OS === 'android';
-module.exports = {
+export default {
   NAVIGATION: {
     URI_PREFIX: 'greaserocket',
   },
   BACKEND: {
-    URL: `http://${isAndroid ? '192.168.1.72' : 'localhost'}:9000/`,
+    URL: `http://${isAndroid ? '10.0.2.2' : 'localhost'}:9000/`,
   },
   AUTH: {
     CLIENT_ID: 'YOUR_CLIENT_ID',

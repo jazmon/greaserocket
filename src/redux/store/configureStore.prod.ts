@@ -11,7 +11,7 @@ import apiMiddleware from 'redux/middleware/api';
 const enhancer = compose(
   installLoop(),
   applyMiddleware(thunk, apiMiddleware),
-  autoRehydrate()
+  autoRehydrate(),
 );
 
 const configureStore = (initialState?: Object) => {

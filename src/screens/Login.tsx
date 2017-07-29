@@ -3,20 +3,22 @@ import React from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
+import { Dispatch } from 'redux';
 
 import { login } from 'redux/modules/user';
-import type { ThemeType } from 'constants/theme';
+import { ThemeType } from 'constants/theme';
 
-import type { ReduxState } from 'redux/modules';
+import { ReduxState } from 'redux/modules';
+import { Maybe } from 'types';
 
 type Props = {
-  navigation: Object,
-  route: Object,
-  loading: boolean,
-  login(): void,
-  error: ?Error,
-  profile: ?Auth0Profile,
-  token: ?Auth0Token,
+  navigation: Object;
+  route: Object;
+  loading: boolean;
+  login(): void;
+  error: Maybe<Error>;
+  profile: Maybe<Auth0Profile>;
+  token: Maybe<Auth0Token>;
 };
 
 const Container = styled.View`
@@ -28,7 +30,7 @@ const Container = styled.View`
   padding: 16;
 `;
 
-class Login extends React.Component<*, Props, void> {
+class Login extends React.Component<Props, void> {
   componentDidMount() {
     this.props.login();
   }
@@ -44,14 +46,20 @@ class Login extends React.Component<*, Props, void> {
     if (profile && token) {
       return (
         <Container>
-          <Text>Welcome {profile.name}</Text>
-          <Text>Your email is: {profile.email}</Text>
+          <Text>
+            Welcome {profile.name}
+          </Text>
+          <Text>
+            Your email is: {profile.email}
+          </Text>
         </Container>
       );
     } else if (error) {
       return (
         <Container>
-          <Text>{error}</Text>
+          <Text>
+            {error}
+          </Text>
         </Container>
       );
     }
@@ -61,7 +69,9 @@ class Login extends React.Component<*, Props, void> {
 
 const mapState = ({ user }: ReduxState) => ({ ...user });
 
-const mapActions = (dispatch: Dispatch) => ({ login: () => dispatch(login()) });
+const mapActions = (dispatch: Dispatch<ReduxState>) => ({
+  login: () => dispatch(login()),
+});
 
 export const LoginComponent = Login;
 export default connect(mapState, mapActions)(Login);
