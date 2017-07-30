@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components/native';
-import { Animated } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { Animated, ViewStyle } from 'react-native';
+import { LinearGradient } from 'react-native-linear-gradient';
 import chroma from 'chroma-js';
 
 import { Maybe } from '../types';
@@ -14,29 +14,29 @@ const Container = Animated.createAnimatedComponent(
 
 interface Props {
   children?: Maybe<any>;
-  style?: Maybe<StyleSheet>;
+  style?: Maybe<ViewStyle>;
 }
+enum Directions {
+  UP = 1,
+  DOWN = -1,
+}
+
 type State = {
   color: number;
-  direction: 1 | -1;
+  direction: Directions;
 };
 
 const MAX = 80;
 const DELAY = 5;
 const MIN = 40;
 
-const Directions = {
-  UP: 1,
-  DOWN: -1,
-};
-
 function getDirection(
-  currentDirection: -1 | 1 = 1,
+  currentDirection: Directions = Directions.UP,
   color: number = 0,
   min: number = 0,
   max: number = 100,
 ): -1 | 1 {
-  let direction = currentDirection;
+  let direction: Directions = currentDirection;
   if (color >= max) {
     direction = Directions.DOWN;
   } else if (color <= min) {

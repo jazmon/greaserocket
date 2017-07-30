@@ -11,5 +11,5 @@
     ]
   ],
   "presets": ["react-native"],
-  "sourceMaps": true
+  "sourceMaps": "inline"
 }

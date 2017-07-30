@@ -4,24 +4,24 @@ import styled from 'styled-components/native';
 import PlaceholderComponent from 'components/PlaceholderComponent';
 
 const Container = styled.View`
-  height: 120;
+  height: 120px;
   flex: 1;
   flex-direction: row;
-  margin-bottom: 8;
+  margin-bottom: 8px;
   opacity: 0.5;
 `;
 const ImageContainer = styled.View`
   align-items: center;
   justify-content: center;
-  width: 120;
+  width: 120px;
 `;
 const MockImage = styled(PlaceholderComponent)`
-  width: 100;
-  height: 100;
+  width: 100px;
+  height: 100px;
 `;
 const TextArea = styled.View`
   flex: 1;
-  padding: 16;
+  padding: 16px;
 `;
 
 interface MockTextProps {
@@ -31,9 +31,9 @@ interface MockTextProps {
 const MockText = styled(PlaceholderComponent)`
   flex-grow: 0;
   flex-direction: row;
-  height: 14;
+  height: 14px;
   padding-top: ${(props: MockTextProps) => (props.upper ? 2 : 0)};
-  padding-bottom: 2;
+  padding-bottom: 2px;
   margin-top: ${(props: MockTextProps) => (props.lower ? 2 : 0)};
 `;
 

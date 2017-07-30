@@ -10,6 +10,7 @@ import { ThemeType } from 'constants/theme';
 
 import { ReduxState } from 'redux/modules';
 import { Maybe } from 'types';
+import { Auth0Profile, Auth0Token } from 'types/auth';
 
 type Props = {
   navigation: Object;
@@ -25,9 +26,9 @@ const Container = styled.View`
   flex: 1;
   flex-direction: column;
   background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
-  margin-top: 24;
+  margin-top: 24px;
   justify-content: center;
-  padding: 16;
+  padding: 16px;
 `;
 
 class Login extends React.Component<Props, void> {

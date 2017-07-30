@@ -20,7 +20,7 @@ const Container = styled.View`
 `;
 const BaseText = styled.Text`
   color: ${({ theme }: { theme: ThemeType }) => theme.text.colors.primary};
-  font-size: 16;
+  font-size: 16px;
 `;
 
 class EventDetail extends React.Component<Props, State> {

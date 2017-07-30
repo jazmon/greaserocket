@@ -51,12 +51,12 @@ const LoadingContainer = styled.View`
   justify-content: center;
   background-color: ${({ theme }: { theme: ThemeType }) =>
     theme.colors.transparent};
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 0px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100px%;
+  height: 100px%;
 `;
 const Container = styled.View`
   flex: 1;
@@ -65,12 +65,12 @@ const Container = styled.View`
   background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
 `;
 const StyledMap = styled(MapView)`
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 0px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100px%;
+  height: 100px%;
 `;
 
 const LoadingOverlay = (): ElementType =>

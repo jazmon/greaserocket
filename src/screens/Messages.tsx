@@ -44,12 +44,12 @@ const Container = styled.View`
   flex: 1;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.white};
-  margin: 8;
-  padding: 8;
+  margin: 8px;
+  padding: 8px;
 `;
 const BaseText = styled.Text`
   color: ${({ theme }) => theme.text.colors.primary};
-  font-size: 16;
+  font-size: 16px;
 `;
 type Foo = React.ComponentClass<any>;
 const List: React.ComponentClass<any> = styled.FlatList``;
@@ -57,12 +57,12 @@ const List: React.ComponentClass<any> = styled.FlatList``;
 const InputContainer = styled.View`
   justify-content: flex-end;
   display: flex;
-  margin-top: 8;
+  margin-top: 8px;
   flex-direction: row;
 `;
 const MessageInput = styled.TextInput`
-  height: 40;
-  border: 1 solid gray;
+  height: 40px;
+  border: 1px solid gray;
   flex-grow: 1;
 `;
 

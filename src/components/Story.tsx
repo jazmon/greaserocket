@@ -26,21 +26,21 @@ const Container = styled.View`
   flex: 1;
   flex-direction: row;
   background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
-  height: 120;
+  height: 120px;
 `;
 const ImageContainer = styled.View`
-  width: 120;
+  width: 120px;
   align-items: center;
   justify-content: center;
 `;
 const AuthorImage = styled(Image)`
-  width: 100;
-  height: 100;
+  width: 100px;
+  height: 100px;
 
 `;
 const TextArea = styled.View`
   flex: 1;
-  padding: 16;
+  padding: 16px;
   flex-direction: column;
 `;
 const BaseText = styled.Text`

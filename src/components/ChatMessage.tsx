@@ -9,9 +9,9 @@ import fiLocale from 'date-fns/locale/fi';
 
 const Container = styled.View`
   background-color: #e9e6e6;
-  margin: 4 0;
-  padding: 8;
-  border-radius: 12;
+  margin: 4px 0px;
+  padding: 8px;
+  border-radius: 12px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -27,20 +27,20 @@ const Wrapper = styled.View`
 `;
 
 const UserImage = styled(Image)`
-  width: 60;
-  height: 60;
-  margin-right: 8;
+  width: 60px;
+  height: 60px;
+  margin-right: 8px;
 `;
 const UserName = styled.Text`
   text-align: left;
-  font-size: 10;
+  font-size: 10px;
   font-weight: bold;
-  margin-bottom: 4;
+  margin-bottom: 4px;
 `;
 
 const Content = styled.Text`
   text-align: left;
-  font-size: 14;
+  font-size: 14px;
 `;
 
 const TextContainer = styled.View`
@@ -55,8 +55,8 @@ const InfoContainer = styled.View`
 `;
 
 const DateText = styled.Text`
-  font-size: 10;
-  margin-left: 8;
+  font-size: 10px;
+  margin-left: 8px;
 `;
 
 interface Props {

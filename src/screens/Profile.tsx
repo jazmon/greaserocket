@@ -44,7 +44,7 @@ const LoadingContainer = styled.View`
 
 const BaseText = styled.Text`
   color: ${({ theme }: { theme: ThemeType }) => theme.text.colors.primary};
-  font-size: 16;
+  font-size: 16px;
 `;
 
 class Profile extends React.Component<Props, void> {
