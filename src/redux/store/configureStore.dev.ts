@@ -42,5 +42,5 @@ const configureStore = (initialState?: Object) => {
   return store;
 };
 
-// export default configureStore;
-module.exports = configureStore;
+export default configureStore;
+// module.exports = configureStore;

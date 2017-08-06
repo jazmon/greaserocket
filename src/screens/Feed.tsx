@@ -81,16 +81,16 @@ class Feed extends React.Component<Props, void> {
   }
 
   componentDidMount() {
-    this.props.fetchStories();
+    // this.props.fetchStories();
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.stories) {
       this.dataSource = ds.cloneWithRows(nextProps.stories);
     }
-    if (nextProps.token && !this.props.token) {
-      this.props.fetchStories();
-    }
+    // if (nextProps.token && !this.props.token) {
+    //   this.props.fetchStories();
+    // }
     if (nextProps.error) {
       console.log(
         nextProps.error.message || 'error fetching data for feed',
@@ -147,9 +147,9 @@ class Feed extends React.Component<Props, void> {
   }
 }
 
-const mapState = ({ feed, user }: ReduxState) => ({
+const mapState = ({ feed }: ReduxState) => ({
   ...feed,
-  token: user.token,
+  // token: user.token,
 });
 
 const mapActions = (dispatch: Dispatch<ReduxState>) => ({

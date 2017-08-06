@@ -3,7 +3,7 @@
 import { loop, Effects } from 'redux-loop';
 import moment from 'moment';
 
-import Auth0Lock from 'react-native-lock';
+// import Auth0Lock from 'react-native-lock';
 import { REHYDRATE } from 'redux-persist/constants';
 
 import config from 'constants/config';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
-import codePush from 'react-native-code-push';
+// import codePush from 'react-native-code-push';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { ThemeProvider } from 'styled-components';
@@ -75,12 +75,12 @@ const Root = () =>
     </ThemeProvider>
   </Provider>;
 
-const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-};
+// const codePushOptions = {
+//   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+// };
 
-const WrappedRoot = codePush(codePushOptions)(Root);
-AppRegistry.registerComponent('Greaserocket', () => WrappedRoot);
+// const WrappedRoot = codePush(codePushOptions)(Root);
+AppRegistry.registerComponent('Greaserocket', () => Root);
 
 export const AppComponent = Root;
-export default WrappedRoot;
+// export default Root;
