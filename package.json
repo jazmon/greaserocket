@@ -42,6 +42,7 @@
     "react": "16.0.0-alpha.12",
     "react-apollo": "^1.4.10",
     "react-native": "0.47.1",
+    "react-native-auth0": "^1.0.3",
     "react-native-code-push": "^5.0.0-beta",
     "react-native-image-progress": "^1.0.1",
     "react-native-linear-gradient": "^2.1.0",
