@@ -3,7 +3,7 @@
 // Definitions by: Atte Huhtakangas https://twitter.com/attehuhtakangas
 // import { StatelessComponent, ComponentClass } from 'react';
 // import { View } from 'react-native';
-import * as redux from 'redux';
+// import * as Redux from 'redux';
 
 declare module 'redux-loop' {
   export function combineReducers(

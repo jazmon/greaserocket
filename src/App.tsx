@@ -17,6 +17,10 @@ import Messages from 'screens/Messages';
 import EventDetail from 'screens/EventDetail';
 import theme from 'constants/theme';
 
+import { graphql, ApolloProvider } from 'react-apollo';
+
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
+
 const App = TabNavigator(
   {
     Feed: {

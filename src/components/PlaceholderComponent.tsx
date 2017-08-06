@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { Animated, ViewStyle } from 'react-native';
-import { LinearGradient } from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import chroma from 'chroma-js';
 
 import { Maybe } from '../types';
