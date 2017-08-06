@@ -58,6 +58,7 @@
     "reselect": "^3.0.1",
     "socket.io-client": "^2.0.3",
     "styled-components": "^2.1.2",
+    "tsutils": "1.6.0",
     "typescript": "^2.4.2"
   },
   "devDependencies": {
@@ -79,7 +80,7 @@
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-native": "^3.0.1",
     "eslint-plugin-sort-class-members": "^1.2.0",
