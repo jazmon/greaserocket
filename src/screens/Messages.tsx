@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, Text, TextInput, Button, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import SocketIOClient from 'socket.io-client';
@@ -51,8 +51,8 @@ const BaseText = styled.Text`
   color: ${({ theme }) => theme.text.colors.primary};
   font-size: 16px;
 `;
-type Foo = React.ComponentClass<any>;
-const List: React.ComponentClass<any> = styled(FlatList)``;
+
+const List = styled(FlatList)``;
 
 const InputContainer = styled.View`
   justify-content: flex-end;
@@ -70,7 +70,7 @@ const MessageArea = styled.View`flex-grow: 1;`;
 
 const extractKey = ({ id }: Message): string => id;
 
-class Messages extends Component<Props, State> {
+class Messages extends React.Component<Props, State> {
   socket: {
     emit: (type: string, props?: any) => void;
     on: (type: string, handler: Function) => void;
@@ -193,10 +193,11 @@ class Messages extends Component<Props, State> {
   }
 }
 
-const mapState = ({ user }: ReduxState) => ({
-  ...user,
-});
+// const mapState = ({  }: ReduxState) => ({
+//   // ...user,
+// });
 
-const mapDispatchtoProps = (dispatch: Dispatch<ReduxState>) => ({});
-export const MessagesComponent = Messages;
-export default connect(mapState, mapDispatchtoProps)(Messages);
+// const mapDispatchtoProps = (dispatch: Dispatch<ReduxState>) => ({});
+// export const MessagesComponent = Messages;
+// export default connect(mapState, mapDispatchtoProps)(Messages);
+export default Messages;

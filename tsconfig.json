@@ -11,7 +11,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "allowSyntheticDefaultImports": false,
-    "typeRoots": ["node_modules/@types", "./types"],
+    "typeRoots": ["node_modules/@types", "types"],
     "sourceMap": true,
     "lib": ["es2017", "esnext.asynciterable", "dom"]
   }

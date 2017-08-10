@@ -54,17 +54,17 @@ class Profile extends React.Component<Props, void> {
       <Icon name="ios-person" size={30} color={tintColor} />,
   };
 
-  componentDidMount() {
-    setTimeout(() => {
-      // FIXME
-      if (
-        !this.props.profile ||
-        moment(this.props.loginDate).isBefore(moment().subtract(20, 'seconds'))
-      ) {
-        this.props.login();
-      }
-    }, 400);
-  }
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     // FIXME
+  //     if (
+  //       !this.props.profile ||
+  //       moment(this.props.loginDate).isBefore(moment().subtract(20, 'seconds'))
+  //     ) {
+  //       this.props.login();
+  //     }
+  //   }, 400);
+  // }
 
   render() {
     console.log('token', this.props.token);
@@ -90,11 +90,12 @@ class Profile extends React.Component<Props, void> {
   }
 }
 
-const mapState = ({ user }: ReduxState) => ({ ...user });
+// const mapState = ({ user }: ReduxState) => ({ ...user });
 
-const mapActions = (dispatch: Dispatch<ReduxState>) => ({
-  login: () => dispatch(login()),
-});
+// const mapActions = (dispatch: Dispatch<ReduxState>) => ({
+//   login: () => dispatch(login()),
+// });
 
-export const ProfileComponent = Profile;
-export default connect(mapState, mapActions)(Profile);
+// export const ProfileComponent = Profile;
+// export default connect(mapState, mapActions)(Profile);
+export default Profile;

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
@@ -68,11 +68,12 @@ class Login extends React.Component<Props, void> {
   }
 }
 
-const mapState = ({ user }: ReduxState) => ({ ...user });
+// const mapState = ({ user }: ReduxState) => ({ ...user });
 
-const mapActions = (dispatch: Dispatch<ReduxState>) => ({
-  login: () => dispatch(login()),
-});
+// const mapActions = (dispatch: Dispatch<ReduxState>) => ({
+//   login: () => dispatch(login()),
+// });
 
-export const LoginComponent = Login;
-export default connect(mapState, mapActions)(Login);
+// export const LoginComponent = Login;
+// export default connect(mapState, mapActions)(Login);
+export default Login;
