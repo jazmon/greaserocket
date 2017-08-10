@@ -1,5 +1,6 @@
 # Project specific
 src/constants/config.js
+.jest
 
 # Created by https://www.gitignore.io/api/linux,vim,macos,windows,osx,code,phpstorm,webstorm,node,git,android,xcode,intellij+iml,intellij,appcode,emacs
 

@@ -1,8 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { AppRegistry, Platform } from 'react-native';
 // import codePush from 'react-native-code-push';
 import { Provider } from 'react-redux';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import {
+  TabNavigator,
+  StackNavigator,
+  TabNavigatorConfig,
+} from 'react-navigation';
 import { ThemeProvider } from 'styled-components';
 import { Store } from 'redux';
 import { ReduxState } from 'redux/modules';
@@ -21,7 +25,13 @@ import { graphql, ApolloProvider } from 'react-apollo';
 
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 
-const App = TabNavigator(
+const client = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: 'http://localhost:9000/graphql',
+  }),
+});
+
+const TabNav = TabNavigator(
   {
     Feed: {
       screen: Feed,
@@ -64,16 +74,18 @@ const App = TabNavigator(
       Platform.OS === 'android'
         ? `${config.NAVIGATION.URI_PREFIX}://${config.NAVIGATION.URI_PREFIX}/`
         : `${config.NAVIGATION.URI_PREFIX}://`,
-  },
+  } as TabNavigatorConfig,
 );
 
 const store: Store<ReduxState> = configureStore();
 const Root = () =>
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </Provider>;
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <TabNav />
+      </ThemeProvider>
+    </Provider>
+  </ApolloProvider>;
 
 // const codePushOptions = {
 //   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,

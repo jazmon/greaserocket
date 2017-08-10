@@ -1,7 +1,7 @@
 // @flow
 
 import { loop, Effects } from 'redux-loop';
-import moment from 'moment';
+import * as moment from 'moment';
 
 // import Auth0Lock from 'react-native-lock';
 import { REHYDRATE } from 'redux-persist/constants';

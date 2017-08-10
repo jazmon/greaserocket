@@ -52,7 +52,7 @@ const BaseText = styled.Text`
   font-size: 16px;
 `;
 type Foo = React.ComponentClass<any>;
-const List: React.ComponentClass<any> = styled.FlatList``;
+const List: React.ComponentClass<any> = styled(FlatList)``;
 
 const InputContainer = styled.View`
   justify-content: flex-end;

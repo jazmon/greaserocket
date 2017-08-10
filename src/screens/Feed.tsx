@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import {
   View,
   ListView,
@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { gql, graphql } from 'react-apollo';
 
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -158,4 +159,15 @@ const mapActions = (dispatch: Dispatch<ReduxState>) => ({
 });
 
 export const FeedComponent = Feed;
-export default connect(mapState, mapActions)(Feed);
+// export default connect(mapState, mapActions)(Feed);
+export default graphql(gql`
+  query FeedQuery {
+    messages {
+      id
+      content
+      user {
+        name
+      }
+    }
+  }
+`)(Feed);

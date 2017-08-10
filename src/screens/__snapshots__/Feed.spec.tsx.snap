@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "flexBasis": 0,
+          "flexDirection": "column",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "marginTop": 24,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RCTScrollView
+      dataSource={
+        ListViewDataSource {
+          "items": 0,
+        }
+      }
+      enableEmptySections={true}
+      pageSize={6}
+      refreshControl={
+        <RefreshControlMock
+          onRefresh={[Function]}
+          refreshing={undefined}
+        />
+      }
+      renderRow={[Function]}
+      renderScrollComponent={[Function]}
+      renderSectionHeader={[Function]}
+      renderSeparator={[Function]}
+    >
+      <RCTRefreshControl />
+      <View />
+    </RCTScrollView>
+  </View>
+</View>
+`;

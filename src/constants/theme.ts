@@ -1,5 +1,5 @@
 // @flow
-import color from 'color';
+import * as color from 'color';
 
 const theme = {
   colors: {

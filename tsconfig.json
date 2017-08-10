@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es6",
     "module": "es2015",
-    "jsx": "react-native",
+    "jsx": "react",
     "moduleResolution": "node",
     "strict": true,
     "noImplicitAny": true,
@@ -10,9 +10,9 @@
     "alwaysStrict": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": ["node_modules/@types", "types"],
+    "allowSyntheticDefaultImports": false,
+    "typeRoots": ["node_modules/@types", "./types"],
     "sourceMap": true,
-    "lib": ["es2017", "esnext.asynciterable"]
+    "lib": ["es2017", "esnext.asynciterable", "dom"]
   }
 }

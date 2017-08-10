@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import moment from 'moment';
+import * as moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';

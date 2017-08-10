@@ -1,12 +1,12 @@
-import React, { ReactChildren } from 'react';
-import { StatusBar, ViewStyle } from 'react-native';
+import * as React from 'react';
+import { StatusBar, ViewStyle, NativeComponent } from 'react-native';
 import styled, { withTheme } from 'styled-components/native';
 import { getStatusBarTextColor, ThemeType } from 'constants/theme';
 import { Maybe } from 'types';
 
 interface Props {
   style?: ViewStyle;
-  children?: Maybe<ReactChildren>;
+  children?: Maybe<React.ReactChildren>;
   theme: any;
 }
 

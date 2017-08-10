@@ -1,11 +1,11 @@
-import React, { StatelessComponent } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 
 import Image from 'react-native-image-progress';
-import _ from 'lodash';
-import format from 'date-fns/format';
-import fiLocale from 'date-fns/locale/fi';
+import * as _ from 'lodash';
+import * as format from 'date-fns/format';
+import * as fiLocale from 'date-fns/locale/fi';
 
 const Container = styled.View`
   background-color: #e9e6e6;
@@ -79,7 +79,7 @@ const formatDate = (date: string): string => {
   return result;
 };
 
-const ChatMessage: StatelessComponent<Props> = ({
+const ChatMessage: React.StatelessComponent<Props> = ({
   message,
   showPicture,
   showDate,

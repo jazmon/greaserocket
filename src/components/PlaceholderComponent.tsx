@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components/native';
 import { Animated, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import chroma from 'chroma-js';
+import * as chroma from 'chroma-js';
 
 import { Maybe } from '../types';
 
