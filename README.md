@@ -1,4 +1,6 @@
 # Greaserocket 
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/jazmon/greaserocket.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/jazmon/greaserocket.svg?branch=master)](https://travis-ci.org/jazmon/greaserocket)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jazmon/greaserocket/master/LICENSE)
