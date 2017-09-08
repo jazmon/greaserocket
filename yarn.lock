@@ -26,48 +26,54 @@
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.10.2.tgz#d7c79acbaa17453b6681c80c34b38fcb10c4c08c"
 
-"@types/jest@^20.0.6":
-  version "20.0.6"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-20.0.6.tgz#7e0ba76ddfacb42ee9bb0d8833e5208cf0680431"
+"@types/jest@^20.0.7":
+  version "20.0.7"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-20.0.7.tgz#39cd215db8bda03928dceb933a1e63eb2cbd210e"
 
-"@types/lodash@^4.14.72":
-  version "4.14.72"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.72.tgz#f090cf6eb1fee1647a0efa1ebe18b0b78ed551c6"
+"@types/lodash@^4.14.73":
+  version "4.14.73"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.73.tgz#9837e47db8643ba5bcef2c7921f37d90f9c24213"
 
-"@types/node@^8.0.20":
-  version "8.0.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.20.tgz#65c7375255c24b184c215a5d0b63247c32f01c91"
+"@types/node@^8.0.24":
+  version "8.0.24"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.24.tgz#06c580084d9add1fb40c1510ef0b448961246fb1"
 
-"@types/react-native-vector-icons@^4.2.1":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-4.2.1.tgz#27be868937b95596da08ba9f842c4f76fcf4061d"
+"@types/react-native-vector-icons@^4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-4.3.1.tgz#2c28d48f5174ef6897e5565e7a100997a1c6ae37"
   dependencies:
     "@types/react" "*"
     "@types/react-native" "*"
 
-"@types/react-native@*", "@types/react-native@^0.47.2":
+"@types/react-native@*":
   version "0.47.2"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.47.2.tgz#7d30ff2d61fe6772f75924f651d37db56b70b138"
   dependencies:
     "@types/react" "*"
 
-"@types/react-navigation@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-1.0.17.tgz#e4b14cdef436b296ac8cbc0984da629af56ef79c"
+"@types/react-native@^0.47.5":
+  version "0.47.5"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.47.5.tgz#c2550f11abb6e10be3cde37a48da5e4c7652af58"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-navigation@^1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-1.0.19.tgz#d52ab9654a2ab3e59a5b81644d32e472c9b4fd82"
   dependencies:
     "@types/react" "*"
     "@types/react-native" "*"
 
-"@types/react-redux@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.0.tgz#51e2f4a2a22898b9e0a77363007bc8afd9eac105"
+"@types/react-redux@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.4.tgz#7b52b6b6bd5be77e8b7ed58a9e6ff00a9a933138"
   dependencies:
     "@types/react" "*"
     redux "^3.6.0"
 
-"@types/react-test-renderer@^15.5.2":
-  version "15.5.2"
-  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-15.5.2.tgz#422a51a3a1750616f8ca5440d3591ab381d7f1e1"
+"@types/react-test-renderer@^15.5.3":
+  version "15.5.3"
+  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-15.5.3.tgz#b870f9e7f5f460f7cbbe16386e29c0e426fa0d2c"
   dependencies:
     "@types/react" "*"
 
@@ -2646,7 +2652,7 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.3, graceful-fs@^4.1.6,
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
-graphql-anywhere@^3.0.0, graphql-anywhere@^3.0.1:
+graphql-anywhere@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-3.1.0.tgz#3ea0d8e8646b5cee68035016a9a7557c15c21e96"
 
@@ -3756,10 +3762,6 @@ lodash.escape@^3.0.0:
   dependencies:
     lodash._root "^3.0.0"
 
-lodash.flatten@^4.2.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
-
 lodash.isarguments@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lodash.isarguments/-/lodash.isarguments-3.1.0.tgz#2f573d85c6a24289ff00663b491c1d338ff3458a"
@@ -3767,14 +3769,6 @@ lodash.isarguments@^3.0.0:
 lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
-
-lodash.isequal@^4.1.1:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-
-lodash.isobject@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
 
 lodash.keys@^3.0.0:
   version "3.1.2"
@@ -4696,18 +4690,14 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-apollo@^1.4.12:
-  version "1.4.12"
-  resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-1.4.12.tgz#0cacbdd335acec4c1079feb48047df1c43f77bdf"
+react-apollo@^1.4.14:
+  version "1.4.14"
+  resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-1.4.14.tgz#86af913887e447710e4e5d85ca6277b35f1a3b82"
   dependencies:
     apollo-client "^1.4.0"
-    graphql-anywhere "^3.0.0"
     graphql-tag "^2.0.0"
     hoist-non-react-statics "^2.2.0"
     invariant "^2.2.1"
-    lodash.flatten "^4.2.0"
-    lodash.isequal "^4.1.1"
-    lodash.isobject "^3.0.2"
     lodash.pick "^4.4.0"
     object-assign "^4.0.1"
     prop-types "^15.5.8"
@@ -4727,9 +4717,9 @@ react-devtools-core@2.3.1:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-native-auth0@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-auth0/-/react-native-auth0-1.0.3.tgz#f9f80af5bddab2ebd569d4d28dba3cc88d89b514"
+react-native-auth0@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-auth0/-/react-native-auth0-1.1.1.tgz#a5a9b96e9055c1c3c3b093baceba1ff8b41e5845"
   dependencies:
     base-64 "^0.1.0"
     url "^0.11.0"
@@ -4772,9 +4762,9 @@ react-native-linear-gradient@^2.2.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-maps@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.16.0.tgz#e5fada6ef1e3304e94c509fa7b4a43e88152c24f"
+react-native-maps@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.16.2.tgz#5716cefd0fb4c3f326bc2281f02e873ebaa1f987"
 
 react-native-tab-view@^0.0.67:
   version "0.0.67"
@@ -5006,9 +4996,9 @@ rebound@^0.0.13:
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/rebound/-/rebound-0.0.13.tgz#4a225254caf7da756797b19c5817bf7a7941fac1"
 
-recompose@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.24.0.tgz#262e93f974439eb17e7779824d88cce90492a5dd"
+recompose@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.25.0.tgz#e2ec723692ff0fdab3d62bd22c1da69af1985acd"
   dependencies:
     change-emitter "^0.1.2"
     fbjs "^0.8.1"

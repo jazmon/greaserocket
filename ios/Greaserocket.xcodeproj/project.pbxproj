@@ -1453,6 +1453,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.attehuhtakangas.Greaserocket;
 				PRODUCT_NAME = Greaserocket;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1478,6 +1479,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.attehuhtakangas.Greaserocket;
 				PRODUCT_NAME = Greaserocket;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -3,13 +3,15 @@
 import { loop, Effects } from 'redux-loop';
 import * as moment from 'moment';
 
-// import Auth0Lock from 'react-native-lock';
+
 import { REHYDRATE } from 'redux-persist/constants';
+import Auth0 from 'react-native-auth0';
 
 import config from 'constants/config';
 
 import { Action, Maybe } from 'types';
 import { ReduxState } from './index';
+import {Auth0Token, } from 'types/auth';
 
 export const REFRESH_SESSION = 'REFRESH_SESSION';
 export const REFRESH_SESSION_SUCCESS = 'REFRESH_SESSION_SUCCESS';

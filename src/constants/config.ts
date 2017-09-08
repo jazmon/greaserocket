@@ -9,7 +9,7 @@ export default {
     URL: `http://${isAndroid ? '10.0.2.2' : 'localhost'}:9000/`,
   },
   AUTH: {
-    CLIENT_ID: 'U1uzzaXr5XKqf7yUZwqpwn8ENofO1KMo',
+    CLIENT_ID: 'twHGVJBerXcIaUcPOQ2Yg7kJgrGn9lhm',
     DOMAIN: 'jaz.eu.auth0.com',
   },
 };

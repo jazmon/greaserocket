@@ -77,7 +77,7 @@ const TabNav = TabNavigator(
   } as TabNavigatorConfig,
 );
 
-const store: Store<ReduxState> = configureStore();
+const store: Store<ReduxState> = configureStore({ client });
 const Root = () =>
   <ApolloProvider client={client}>
     <Provider store={store}>

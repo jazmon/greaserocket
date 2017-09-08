@@ -21,41 +21,25 @@
       <meta-data
           android:name="com.google.android.geo.API_KEY"
           android:value="AIzaSyABnSqtcoVaWsDXwAFo5UkeK5MfOri5Tns"/>
-          <!--Auth0 Lock-->
-        <activity
-          android:name="com.auth0.lock.LockActivity"
-          android:theme="@style/Lock.Theme"
-          android:screenOrientation="portrait"
-          android:launchMode="singleTask">
-        </activity>
-        <!--Auth0 Lock End-->
-        <!--Auth0 Lock Embedded WebView-->
-        <activity
-            android:name="com.auth0.identity.web.WebViewActivity"
-            android:theme="@style/Lock.Theme">
-        </activity>
-        <!--Auth0 Lock Embedded WebView End-->
-        <!--Auth0 Lock Passwordless-->
-        <activity
-            android:name="com.auth0.lock.passwordless.LockPasswordlessActivity"
-            android:theme="@style/Lock.Theme"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask">
-        </activity>
-        <activity
-            android:name="com.auth0.lock.passwordless.CountryCodeActivity"
-            android:theme="@style/Lock.Theme">
-        </activity>
-        <!--Auth0 Lock Passwordless End-->
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
+        android:launchMode="singleTask"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data
+                android:host="jaz.eu.auth0.com"
+                android:pathPrefix="/android/${applicationId}/callback"
+                android:scheme="${applicationId}" />
+        </instent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
