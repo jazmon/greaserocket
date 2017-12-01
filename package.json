@@ -19,7 +19,10 @@
     "lint-staged": "lint-staged",
     "generateSchema": "apollo-codegen introspect-schema http://localhost:9000/graphql --output ./src/schema.json"
   },
-  "pre-commit": ["lint-staged", "test:precommit"],
+  "pre-commit": [
+    "lint-staged",
+    "test:precommit"
+  ],
   "dependencies": {
     "@types/lodash": "^4.14.65",
     "@types/node": "^7.0.27",
@@ -38,7 +41,7 @@
     "react-apollo": "^1.4.2",
     "react-native": "v0.45.0-rc.0",
     "react-native-code-push": "^2.0.2-beta",
-    "react-native-gifted-chat": "^0.1.4",
+    "react-native-gifted-chat": "^0.2.8",
     "react-native-image-progress": "^0.6.0",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-lock": "^0.4.0",
@@ -88,8 +91,12 @@
     "preset": "react-native",
     "coverageDirectory": "coverage",
     "clearMocks": true,
-    "setupFiles": ["./jest/setup.js"],
-    "transformIgnorePatterns": ["node_modules/?!(react-navigation)"]
+    "setupFiles": [
+      "./jest/setup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-navigation)"
+    ]
   },
   "lint-staged": {
     "*.js": [
