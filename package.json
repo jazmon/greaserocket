@@ -17,9 +17,14 @@
     "snapshot:update": "npm run test -- --updateSnapshot",
     "test:watch": "npm run test -- --watch",
     "lint-staged": "lint-staged",
-    "generateSchema": "apollo-codegen introspect-schema http://localhost:9000/graphql --output ./src/schema.json"
+    "generateSchema": "apollo-codegen introspect-schema http://localhost:9000/graphql --output ./src/schema.json",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
-  "pre-commit": ["lint-staged", "test:precommit"],
+  "pre-commit": [
+    "lint-staged",
+    "test:precommit"
+  ],
   "dependencies": {
     "@types/lodash": "^4.14.65",
     "@types/node": "^7.0.27",
@@ -36,7 +41,7 @@
     "moment": "^2.18.1",
     "react": "16.0.0-alpha.12",
     "react-apollo": "^1.4.2",
-    "react-native": "v0.45.0-rc.0",
+    "react-native": "0.56.0",
     "react-native-code-push": "^2.0.2-beta",
     "react-native-gifted-chat": "^0.1.4",
     "react-native-image-progress": "^0.6.0",
@@ -54,7 +59,8 @@
     "reselect": "^3.0.0",
     "socket.io-client": "^1.7.3",
     "styled-components": "^1.4.5",
-    "typescript": "^2.3.2"
+    "typescript": "^2.3.2",
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "apollo-codegen": "^0.10.13",
@@ -88,8 +94,12 @@
     "preset": "react-native",
     "coverageDirectory": "coverage",
     "clearMocks": true,
-    "setupFiles": ["./jest/setup.js"],
-    "transformIgnorePatterns": ["node_modules/?!(react-navigation)"]
+    "setupFiles": [
+      "./jest/setup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-navigation)"
+    ]
   },
   "lint-staged": {
     "*.js": [
@@ -97,5 +107,6 @@
       "eslint --fix",
       "git add"
     ]
-  }
+  },
+  "snyk": true
 }
